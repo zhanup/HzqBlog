@@ -1,0 +1,39 @@
+{
+  "name": "blog-client-vue",
+  "version": "0.0.0",
+  "license": "ISC",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vue-tsc --noEmit && vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "axios": "^0.23.0",
+    "dayjs": "^1.10.7",
+    "element-plus": "^1.2.0-beta.2",
+    "github-markdown-css": "^5.0.0",
+    "highlight.js": "^11.3.1",
+    "macy": "^2.5.1",
+    "marked": "^3.0.7",
+    "masonry-layout": "^4.2.2",
+    "ua-parser-js": "^0.7.28",
+    "vue": "^3.2.16",
+    "vue-router": "^4.0.11"
+  },
+  "devDependencies": {
+    "@types/marked": "^3.0.1",
+    "@types/masonry-layout": "^4.2.4",
+    "@types/node": "^16.11.6",
+    "@types/ua-parser-js": "^0.7.36",
+    "@vitejs/plugin-vue": "^1.9.3",
+    "less": "^4.1.2",
+    "typescript": "^4.4.3",
+    "unplugin-vue-components": "^0.17.2",
+    "vite": "^2.6.4",
+    "vite-plugin-compression": "^0.3.5",
+    "vue-tsc": "^0.3.0"
+  },
+  "resolutions": {
+    "bin-wrapper": "npm:bin-wrapper-china"
+  }
+}

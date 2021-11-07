@@ -1,0 +1,106 @@
+.gallery {
+  .upload {
+    padding: 20px;
+    background-color: #fff;
+
+    .dragger {
+      width: 360px;
+      height: 180px;
+      background-color: #fff;
+      margin: 0 auto;
+      border-radius: 6px;
+      margin-bottom: 50px;
+
+      em {
+        color: #409eff;
+        font-style: normal;
+      }
+    }
+  }
+
+  .waterfall {
+    margin: 10px 0;
+    transition: .3s ease-in-out;
+
+    .card {
+      background: #fff;
+      border-radius: 5px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      transition: .2s;
+      top: 0;
+
+      .cover {
+        padding: 10px 10px 0 10px;
+        img {
+          display: block;
+          width: 100%;
+        }
+      }
+
+      .name {
+        background: #fff;
+        color: #666;
+        font-weight: 600;
+        padding: 10px 20px;
+        font-size: 14px;
+
+        p {
+          padding: 0;
+          margin: 0;
+        }
+      }
+
+      .menus {
+        padding: 10px;
+        border-top: 1px solid #e7e7e7;
+        text-align: right;
+
+        p {
+          position: relative;
+          display: inline-block;
+          padding: 4px 10px;
+          text-decoration: none;
+          text-align: center;
+          cursor: pointer;
+          user-select: none;
+          color: #fff;
+          font-size: 12px;
+          margin: 0;
+          margin-left: 10px;
+
+          &:hover::before {
+            box-shadow: 0 5px 15px rgb(0 0 0 / 30%);
+          }
+
+          &::after {
+            position: relative;
+            display: inline-block;
+            content: attr(data-title);
+            transition: transform .2s ease;
+            font-weight: 700;
+            letter-spacing: .01em;
+            will-change: transform;
+            transform: translateY(var(--ty,0)) rotateX(var(--rx,0)) rotateY(var(--ry,0));
+          }
+
+          &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(135deg,#6e8efb,#a777e3);
+            border-radius: 4px;
+            transition: box-shadow .5s ease,transform .2s ease;
+            will-change: transform;
+            box-shadow: 0 2px 5px rgb(0 0 0 / 20%);
+            transform: translateY(var(--ty,0)) rotateX(var(--rx,0)) rotateY(var(--ry,0)) translateZ(var(--tz,-12px));
+          }
+        }
+      }
+    }
+  }
+}

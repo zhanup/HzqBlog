@@ -1,0 +1,48 @@
+[data-user-color-scheme='dark'] .markdown-body table tr {
+  background-color: var(--board-bg-color);
+  transition: background-color 0.2s ease-in-out;
+}
+
+[data-user-color-scheme='dark'] .markdown-body table tr:nth-child(2n) {
+  background-color: var(--board-bg-color);
+  transition: background-color 0.2s ease-in-out;
+}
+
+[data-user-color-scheme='dark'] .markdown-body table th,
+[data-user-color-scheme='dark'] .markdown-body table td {
+  border-color: #435266;
+  transition: border-color 0.2s ease-in-out;
+}
+
+[data-user-color-scheme='dark'] .markdown-body table th {
+  background-color: var(--board-bg-color);
+}
+
+[data-user-color-scheme='dark'] .markdown-body h1,
+[data-user-color-scheme='dark'] .markdown-body h2,
+[data-user-color-scheme='dark'] .markdown-body h3,
+[data-user-color-scheme='dark'] .markdown-body h4,
+[data-user-color-scheme='dark'] .markdown-body h5,
+[data-user-color-scheme='dark'] .markdown-body h6 {
+  border-bottom-color: #435266;
+}
+
+.markdown-body {
+  background-color: var(--board-bg-color) !important;
+  color: var(--text-color) !important;
+  font-family: var(--font-family) !important;
+}
+
+.markdown-body a {
+  color: var(--link-color) !important;
+}
+
+.markdown-body pre {
+  font-family: Consolas, 'Source Code Pro', 'Fira Code' !important;
+  background-color: var(--code-bg-color) !important;
+  font-size: 14.5px !important;
+}
+
+.markdown-body table th {
+  background-color: #f2f2f2;
+}
