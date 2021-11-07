@@ -15,7 +15,6 @@
     "highlight.js": "^11.3.1",
     "macy": "^2.5.1",
     "marked": "^3.0.7",
-    "masonry-layout": "^4.2.2",
     "ua-parser-js": "^0.7.28",
     "vue": "^3.2.16",
     "vue-router": "^4.0.11"
