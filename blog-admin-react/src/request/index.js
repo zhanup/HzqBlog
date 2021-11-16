@@ -36,6 +36,9 @@ export const reqUpdateArticle = ({id, title, img_url, desc, content, tags, categ
 // 搜索文章
 export const reqSearchArticle = (title) => axios({url: '/manage/article/search', params: { title }})
 
+// 下载文章
+export const reqDownloadhArticle = () => axios({url: '/manage/article/download'})
+
 // 标签列表
 export const reqTagList = (pageNum, pageSize) => axios({url: '/manage/tag/list',  params: { pageNum, pageSize }})
 
@@ -73,19 +76,13 @@ export const reqDeleteLink = (id) => axios({url: '/manage/link/delete', data: { 
 export const reqUpdateLink = ({ id, name, url, icon, desc }) => axios({url: '/manage/link/update', data: { id, name, url, icon, desc }, method: 'POST'})
 
 // 评论列表
-export const reqCommentList = ({article_id, pageNum, pageSize}) => axios({url: '/manage/comment/list', params: { article_id, pageNum, pageSize }})
+export const reqCommentList = ({aid, pageNum, pageSize}) => axios({url: '/manage/comment/list', params: { aid, pageNum, pageSize }})
 
 // 修改评论
 export const reqUpdateComment = ({id, visible, name, email, avatar, content}) => axios({url: '/manage/comment/update', data: { id, visible, name, email, avatar, content }, method: 'POST'})
 
-// 修改回复
-export const reqUpdateReply = ({id, visible, name, email, avatar, content}) => axios({url: '/manage/reply/update', data: { id, visible, name, email, avatar, content }, method: 'POST'})
-
 // 删除评论
 export const reqDeleteComment = (id) => axios({url: '/manage/comment/delete', data: { id }, method: 'POST'})
-
-// 删除回复
-export const reqDeleteReply = (id) => axios({url: '/manage/reply/delete', data: { id }, method: 'POST'})
 
 // 图片列表
 export const reqImgList = () => axios({url: '/manage/img/list'})

@@ -30,7 +30,6 @@ export default class Gallery extends Component {
         400: 2
       }
     })
-
     masonry.reInit()
   }
 

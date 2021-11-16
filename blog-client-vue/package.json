@@ -31,8 +31,5 @@
     "vite": "^2.6.4",
     "vite-plugin-compression": "^0.3.5",
     "vue-tsc": "^0.3.0"
-  },
-  "resolutions": {
-    "bin-wrapper": "npm:bin-wrapper-china"
   }
 }

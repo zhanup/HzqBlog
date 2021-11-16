@@ -3,14 +3,7 @@ import {Button, Card, Image, message, Modal, Select, Switch, Table} from 'antd'
 import {DeleteOutlined, EditOutlined} from '@ant-design/icons'
 import {formateDate} from '../../utils/format'
 import UpdateForm from './update-form'
-import {
-  reqArticleList,
-  reqCommentList,
-  reqDeleteComment,
-  reqDeleteReply,
-  reqUpdateComment,
-  reqUpdateReply
-} from '../../request'
+import {reqArticleList, reqCommentList, reqDeleteComment, reqUpdateComment} from '../../request'
 
 const { Option } = Select
 
@@ -78,7 +71,7 @@ export default class Comment extends Component {
         render: (text, record) => (
           <Switch
             defaultChecked={text}
-            onChange={(visible) => this.updateVisible(record.type, record._id, visible)}
+            onChange={(visible) => this.updateVisible(record._id, visible)}
           >
           </Switch>
         )
@@ -121,11 +114,11 @@ export default class Comment extends Component {
   }
 
   // 留言列表
-  getCommentList = async (pageNum, article_id) => {
+  getCommentList = async (pageNum, aid) => {
     const { pageSize } = this.state
     // 发送请求前，显示loading
     this.setState({loading: true})
-    const result = await reqCommentList({pageNum, pageSize, article_id})
+    const result = await reqCommentList({pageNum, pageSize, aid})
     // 在请求完成后，隐藏 Loading
     this.setState({loading: false})
 
@@ -158,13 +151,7 @@ export default class Comment extends Component {
       cancelText: '取消',
       onOk: async () => {
         try {
-          let result
-          if (type === 'comment') {
-            result = await reqDeleteComment(id)
-          } else {
-            result = await reqDeleteReply(id)
-          }
-
+          const result = await reqDeleteComment(id)
           const { msg } = result
           if (result.status === 1) {
             message.success(msg)
@@ -184,15 +171,9 @@ export default class Comment extends Component {
   }
 
   // 修改 评论 / 回复 可见性
-  updateVisible = async (type, id, visible) => {
+  updateVisible = async (id, visible) => {
     try {
-      let result
-      if (type === 'comment') {
-        result = await reqUpdateComment({id, visible})
-      } else {
-        result = await reqUpdateReply({id, visible})
-      }
-  
+      const result = await reqUpdateComment({id, visible})
       const { msg } = result
       if (result.status === 1) {
         message.success(msg)
@@ -215,17 +196,12 @@ export default class Comment extends Component {
 
   // 编辑评论
   update = () => {
-    const { type, _id } = this.comment
+    const id = this.comment._id
 
     this.form.current.validateFields()
-      .then(async (val) => {
+      .then(async (value) => {
         try {
-          let result
-          if (type === 'comment') {
-            result = await reqUpdateComment({id: _id, ...val })
-          } else (
-            result = await reqUpdateReply({id: _id, ...val})
-          )
+          const result = await reqUpdateComment({id, ...value})
           const { msg } = result
 
           // 关闭回复框 重置表单
@@ -268,7 +244,7 @@ export default class Comment extends Component {
           placeholder="选择文章" 
           allowClear={true}
           onClear={() => this.getCommentList(1)}
-          onSelect={id => this.getCommentList.call(this, 1, id)}
+          onSelect={id => this.getCommentList(1, id)}
         >
           { blogs.map((item) => <Option key={item._id} value={item._id}>{item.title}</Option>) }
         </Select>
@@ -283,7 +259,7 @@ export default class Comment extends Component {
           pagination={{
             total,
             pageSize,
-            onChange: (page) => this.getCommentList(page)
+            onChange: page => this.getCommentList(page)
           }}
         >
         </Table>

@@ -95,20 +95,20 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, onMounted, nextTick, onBeforeUnmount, computed } from 'vue';
-import { useRoute } from 'vue-router';
-import Comment from '../../components/Comment.vue';
-import FullButton from '../../components/FullButton.vue';
-import http from '../../utils/http';
-import { Article, Comments, ResponseData } from '../../types';
+import { ref, reactive, onMounted, nextTick, onBeforeUnmount, computed } from 'vue'
+import { useRoute } from 'vue-router'
+import Comment from '../../components/Comment.vue'
+import FullButton from '../../components/FullButton.vue'
+import http from '../../utils/http'
+import { Article, Comments, ResponseData } from '../../types'
 import { getCommentList } from '../../utils/api'
-import marked from 'marked';
-import 'github-markdown-css/github-markdown.css';
+import marked from 'marked'
+import 'github-markdown-css/github-markdown.css'
 
 const route = useRoute()
-const isFull = ref<boolean>(false);
+const isFull = ref<boolean>(false)
 const state = reactive({
-  article_id: '',
+  aid: '',
   pageNum: 1,
   pageSize: 10,
   total: 0,
@@ -116,7 +116,7 @@ const state = reactive({
   comments: [] as Array<Comments>,
   content: '',
   detail: {} as Article
-});
+})
 
 // 初始化目录
 const tocbotInit = (): void => {
@@ -140,7 +140,7 @@ const getArticleDetail = async (): Promise<void> => {
   const id = route.params.id
   const res: Article = await http.get(`/article/detail?id=${id}`)
   state.detail = res;
-  state.article_id = res._id;
+  state.aid = res._id;
   state.content = marked(res.content);
   getComments();
   nextTick(() => tocbotInit());
@@ -148,8 +148,8 @@ const getArticleDetail = async (): Promise<void> => {
 
 // 获取评论列表
 const getComments = async (): Promise<void> => {
-  const { article_id, pageNum, pageSize } = state
-  const res: ResponseData<Comments> = await getCommentList(article_id, pageNum, pageSize)
+  const { aid, pageNum, pageSize } = state
+  const res: ResponseData<Comments> = await getCommentList(aid, pageNum, pageSize)
   state.comments = res.list
   state.total = res.total
 }
@@ -165,10 +165,7 @@ const handleComment = async (param: any): Promise<void> => {
   const res: any = await http({
     url: '/comment/add',
     method: 'POST',
-    data: {
-      article_id: state.article_id,
-      ...param
-    }
+    data: {aid: state.aid, ...param}
   })
   getComments()
 }
@@ -176,9 +173,9 @@ const handleComment = async (param: any): Promise<void> => {
 // 回复评论
 const handleReply = async (param: any): Promise<void> => {
   const res: any = await http({
-    url: '/reply/add',
+    url: '/comment/add',
     method: 'POST',
-    data: { ...param }
+    data: {aid: state.aid, ...param}
   })
   getComments()
 }
@@ -187,8 +184,8 @@ const handleReply = async (param: any): Promise<void> => {
 const loadMore = async (param: any): Promise<void> => {
   state.pageNum = param;
   state.loadBottom = true;
-  const { article_id, pageNum, pageSize } = state
-  const res: ResponseData<Comments> = await getCommentList(article_id, pageNum, pageSize)
+  const { aid, pageNum, pageSize } = state
+  const res: ResponseData<Comments> = await getCommentList(aid, pageNum, pageSize)
   state.loadBottom = false;
   state.comments = [...state.comments, ...res.list];
 }
@@ -379,7 +376,7 @@ onBeforeUnmount(() => {
     }
 
     .toc-aside {
-      display: none;
+      display: none !important;
     }
 
     .artDetail {

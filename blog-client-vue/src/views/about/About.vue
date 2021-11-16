@@ -16,7 +16,7 @@
       <div class="card">
         <h2 class="card-title">本站简介</h2>
         <p><router-link to="/">HBlog个人博客系统</router-link>，前端基于 Vue 开发，本是个人博客，亦是学习过程中的产物，所以也没有考虑 SEO。目前博客系统还是非常简单，功能不全的状态，先部署上线了，后期会逐渐完善博客的功能。</p>
-        <p>本博客项目已在github上开源，项目地址：<a href="https://github.com/yubifeng/SkyBlog" target="_blank">https://github.com/yubifeng/SkyBlog</a>，欢迎访问。</p>
+        <p>本博客项目已在github上开源，项目地址：<a href="https://github.com/zhanup/HzqBlog" target="_blank">https://github.com/zhanup/HzqBlog</a>，欢迎访问。</p>
       </div>
       <div class="card">
         <h2 class="card-title">联系方式</h2>

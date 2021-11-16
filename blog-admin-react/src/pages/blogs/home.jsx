@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { Card, Input, Button, Table, Tag, Image, Switch, Modal, message  } from 'antd'
-import { SearchOutlined, SyncOutlined, EditOutlined,DeleteOutlined } from '@ant-design/icons'
-import { reqArticleList, reqDeleteArticle, reqUpdateArticle, reqSearchArticle } from '../../request'
+import { SearchOutlined, SyncOutlined, EditOutlined, DeleteOutlined, DownloadOutlined } from '@ant-design/icons'
+import { reqArticleList, reqDeleteArticle, reqUpdateArticle, reqSearchArticle, reqDownloadhArticle } from '../../request'
+import JSZip from 'jszip'
+import { saveAs } from 'file-saver'
 import { formateDate } from '../../utils/format'
 
 export default class Blogs extends Component {
@@ -177,6 +179,25 @@ export default class Blogs extends Component {
     }
   }
 
+  // 保存数据
+  downloadArticle = async () => {
+    const res = await reqDownloadhArticle()
+    if (res.status === 1) {
+      const zip  = new JSZip()
+      const { list } = res.data
+      list.forEach(item => {
+        zip.file(`${item.title}.md`, item.content)
+      })
+
+      // 下载
+      zip.generateAsync({type: 'blob'}).then((content) => {
+        saveAs(content, "articles.zip")
+      })
+    } else {
+      message.error('下载失败')
+    }
+  }
+
   // 重置表格数据
   reset = () => {
     this.title = ''
@@ -196,8 +217,8 @@ export default class Blogs extends Component {
   }
 
   componentDidMount() {
-    this.initColumns();
-    this.getArticleList(1);
+    this.initColumns()
+    this.getArticleList(1)
   }
   
   render() {
@@ -225,6 +246,15 @@ export default class Blogs extends Component {
             onClick={this.reset}
           >
             重置
+          </Button>
+
+          <Button 
+            style={{float: 'right'}} 
+            icon={<DownloadOutlined />} 
+            type="primary"
+            onClick={this.downloadArticle}
+          >
+            保存数据
           </Button>
         </div>
 

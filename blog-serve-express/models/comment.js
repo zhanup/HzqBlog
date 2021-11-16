@@ -1,14 +1,17 @@
 const mongoose = require('mongoose')
 
 const commentSchema = new mongoose.Schema({
-  // 文字id
-  type: {
-    type: String,
-    default: 'comment'
-  },
-  article_id: { 
+  // 评论的文章
+  aid: {
     type: mongoose.Schema.Types.ObjectId,
-    required: true 
+    required: true
+  },
+  cid: {
+    type: mongoose.Schema.Types.ObjectId
+  },
+  to_whom: {
+    type: String,
+    default: ''
   },
   // 名字
   name: {
@@ -37,17 +40,18 @@ const commentSchema = new mongoose.Schema({
     type: String,
     default: ''
   },
+  // 回复列表
+  replies: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Comment'
+    }
+  ],
   // 时间
   date: {
     type: Date,
     default: Date.now
-  },
-  replies: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Reply'
-    }
-  ]
+  }
 })
 
 const CommentSchema = mongoose.model('Comment', commentSchema)

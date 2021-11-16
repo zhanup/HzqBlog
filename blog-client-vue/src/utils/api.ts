@@ -24,11 +24,11 @@ export const getTagArticles = (name: string | any, pageNum: number, pageSize: nu
 }
 
 // 获取评论列表
-export const getCommentList = (article_id: string, pageNum: number, pageSize: number) => {
+export const getCommentList = (aid: string, pageNum: number, pageSize: number) => {
   return http({
     url: '/comment/list',
     params: { 
-      article_id,
+      aid,
       pageNum,
       pageSize     
     }

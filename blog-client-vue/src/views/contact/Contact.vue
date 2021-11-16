@@ -62,24 +62,13 @@ const getComments = async (): Promise<void> => {
 
 // 留言
 const handleComment = async (param: any): Promise<void> => {
-  const res: any = await http({
-    url: '/comment/add',
-    method: 'POST',
-    data: {
-      article_id: state.aid,
-      ...param
-    }
-  })
+  await http({url: '/comment/add', data: {aid: state.aid, ...param}, method: 'POST'})
   getComments()
 }
 
 // 回复评论
 const handleReply = async (param: any): Promise<void> => {
-  const res: any = await http({
-    url: '/reply/add',
-    method: 'POST',
-    data: { ...param }
-  })
+  await http({url: '/comment/add', data: {aid: state.aid, ...param}, method: 'POST'})
   getComments()
 }
 

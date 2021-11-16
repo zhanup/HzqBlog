@@ -20,7 +20,7 @@ class LeftNav extends Component {
   }
 
   render() {
-    let path = this.props.location.pathname;
+    let path = this.props.location.pathname
     let openKey = path;
     if (path === '/publish' || path === '/blogs') {
       openKey = '/article';

@@ -93,6 +93,14 @@ exports.articleManageDetail = (req, res, next) => {
   })
 }
 
+// 下载全部文章
+exports.articleDownload = (req, res, next) => {
+  Article.find({title: {$ne: '留言板'}}, {title: 1, content: 1}, (err, doc) => {
+    if (err) return next(err)
+    res.send({status: 1, data: {list: doc}})
+  })
+}
+
 // 前台文章列表（不会返回不公开的文章）
 exports.articleApiList = (req, res, next) => {
   // 如果接收到 pageSize || pageNum 参数则为查询文章列表，否则则为查询归档
@@ -161,19 +169,18 @@ exports.contactList = (req, res, next) => {
   const pageNum = req.query.pageNum * 1 || 1
   const pageSize = req.query.pageSize * 1 || 10
 
-  Article.findOne({title: '留言板'}, (err, data) => {
-    if (err) return next(err)
-
-    Comment.find({article_id: data._id}).sort({date: -1}).populate('replies').exec((err, doc) => {
+  Article.findOne({title: '留言板'})
+    .populate({path: 'comments', match: {visible: true}, populate: {path: 'replies', match: {visible: true}}})
+    .exec((err, doc) => {
       if (err) return next(err)
+
       res.send({
         status: 1,
         data: {
-          list: doc.slice((pageNum-1) * pageSize, pageNum * pageSize),
-          total: doc.length,
-          aid: data._id
+          list: doc.comments.slice((pageNum-1) * pageSize, pageNum * pageSize),
+          total: doc.comments.length,
+          aid: doc._id
         }
       })
     })
-  })
 }

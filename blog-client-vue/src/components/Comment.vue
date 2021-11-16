@@ -152,7 +152,7 @@ const emit = defineEmits(['comment', 'reply', 'more-click']);
 const emojiVisible = ref<boolean>(false);
 const replyVisible = ref<boolean>(false);
 const to_whom = ref<string>('');
-const comment_id = ref<string>('');
+const cid = ref<string>('');
 const comment = reactive({
   name: '',
   email: '',
@@ -171,7 +171,7 @@ const insertEmoji = (emoji: string): void => {
 // 打开回复框
 const openDialog = (id: string, name: string): void => {
   replyVisible.value = true;
-  comment_id.value = id;
+  cid.value = id;
   to_whom.value = name;
 }
 
@@ -223,7 +223,7 @@ const howLongBefore = (date: string): string => {
 // 提交回复
 const onReply = (param: any): void => {
   emit('reply', {
-    comment_id: comment_id.value,
+    cid: cid.value,
     to_whom: to_whom.value, 
     ...param 
   })
