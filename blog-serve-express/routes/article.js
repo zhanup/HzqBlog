@@ -173,14 +173,12 @@ exports.contactList = (req, res, next) => {
     .populate({path: 'comments', match: {visible: true}, populate: {path: 'replies', match: {visible: true}}})
     .exec((err, doc) => {
       if (err) return next(err)
-
+      const comments = doc.comments
+      const list = comments.sort((a, b) => b.date - a.date).slice((pageNum-1) * pageSize, pageNum * pageSize)
+      
       res.send({
         status: 1,
-        data: {
-          list: doc.comments.slice((pageNum-1) * pageSize, pageNum * pageSize),
-          total: doc.comments.length,
-          aid: doc._id
-        }
+        data: { aid: doc._id, list, total: comments.length }
       })
     })
 }

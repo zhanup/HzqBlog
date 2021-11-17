@@ -108,13 +108,13 @@ const getCategory = async (): Promise<void> => {
 
 // 切换主题
 const switchTheme = (): void => {
-  const scheme = document.documentElement.getAttribute('data-user-color-scheme');
+  const scheme = document.documentElement.getAttribute('data-user-color-scheme')
   if (scheme === 'dark') {
-    document.documentElement.setAttribute('data-user-color-scheme', 'light');
+    document.documentElement.setAttribute('data-user-color-scheme', 'light')
     isDark.value = false;
   }
   else {
-    document.documentElement.setAttribute('data-user-color-scheme', 'dark');
+    document.documentElement.setAttribute('data-user-color-scheme', 'dark')
     isDark.value = true;
   }
 }
@@ -122,11 +122,11 @@ const switchTheme = (): void => {
 // 控制导航栏显示
 const showNav = (): void => {
   if (isShow.value === true) {
-    isShow.value = false;
-    emit('switch', true);
+    isShow.value = false
+    emit('switch', true)
   } else {
-    isShow.value = true;
-    emit('switch', false);
+    isShow.value = true
+    emit('switch', false)
   }
 }
 

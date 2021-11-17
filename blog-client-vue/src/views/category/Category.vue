@@ -22,7 +22,7 @@
 
 <script lang="ts" setup>
 import { reactive, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, onBeforeRouteUpdate } from 'vue-router';
 import ArticleWaterfall from '../../components/ArticleWaterfall.vue';
 import Pagination from '../../components/Pagination.vue';
 import http from '../../utils/http';
@@ -37,16 +37,11 @@ const state = reactive({
   list: [] as Array<Article>
 })
 
-const getArticleList = async(pageNum: number): Promise<void> => {
-  const { name } = route.params
+const getArticleList = async(pageNum: number, name: string | string[] = route.params.name): Promise<void> => {
   const { pageSize } = state
   const res: ResponseData<Article> = await http({
     url: '/category/article',
-    params: {
-      name,
-      pageNum,
-      pageSize
-    }
+    params: { name, pageNum, pageSize }
   })
   state.list = res.list
   state.total = res.total
@@ -57,6 +52,11 @@ const currentChange = (param: any) => {
   state.pageNum = param
   getArticleList(param)
 }
+
+// 路由更新钩子
+onBeforeRouteUpdate((to, form) => {
+  getArticleList(1, to.params.name)
+})
 
 onMounted(() => {
   getArticleList(1)

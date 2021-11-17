@@ -1,7 +1,7 @@
 import axios from 'axios'
 import storageUtils from '../utils/storageUtils'
 
-// axios.defaults.baseURL = 'http://localhost:3002'
+axios.defaults.baseURL = 'http://localhost:3002'
 
 // 请求拦截
 axios.interceptors.request.use(config => {

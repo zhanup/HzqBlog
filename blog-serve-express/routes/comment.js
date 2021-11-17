@@ -47,7 +47,7 @@ exports.commentList = (req, res, next) => {
   const { aid } = req.query
   const filter = aid ? { aid } : {}
 
-  Comment.find(filter, (err, doc) => {
+  Comment.find(filter, null, {sort: {date: -1}}, (err, doc) => {
     if (err) return next(err)
     const list = doc.slice((pageNum - 1) * pageSize, pageNum * pageSize)
     res.send({status: 1, data: {list, total: doc.length}})

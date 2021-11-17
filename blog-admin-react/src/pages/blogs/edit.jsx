@@ -127,7 +127,7 @@ export default class Edit extends Component {
               name="desc"
               rules={[ {required: true, message: '请输入摘要'} ]}
             >
-              <TextArea />
+              <TextArea autoSize={{ minRows: 2, maxRows: 6 }} />
             </Form.Item>
 
             <Form.Item
