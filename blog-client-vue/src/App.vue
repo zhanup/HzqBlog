@@ -1,5 +1,5 @@
 <template>
-  <Header :isTransparent="isTransparent" @switch="changeTransparent" />
+  <Header :isTransparent="isTransparent" />
   <main class="page-content">
     <router-view></router-view>
   </main>
@@ -18,15 +18,11 @@ const isTransparent = ref<boolean>(true);
 // 滚动处理函数
 const handleScroll = (): void => {
   const scroll = document.documentElement.scrollTop || document.body.scrollTop;
-  if (scroll > 80) {
+  if (scroll > 200) {
     isTransparent.value = false;
   } else {
     isTransparent.value = true;
   }
-}
-
-const changeTransparent = (param: any): void => {
-  isTransparent.value = param;
 }
 
 onMounted(() => {

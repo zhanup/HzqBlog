@@ -32,44 +32,7 @@
           <div class="article-desc">{{ state.detail.desc }}</div>
           <div class="markdown-body" v-highlight v-html="state.content"></div>
           <hr class="divide" />
-          <div class="reprint">
-            <div class="reprint__author">
-              <span class="reprint-meta">
-                <i class="iconfont icon-user"></i>
-                文章作者: 
-              </span>
-              <span class="reprint-info">
-                <a href="/about" rel="external nofollow noreferrer">在路上</a>
-              </span>
-            </div>
-            <div class="reprint__type">
-              <span class="reprint-meta">
-                <i class="iconfont icon-link-fill"></i>
-                文章链接: 
-              </span>
-              <span class="reprint-info">
-                <a
-                  :href="'http://localhost:3001' + route.path"
-                >{{ 'http://localhost:3001' + route.path }}</a>
-              </span>
-            </div>
-            <div class="reprint__notice">
-              <span class="reprint-meta">
-                <i class="iconfont icon-copyright"></i>
-                版权声明: 
-              </span>
-              <span class="reprint-info">
-                本博客所有文章除特別声明外，均采用
-                <a
-                  href="https://creativecommons.org/licenses/by/4.0/deed.zh"
-                  rel="external nofollow noreferrer"
-                  target="_blank"
-                >CC BY 4.0</a>
-                许可协议。转载请注明来源
-                <a href="/about" target="_blank">在路上</a>！
-              </span>
-            </div>
-          </div>
+          <Reprint name="在路上" :url="url" />
         </div>
       </div>
 
@@ -98,12 +61,12 @@
 import { ref, reactive, onMounted, nextTick, onBeforeUnmount, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import Comment from '../../components/Comment.vue'
-import FullButton from '../../components/FullButton.vue'
+import FullButton from './FullButton.vue'
+import Reprint from './Reprint.vue'
 import http from '../../utils/http'
 import { Article, Comments, ResponseData } from '../../types'
 import { getCommentList } from '../../utils/api'
 import marked from 'marked'
-import 'github-markdown-css/github-markdown.css'
 
 const route = useRoute()
 const isFull = ref<boolean>(false)
@@ -135,6 +98,11 @@ const fullClick = (): void => {
   isFull.value = !isFull.value
 }
 
+// 文章链接
+const url = computed<string>(() => {
+  return `http://localhost:3001/detail/${route.params.id}`
+})
+
 // 获取文章详情
 const getArticleDetail = async (): Promise<void> => {
   const id = route.params.id
@@ -162,32 +130,24 @@ const formatDate = (date: string | Date): string => {
 
 // 提交评论
 const handleComment = async (param: any): Promise<void> => {
-  const res: any = await http({
-    url: '/comment/add',
-    method: 'POST',
-    data: {aid: state.aid, ...param}
-  })
+  await http({ url: '/comment/add', method: 'POST', data: { aid: state.aid, ...param } })
   getComments()
 }
 
 // 回复评论
 const handleReply = async (param: any): Promise<void> => {
-  const res: any = await http({
-    url: '/comment/add',
-    method: 'POST',
-    data: {aid: state.aid, ...param}
-  })
+  await http({ url: '/comment/add', method: 'POST', data: { aid: state.aid, ...param } })
   getComments()
 }
 
 // 加载更多评论
 const loadMore = async (param: any): Promise<void> => {
-  state.pageNum = param;
-  state.loadBottom = true;
+  state.pageNum = param
+  state.loadBottom = true
   const { aid, pageNum, pageSize } = state
   const res: ResponseData<Comments> = await getCommentList(aid, pageNum, pageSize)
-  state.loadBottom = false;
-  state.comments = [...state.comments, ...res.list];
+  state.loadBottom = false
+  state.comments = [...state.comments, ...res.list]
 }
 
 // 分类名称
@@ -315,32 +275,6 @@ onBeforeUnmount(() => {
         border-radius: 3px;
         font-size: 16px;
         line-height: 1.85rem;
-      }
-    }
-
-    .reprint {
-      margin: 15px 0 6px;
-      padding: 8px 12px;
-      border: 1px solid #eee;
-      line-height: 2;
-      transition: box-shadow 0.3s ease-in-out;
-
-      &:hover {
-        box-shadow: 0 0 10px 0 rgb(232 237 250 / 60%),
-          0 4px 8px 0 rgb(232 237 250 / 50%);
-      }
-
-      .reprint-meta {
-        font-weight: bold;
-      }
-
-      .reprint-info {
-        word-break: break-word;
-        line-height: 2;
-
-        a {
-          color: var(--link-color);
-        }
       }
     }
   }

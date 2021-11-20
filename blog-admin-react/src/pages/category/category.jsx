@@ -98,7 +98,6 @@ export default class Category extends Component {
         try {
           const result = await reqAddCategory(v.name)
           const { msg } = result
-  
           // 重置表单、关闭Modal框
           this.addRef.current.resetFields()
           this.setState({ showAdd: false })
@@ -113,6 +112,8 @@ export default class Category extends Component {
           const res = err.response
           if (res.status === 401) {
             message.error(res.data.msg)
+          } else {
+            message.error('服务器错误')
           }
           // 重置表单、关闭Modal框
           this.addRef.current.resetFields()
@@ -147,6 +148,8 @@ export default class Category extends Component {
           const res = err.response
           if (res.status === 401) {
             message.error(res.data.msg)
+          } else {
+            message.error('服务器错误')
           }
         }
       }
@@ -176,6 +179,8 @@ export default class Category extends Component {
           const res = err.response
           if (res.status === 401) {
             message.error(res.data.msg)
+          } else {
+            message.error('服务器错误')
           }
           // 重置表单、关闭Modal框
           this.setState({ showUpdate: false })
@@ -188,12 +193,12 @@ export default class Category extends Component {
   // 保存要更新的分类
   showUpdateCategory = (category) => {
     this.category = category;
-    this.setState({showUpdate: true});
+    this.setState({showUpdate: true})
   }
 
   componentDidMount() {
-    this.initColumns();
-    this.getCategoryList(1);
+    this.initColumns()
+    this.getCategoryList(1)
   }
 
   render() {

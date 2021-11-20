@@ -1,13 +1,13 @@
-import React, {Component} from 'react'
-import {message, Modal, Spin, Upload} from 'antd'
-import {InboxOutlined} from '@ant-design/icons'
-import {reqDeleteImg, reqImgList} from '../../request'
+import React, { Component } from 'react'
+import { message, Modal, Spin, Upload } from 'antd'
+import { InboxOutlined } from '@ant-design/icons'
+import { reqDeleteImg, reqImgList } from '../../request'
 import Macy from 'macy'
-import {copyToClipboard} from '../../utils'
+import { copyToClipboard } from '../../utils'
 import storageUtils from '../../utils/storageUtils'
 import './gallery.less'
 
-const {Dragger} = Upload
+const { Dragger } = Upload
 
 export default class Gallery extends Component {
   state = {
@@ -81,6 +81,8 @@ export default class Gallery extends Component {
           const res = err.response
           if (res.status === 401) {
             message.error(res.data.msg)
+          } else {
+            message.error('服务器错误')
           }
         }
       }

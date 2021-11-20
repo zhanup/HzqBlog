@@ -1,6 +1,6 @@
 <template>
   <header class="navbar">
-    <nav class="navbar-wrapper" :class="isTransparent ? 'transparent' : ''">
+    <nav class="navbar-wrapper" :class="(isTransparent && !isShow) ? 'transparent' : ''">
       <div class="container">
         <h3 class="logo-container">
           <router-link tag="h3" to="/">Hzq's Blog</router-link>
@@ -70,23 +70,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
-import SearchModal from './SearchModal.vue';
+import { ref, reactive, onMounted, watch } from 'vue'
+import { useRouter } from 'vue-router'
+import SearchModal from './SearchModal.vue'
 import http from '../utils/http'
-import { Category, ResponseData } from '../types';
+import { Category, ResponseData } from '../types'
 
-defineProps({
-  isTransparent: Boolean
-})
-
-const emit = defineEmits(['switch']);
-const router = useRouter();
-
-const dialogVisible = ref<boolean>(false);
-const isOpen = ref<boolean>(false);
-const isDark = ref<boolean>(false);
-const isShow = ref<boolean>(false);
+defineProps({ isTransparent: Boolean })
+const router = useRouter()
+const dialogVisible = ref<boolean>(false)
+const isOpen = ref<boolean>(false)
+const isDark = ref<boolean>(false)
+const isShow = ref<boolean>(false)
 const state = reactive({
   categories: {} as any
 })
@@ -123,10 +118,8 @@ const switchTheme = (): void => {
 const showNav = (): void => {
   if (isShow.value === true) {
     isShow.value = false
-    emit('switch', true)
   } else {
     isShow.value = true
-    emit('switch', false)
   }
 }
 

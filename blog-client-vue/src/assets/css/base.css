@@ -6,7 +6,9 @@
 :root {
   --body-bg-color: #f7f9fe;
   --board-bg-color: #fff;
-  --text-color: #34495e;
+  --text-color: #24292f;
+  --text-muted-color: #57606a;
+  --text-subtle-color: #6e7781;
   --btn-bg-color: #ff6666;
   --tag-text-color: #fff;
   --sec-text-color: #525f7f;
@@ -17,14 +19,16 @@
   --link-hover-bg-color: #f8f9fa;
   --navbar-bg-color: #0099cc;
   --navbar-text-color: #fff;
-  --font-family: Georgia, 'Noto Serif SC', Helvetica, Arial, Menlo, Monaco, monospace, serif;
-  /* --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; */
+  --font-family: Georgia, "Noto Serif SC", Helvetica, Arial, Menlo, Monaco,
+    monospace, serif;
 }
 
 [data-user-color-scheme="dark"] {
   --body-bg-color: #191928;
   --board-bg-color: #282c34;
-  --text-color: rgba(255, 255, 255, 0.6);
+  --text-color: #c9d1d9;
+  --text-muted-color: #8b949e;
+  --text-subtle-color: #484f58;
   --tag-text-color: #999;
   --sec-text-color: rgba(255, 255, 255, 0.75);
   --desc-bg-color: #2b3b3c;
@@ -70,27 +74,30 @@ textarea {
   margin: 0;
 }
 
+/* 定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸 */
 ::-webkit-scrollbar {
-  width: 13px;
-  height: 13px;
+  width: 8px;
+  height: 8px;
 }
 
-::-webkit-scrollbar-corner {
-  background: transparent;
+/* 定义滑块 内阴影 + 圆角 */
+::-webkit-scrollbar-thumb {
+  background-color: #49b1f5;
+  background-image: -webkit-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.4) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0.4) 75%,
+    transparent 75%,
+    transparent
+  );
+  border-radius: 2em;
 }
 
+/* 定义滚动条轨道 内阴影 + 圆角 */
 ::-webkit-scrollbar-track {
-  box-shadow: 1px 1px 5px rgb(0 0 0 / 20%) inset;
-}
-
-::-webkit-scrollbar-thumb {
-  min-height: 20px;
-  background-clip: content-box;
-  box-shadow: 0 0 0 5px rgb(0 0 0 / 20%) inset;
-}
-
-::-webkit-scrollbar-track,
-::-webkit-scrollbar-thumb {
-  border-radius: 999px;
-  border: 5px solid transparent;
+  background-color: rgba(73, 177, 245, 0.2);
+  border-radius: 2em;
 }

@@ -2,23 +2,15 @@
   overflow-y: auto
 }
 
-.toc>.toc-list {
-  overflow: hidden;
-  position: relative
-}
-
-.toc>.toc-list li {
+.toc ol {
   list-style: none;
-  line-height: 2rem;
-  font-size: 14.5px;
-  counter-increment: ol-li;
+  counter-reset: ol-li;
+}
+.toc li {
+  padding-left: 10px;
 }
 
-.toc>.toc-list li:hover::before {
-  transform: rotate(360deg);
-}
-
-.toc>.toc-list li:before {
+.toc li:before {
   display: block;
   float: left;
   width: 19px;
@@ -33,7 +25,24 @@
   border-radius: 50%;
   text-align: center;
   content: counter(ol-li);
+  counter-increment: ol-li;
   transition: all 1s;
+}
+
+.toc>.toc-list {
+  overflow: hidden;
+  position: relative;
+}
+
+.toc>.toc-list li {
+  list-style: none;
+  line-height: 2rem;
+  font-size: 14.5px;
+  
+}
+
+.toc>.toc-list li:hover::before {
+  transform: rotate(360deg);
 }
 
 .toc-list {

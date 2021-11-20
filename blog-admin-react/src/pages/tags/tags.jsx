@@ -110,6 +110,8 @@ export default class Tags extends Component {
           const res = err.response
           if (res.status === 401) {
             message.error(res.data.msg)
+          } else {
+            message.error('服务器错误')
           }
           // 清空表单 关闭modal
           this.addRef.current.resetFields()
@@ -144,6 +146,8 @@ export default class Tags extends Component {
           const res = err.response
           if (res.status === 401) {
             message.error(res.data.msg)
+          } else {
+            message.error('服务器错误')
           }
         }
       }
@@ -173,6 +177,8 @@ export default class Tags extends Component {
           const res = err.response
           if (res.status === 401) {
             message.error(res.data.msg)
+          } else {
+            message.error('服务器错误')
           }
            // 重置表单 关闭modal
            this.updateRef.current.resetFields()

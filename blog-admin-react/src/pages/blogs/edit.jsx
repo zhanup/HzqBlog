@@ -65,10 +65,11 @@ export default class Edit extends Component {
         message.error(msg)
       }
     } catch(err) {
-      const res = err.response
-      
+      const res = err.response      
       if (res.status === 401) {
         message.error(res.data.msg)
+      } else {
+        message.error('服务器错误')
       }
     }
   }

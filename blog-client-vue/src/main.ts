@@ -12,7 +12,7 @@ hljs.configure({ ignoreUnescapedHTML: true })
 const app = createApp(App)
 
 app.directive('highlight', (el) => {
-  el.querySelectorAll('pre').forEach((block: any) => {
+  el.querySelectorAll('pre code').forEach((block: any) => {
     hljs.highlightElement(block);
   })
 })

@@ -50,6 +50,8 @@ export default class Publish extends Component {
       const res = err.response
       if (res.status === 401) {
         message.error(res.data.msg)
+      } else {
+        message.error('服务器错误')
       }
     }
   }

@@ -6,8 +6,6 @@
   </div>
   <div class="friends">
     <div class="container box-shadow">
-      
-
       <div class="info">
         <h3 class="header">申请友链须知：</h3>
         <ul class="list">
@@ -27,7 +25,6 @@
             <p>5、本站会定期对所有友链进行检查，如果发现一月内不能访问或者六个月内没有内容更新可能会取消该友链。</p>
           </li>
         </ul>
-
         <h3 class="header">我的博客资料：</h3>
         <ul class="list">
           <li>
@@ -39,35 +36,20 @@
           <li>
             <p>
               地址：
-              <a
-                href="https://www.impasse.top"
-                target="_blank"
-                rel="noopener"
-              >https://www.impasse.top</a>
+              <a href="https://www.impasse.top" target="_blank" rel="noopener">https://www.impasse.top</a>
             </p>
           </li>
           <li>
             <p>
               头像：
-              <a
-                href="https://www.impasse.top/medias/avatars/avatar.jpg"
-                target="_blank"
-                rel="noopener"
-              >https://www.impasse.top/medias/avatars/avatar.jpg</a>
+              <a href="https://www.impasse.top/medias/avatars/avatar.jpg" target="_blank" rel="noopener">https://www.impasse.top/medias/avatars/avatar.jpg</a>
             </p>
           </li>
         </ul>
       </div>
       <hr class="divide" />
       <div class="links">
-        <a
-          class="card"
-          v-for="link in state.list"
-          :key="link._id"
-          :href="link.url"
-          target="_blank"
-          :style="{ backgroundColor: getColor() }"
-        >
+        <a class="card" v-for="link in state.list" :key="link._id" :href="link.url" target="_blank" :style="{ backgroundColor: getColor() }">
           <div class="image">
             <img :src="link.icon" :alt="link.name" />
           </div>
@@ -80,19 +62,18 @@
     </div>
   </div>
 </template>
-
 <script lang="ts" setup>
 import { reactive, onMounted } from 'vue'
 import http from '../../utils/http'
-import { Link, ResponseData } from '../../types';
+import { Link, ResponseData } from '../../types'
 
 const state = reactive({
-  list: [] as Array<Link>
+  list: [] as Array < Link >
 })
 
 // 获取友链数据
-const getLinks = async (): Promise<void> => {
-  const res: ResponseData<Link> = await http.get('/link/list')
+const getLinks = async (): Promise < void > => {
+  const res: ResponseData < Link > = await http.get('/link/list')
   state.list = res.list
 }
 
@@ -108,7 +89,6 @@ onMounted(() => {
   getLinks()
 })
 </script>
-
 <style lang="less" scoped>
 .bg-cover {
   background-image: url(http://browser9.qhimg.com/bdr/__85/t016bfcfba1e1d7b91f.jpg) !important;
@@ -138,6 +118,7 @@ onMounted(() => {
       background-color: rgb(52, 152, 219);
       display: flex;
       flex-direction: column;
+
       .image {
         width: 70px;
         margin: 10px auto 0;
@@ -187,6 +168,7 @@ onMounted(() => {
       p {
         margin-top: 0;
         margin-bottom: 10px;
+        word-break: break-all;
       }
 
       li {
@@ -204,19 +186,31 @@ onMounted(() => {
   }
 }
 
-@media screen and (max-width: 900px) {
-  .links {
-    .card {
-      width: calc(50% - 20px) !important;
+@media screen and (max-width: 992px) {
+  .friends {
+    .container {
+      padding: 40px 30px 20px 32px;
+    }
+
+    .links {
+      .card {
+        width: calc(50% - 20px);
+      }
     }
   }
 }
 
-@media screen and (max-width: 500px) {
-  .links {
-    .card {
-      margin: 10px 0 !important;
-      width: 100% !important;
+@media screen and (max-width: 602px) {
+  .friends {
+    .container {
+      padding: 40px 15px 20px 18px;
+    }
+
+    .links {
+      .card {
+        margin: 10px 0 !important;
+        width: 100% !important;
+      }
     }
   }
 }

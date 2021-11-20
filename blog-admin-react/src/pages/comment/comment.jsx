@@ -140,7 +140,7 @@ export default class Comment extends Component {
 
   // 搜索
   onFinish = async (val) => {
-    this.getCommentList(1, val.article_id)
+    this.getCommentList(1, val.aid)
   }
 
   // 删除评论

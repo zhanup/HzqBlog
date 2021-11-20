@@ -21,8 +21,8 @@
       <div class="card">
         <h2 class="card-title">联系方式</h2>
         <p>QQ：2925309929</p>
-        <p>微信：zhanup323</p>
-        <p>邮箱：2925309929@qq.com</p>
+        <p>邮箱：zhanup323@foxmail.com</p>
+        <p>Github：<a href="https://github.com/zhanup" target="_blank">https://github.com/zhanup</a></p>
       </div>
       <div class="card">
         <h2 class="card-title">免责声明</h2>

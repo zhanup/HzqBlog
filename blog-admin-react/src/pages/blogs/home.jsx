@@ -149,7 +149,6 @@ export default class Blogs extends Component {
         try {
           const result = await reqDeleteArticle(id)
           const { msg } = result
-
           if (result.status === 1) {
             message.success(msg)
             this.getArticleList(this.pageNum)
@@ -158,9 +157,10 @@ export default class Blogs extends Component {
           }
         } catch(err) {
           const res = err.response
-
           if (res.status === 401) {
             message.error(res.data.msg)
+          } else {
+            message.error('服务器错误')
           }
         } 
       }
@@ -206,14 +206,22 @@ export default class Blogs extends Component {
 
   // 改变可见性
   updateVisible = async(id, visible) => {
-    const result = await reqUpdateArticle({id, visible})
-    const { msg } = result
-
-    if (result.status === 1) {
-      message.success(msg)
-    } else {
-      message.error(msg)
-    }
+    try {
+      const result = await reqUpdateArticle({id, visible})
+      const { msg } = result
+      if (result.status === 1) {
+        message.success(msg)
+      } else {
+        message.error(msg)
+      }
+    } catch(err) {
+      const res = err.response
+      if (res.status === 401) {
+        message.error(res.data.msg)
+      } else {
+        message.error('服务器错误')
+      }
+    }    
   }
 
   componentDidMount() {
