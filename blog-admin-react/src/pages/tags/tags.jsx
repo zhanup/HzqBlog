@@ -124,7 +124,7 @@ export default class Tags extends Component {
   // 删除标签
   deleteTag = (id, index) => {
     Modal.confirm({
-      title: '是否删除改标签？',
+      title: '是否删除该标签？',
       icon: <ExclamationCircleOutlined />,
       okText: '确认',
       cancelText: '取消',

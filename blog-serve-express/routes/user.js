@@ -4,12 +4,12 @@ const { getAvatar } =  require('../utils/utils')
 
 // 注册
 exports.register = (req, res, next) => {
-  const { name, email, password } = req.body;
-  const type = req.body.type || 1
+  const { name, email, password, type } = req.body;
   const avatar = getAvatar(email)
 
-  User.findOne({ name }, (err) => {
+  User.findOne({ name }, (err, data) => {
     if (err) return next(err)
+    if (data) return res.send({status: 0, msg: '用户已存在'})
 
     User.create({name, email, avatar, type, password: md5(password)}, (err) => {
       if (err) return next(err)
@@ -23,14 +23,13 @@ exports.register = (req, res, next) => {
 exports.login = (req, res, next) => {
   const { name, password } = req.body;
 
-  User.findOne({ name }, (err, doc) => {
+  User.findOne({ name }, (err, data) => {
     if (err) return next(err)
+    if (!data) return res.send({status: 0, msg: '用户不存在'})
 
-    if (!doc) return res.send({status: 0, msg: '用户不存在'})
-
-    if (doc.password === md5(password)) {
-      const { _id, name, email, avatar } = doc
-      const token = getToken(doc.type, doc.name)
+    if (data.password === md5(password)) {
+      const { _id, name, email, avatar, type } = data
+      const token = getToken(type, name)
       res.send({
         status: 1,
         msg: '登录成功',
@@ -54,9 +53,9 @@ exports.deleteUser = (req, res, next) => {
 
 // 修改用户信息
 exports.updateUser = (req, res, next) => {
-  const { id, name, password } = req.body;
+  const { id, name, type, email, avatar } = req.body;
 
-  User.findByIdAndUpdate(id, {name, password: md5(password)}, (err) => {
+  User.findByIdAndUpdate(id, {name, type, email, avatar}, (err) => {
     if (err) return next(err)
     res.send({ status: 1, msg: '修改成功' });
   })
@@ -64,12 +63,16 @@ exports.updateUser = (req, res, next) => {
 
 // 用户列表
 exports.userList = (req, res, next) => {
+  const pageNum = req.body.pageNum * 1 || 1
+  const pageSize = req.body.pageSize * 1 || 10
+
   User.find({}, (err, doc) => {
     if (err) return next(err)
 
+    const list = doc.slice((pageNum - 1) * pageSize, pageNum * pageSize)
     res.send({
       status: 1,
-      data: { list: doc }
+      data: { list, total: doc.length }
     })
   })
 }

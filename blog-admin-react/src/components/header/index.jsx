@@ -24,8 +24,7 @@ class Header extends Component {
     
     const menu = (
       <Menu>
-        <Menu.Item key="1">修改密码</Menu.Item>
-        <Menu.Item key="2" onClick={this.logout.bind(this)}>退出登录</Menu.Item>
+        <Menu.Item key="1" onClick={this.logout.bind(this)}>退出登录</Menu.Item>
       </Menu>
     )
 

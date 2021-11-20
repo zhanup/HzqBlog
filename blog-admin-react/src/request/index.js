@@ -89,3 +89,15 @@ export const reqImgList = () => axios({url: '/manage/img/list'})
 
 // 删除图片
 export const reqDeleteImg = (name) => axios({url: '/manage/img/delete', data: { name }, method: 'POST'})
+
+// 用户列表
+export const reqUserList = (pageNum, pageSize) => axios({url: '/manage/user/list', params: {pageNum, pageSize}})
+
+// 删除用户
+export const reqDeleteUser = (id) => axios({url: '/manage/user/delete', data: { id }, method: 'POST'})
+
+// 添加用户
+export const reqAddUser = ({name, email, type, password}) => axios({url: '/register', data: { name, email, type, password }, method: 'POST'})
+
+// 更新用户
+export const reqUpdateUser = ({id, name, email, type}) => axios({url: '/manage/user/update', data: { id, name, email, type }, method: 'POST'})

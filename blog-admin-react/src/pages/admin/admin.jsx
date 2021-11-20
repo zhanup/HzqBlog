@@ -14,6 +14,7 @@ import Tags from '../tags/tags'
 import Category from '../category/category'
 import Comment from '../comment/comment'
 import Gallery from '../gallery/gallery'
+import User from '../user/user'
 
 const { Content, Sider } = Layout
 
@@ -59,6 +60,7 @@ class Admin extends Component {
                   <Route path="/tags" component={Tags}/>
                   <Route path="/category" component={Category}/>
                   <Route path="/gallery" component={Gallery}/>
+                  <Route path="/user" component={User}/>
               </Switch>
           </Content>
         </Layout>

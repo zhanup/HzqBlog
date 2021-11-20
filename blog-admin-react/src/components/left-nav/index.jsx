@@ -9,7 +9,8 @@ import {
   AppstoreOutlined,
   LinkOutlined,
   CommentOutlined,
-  AreaChartOutlined
+  AreaChartOutlined,
+  UserOutlined
 } from "@ant-design/icons";
 
 const { SubMenu } = Menu;
@@ -61,6 +62,10 @@ class LeftNav extends Component {
 
         <Menu.Item key="/gallery" icon={<AreaChartOutlined />}>
           图片管理
+        </Menu.Item>
+
+        <Menu.Item key="/user" icon={<UserOutlined />}>
+          用户管理
         </Menu.Item>
       </Menu>
     );

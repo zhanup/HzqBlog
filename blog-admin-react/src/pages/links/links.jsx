@@ -208,7 +208,7 @@ export default class Links extends Component {
       .catch()
   }
 
-  // 
+  // 保存友链信息
   showUpdateLink = (links) => {
     this.links = links
     this.setState({ showUpdate: true })
@@ -220,7 +220,7 @@ export default class Links extends Component {
   }
 
   render() {
-    const { list, loading, total, pageSize, showAdd } = this.state
+    const { list, loading, total, pageSize, showAdd, showUpdate } = this.state
     const links = this.links || { name: '', url: '', icon: '', desc: '' }
 
     return (
@@ -261,8 +261,8 @@ export default class Links extends Component {
         </Modal>
 
         <Modal
-          title="添加友链"
-          visible={this.state.showUpdate}
+          title="更新友链"
+          visible={showUpdate}
           okText="确认"
           cancelText="取消"
           onCancel={() => this.setState({showUpdate: false})}
