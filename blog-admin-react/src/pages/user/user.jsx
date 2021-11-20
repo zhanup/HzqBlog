@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import React, { Component } from 'react'
 import { Card, Table, Button, Image, Tag, Modal, message } from 'antd'
 import { EditOutlined, DeleteOutlined, PlusOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
 import { reqUserList, reqDeleteUser, reqAddUser, reqUpdateUser } from '../../request'

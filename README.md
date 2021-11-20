@@ -36,6 +36,7 @@
 - 代码高亮
 - 响应式
 - 主题切换
+- 下载文章
 
 ## 博客后台
 
@@ -46,6 +47,8 @@
 - axios（一个基于 promise 的 HTTP 库）
 - react-simplemde-editor（Markdown编辑器）
 - macy（js瀑布流插件）
+- jszip（创建、读取和编辑.zip文件的js库）
+- file-saver（js保存各种类型文件的插件）
 
 #### 实现功能：
 
