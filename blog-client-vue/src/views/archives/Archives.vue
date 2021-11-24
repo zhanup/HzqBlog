@@ -9,7 +9,7 @@
       <div class="tags-card box-shadow">
         <div class="chips">
           <router-link v-for="(item, index) in state.tags" :key="item._id" :to="`/tags/${item.name}`">
-            <span class="chip" :style="{backgroundColor: color[index]}">{{ item.name }}</span>
+            <span class="chip" :style="{backgroundColor: color[index % 12]}">{{ item.name }}</span>
           </router-link>
         </div>
       </div>
@@ -87,7 +87,7 @@ onMounted(() => {
 
 <style lang="less" scoped>
 .bg-cover {
-  background-image: url(http://browser9.qhimg.com/bdr/__85/t01ca9bd06037f75c60.jpg) !important;
+  background-image: url(/img/bg3.jpg);
 }
 
 .archives {
@@ -192,6 +192,12 @@ onMounted(() => {
         }
       }
     }
+  }
+}
+
+[data-color-scheme="dark"] .archives {
+  .chip {
+    opacity: .8;
   }
 }
 

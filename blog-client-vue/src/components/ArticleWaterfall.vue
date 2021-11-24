@@ -4,7 +4,7 @@
       <div class="card box-shadow">
       <router-link :to="`/detail/${article?._id}`">
         <div class="card-image">
-          <img :src="article?.img_url" alt="img" />
+          <img v-lazy="article?.img_url" alt="img" />
           <span class="card-title">{{ article?.title }}</span>
         </div>
       </router-link>
@@ -93,6 +93,7 @@ watch(() => props.list, () => {
       bottom: 0;
       width: 100%;
       height: 220px;
+      filter: brightness(.7);
     }
 
     .card-title {

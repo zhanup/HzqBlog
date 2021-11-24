@@ -114,7 +114,8 @@ export default class Gallery extends Component {
               className="dragger"
               name="image"
               accept="image/*"
-              action="/manage/img/upload"
+              // action="/manage/img/upload"
+              action="http://1.15.112.209:5000/manage/img/upload"
               onChange={this.uploadImg}
               headers={{Authorization: user.token}}
           >

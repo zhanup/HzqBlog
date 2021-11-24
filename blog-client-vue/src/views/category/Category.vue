@@ -65,7 +65,7 @@ onMounted(() => {
 
 <style lang="less" scoped>
 .bg-cover {
-  background-image: url(http://browser9.qhimg.com/bdr/__85/t0154531e5acb137359.jpg) !important;
+  background-image: url(/img/bg2.jpg);
 }
 .category {
   .container {

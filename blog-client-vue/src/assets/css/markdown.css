@@ -1,4 +1,4 @@
-[data-user-color-scheme="dark"] .markdown-body {
+[data-color-scheme="dark"] .markdown-body {
   color-scheme: dark;
   --color-fg-default: #c9d1d9;
   --color-fg-muted: #8b949e;
@@ -13,7 +13,7 @@
   --color-danger-fg: #f85149;
 }
 
-[data-user-color-scheme="light"] .markdown-body {
+[data-color-scheme="light"] .markdown-body {
   color-scheme: light;
   --color-fg-default: #24292f;
   --color-fg-muted: #57606a;
@@ -227,7 +227,7 @@
 .markdown-body blockquote {
   margin: 0;
   padding: 1rem 0.8rem;
-  color: #666;
+  /* color: #666; */
   border-left: 0.25em solid #42b983;
   background-color: rgba(66, 185, 131, 0.1);
 }

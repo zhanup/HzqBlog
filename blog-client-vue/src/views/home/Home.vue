@@ -1,7 +1,7 @@
 <template>
   <div class="bg-cover">
     <div class="container">
-      <p class="blog-desc">生活不会惯着你，想要不被抛弃，必须自己争气</p>
+      <p class="blog-desc">生如夏花之绚烂, 死如秋叶之静美</p>
     </div>
   </div>
   <div class="home">
@@ -58,6 +58,7 @@ onMounted(() => {
 <style lang="less" scoped>
 .bg-cover {
   height: 100vh;
+  background-image: url(/img/bg1.jpg);
 
   .container {
     margin-top: 0;

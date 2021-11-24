@@ -6,6 +6,11 @@ import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 export default defineConfig({
+  css: {
+    postcss: {
+      plugins: [require('autoprefixer')()]
+    }
+  },
   plugins: [
     vue(),
     // ElementPlus按需加载
@@ -22,7 +27,8 @@ export default defineConfig({
     // 配置代理服务器，解决跨域
     proxy: {
       '/api': {
-        target: 'http://localhost:3002',
+        // target: 'http://localhost:3002',
+        target: 'http://1.15.112.209:5000',
         changeOrigin: true
       }
     }

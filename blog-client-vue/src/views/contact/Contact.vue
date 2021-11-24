@@ -94,6 +94,9 @@ onMounted(() => {
 </script>
 
 <style lang="less" scoped>
+.bg-cover {
+  background-image: url(/img/bg6.jpg);
+}
 .contact {
   .container {
     width: 95%;

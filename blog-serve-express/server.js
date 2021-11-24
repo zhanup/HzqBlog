@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const jwtAuth = require('./utils/auth')
 const router = require('./routes')
 const { handleError } = require('./utils/utils')
+const { PORT } = require('./utils/constant')
 const app = express()
 
 // 连接数据库
@@ -30,7 +31,7 @@ app.use((err, req, res, next) => {
     handleError(err, res)
 })
 
-app.listen(3002, () => {
-    console.log('App running at: http://localhost:3002/');
+app.listen(PORT, () => {
+    console.log(`App running at: http://localhost:${PORT}/`);
 })
 

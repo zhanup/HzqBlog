@@ -38,7 +38,7 @@
 
 <style lang="less" scoped>
 .bg-cover {
-  background-image: url(http://browser9.qhimg.com/bdr/__85/t0100dc32508c7e4d7a.jpg) !important;
+  background-image: url(/img/bg7.jpg);
 }
 .about {
   .container {

@@ -28,21 +28,21 @@
         <h3 class="header">我的博客资料：</h3>
         <ul class="list">
           <li>
-            <p>名称：万能的小江</p>
+            <p>名称：在路上</p>
           </li>
           <li>
-            <p>简介：Keep Learning…</p>
+            <p>简介：承认自己的无知,乃是开启智慧的大门</p>
           </li>
           <li>
             <p>
               地址：
-              <a href="https://www.impasse.top" target="_blank" rel="noopener">https://www.impasse.top</a>
+              <a href="http://www.zhanup.top" target="_blank" rel="noopener">http://www.zhanup.top</a>
             </p>
           </li>
           <li>
             <p>
               头像：
-              <a href="https://www.impasse.top/medias/avatars/avatar.jpg" target="_blank" rel="noopener">https://www.impasse.top/medias/avatars/avatar.jpg</a>
+              <a href="http://www.zhanup.top/img/avatar.jpg" target="_blank" rel="noopener">http://www.zhanup.top/img/avatar.jpg</a>
             </p>
           </li>
         </ul>
@@ -91,7 +91,7 @@ onMounted(() => {
 </script>
 <style lang="less" scoped>
 .bg-cover {
-  background-image: url(http://browser9.qhimg.com/bdr/__85/t016bfcfba1e1d7b91f.jpg) !important;
+  background-image: url(/img/bg5.jpg);
 }
 
 .friends {

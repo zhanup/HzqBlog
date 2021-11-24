@@ -71,6 +71,8 @@ const closeDialog = (): void => {
 
 <style lang="less" scoped>
 .search-modal {
+  opacity: 0;
+
   .title {
     font-size: 20px;
 
@@ -105,9 +107,7 @@ const closeDialog = (): void => {
       box-shadow: 0 1px 0 0 #26a69a;
     }
   }
-}
 
-.search-modal {
   .result-list {
     padding: 0;
     margin: 0;

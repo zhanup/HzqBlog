@@ -1,14 +1,12 @@
-@import "./normalize.css";
 @import "./markdown.css";
 @import "./toc.css";
 @import "./common.css";
 
-:root {
+[data-color-scheme="light"] {
+  color-scheme: light;
   --body-bg-color: #f7f9fe;
   --board-bg-color: #fff;
-  --text-color: #24292f;
-  --text-muted-color: #57606a;
-  --text-subtle-color: #6e7781;
+  --text-color: #34495e;
   --btn-bg-color: #ff6666;
   --tag-text-color: #fff;
   --sec-text-color: #525f7f;
@@ -17,25 +15,31 @@
   --link-color: #42b983;
   --code-bg-color: #2d2d2d;
   --link-hover-bg-color: #f8f9fa;
-  --navbar-bg-color: #0099cc;
+  --navbar-bg-color: #12121c;
   --navbar-text-color: #fff;
-  --font-family: Georgia, "Noto Serif SC", Helvetica, Arial, Menlo, Monaco,
-    monospace, serif;
+  --font-family: Georgia, "Noto Serif SC", Helvetica, Arial, Menlo, Monaco, monospace, serif;
 }
 
-[data-user-color-scheme="dark"] {
+[data-color-scheme="dark"] {
+  color-scheme: dark;
   --body-bg-color: #191928;
   --board-bg-color: #282c34;
-  --text-color: #c9d1d9;
-  --text-muted-color: #8b949e;
-  --text-subtle-color: #484f58;
+  --text-color: rgba(255, 255, 255, 0.6);
+  --btn-bg-color: #ff6666;
   --tag-text-color: #999;
   --sec-text-color: rgba(255, 255, 255, 0.75);
   --desc-bg-color: #2b3b3c;
   --toc-counter-bg-color: #3579a9;
+  --link-color: #42b983;
   --code-bg-color: #272822;
-  --navbar-bg-color: #12121c;
+  --link-hover-bg-color: #f8f9fa;
+  --navbar-bg-color: #1b1c1d;
   --navbar-text-color: rgba(255, 255, 255, 0.6);
+  --font-family: Georgia, "Noto Serif SC", Helvetica, Arial, Menlo, Monaco, monospace, serif;
+}
+
+[data-color-scheme="dark"] img {
+  opacity: .9;
 }
 
 *,
@@ -72,6 +76,51 @@ textarea {
   font-size: 100%;
   line-height: 1.15;
   margin: 0;
+}
+.el-dropdown__popper {
+  opacity: .8;
+  border-color: var(--navbar-bg-color) !important;
+  background-color: var(--navbar-bg-color) !important;
+}
+
+.el-popper__arrow::before {
+  border-color: var(--navbar-bg-color) !important;
+  background-color: var(--navbar-bg-color) !important;
+}
+
+.el-dropdown-menu {
+  background-color: var(--navbar-bg-color) !important;
+}
+
+.el-dropdown-menu__item {
+  position: relative;
+}
+
+.el-dropdown-menu__item::after {
+  display: none;
+  content: "";
+  position: absolute;
+  top: 35px;
+  left: calc(50% - 30px);
+  width: 60px;
+  height: 2px;
+  background-color: #ff6666;
+}
+
+.el-dropdown-menu__item:hover::after {
+  display: block;
+}
+
+.el-dropdown-menu__item:hover {
+  background: none !important;
+  
+}
+
+.el-dropdown-menu__item a {
+  font-size: 14.5px;
+  font-weight: 700;
+  font-family: var(--font-family) !important;
+  color: var(--navbar-text-color) !important;
 }
 
 /* 定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸 */

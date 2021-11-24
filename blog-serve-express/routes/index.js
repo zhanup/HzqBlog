@@ -9,8 +9,8 @@ const comment = require('./comment')
 const gallery = require('./upload')
 
 // 用户
-router.post('/register', user.register)
-router.post('/login', user.login)
+router.post('/manage/user/register', user.register)
+router.post('/manage/user/login', user.login)
 router.post('/manage/user/update', user.updateUser)
 router.post('/manage/user/delete', user.deleteUser)
 router.get('/manage/user/list', user.userList)

@@ -290,7 +290,7 @@ onBeforeUnmount(() => {
     .toc-title {
       margin: 35px 0 15px 0;
       font-size: 18px;
-      padding-left: 10px;
+      padding-left: 20px;
       font-weight: bold;
       line-height: 24px;
       color: #34495e;

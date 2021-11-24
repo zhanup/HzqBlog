@@ -11,44 +11,39 @@
         </button>
 
         <ul class="nav-list" :class="isShow ? 'show' : ''">
-          <li class="nav-item" @click="isShow = false">
-            <router-link to="/" class="nav-link">首页</router-link>
+          <li class="nav-item">
+            <router-link to="/" class="nav-link" @click="isShow = false">首页</router-link>
           </li>
 
-          <li class="nav-item dropdown">
-            <span
-              class="nav-link dropdown-link"
-              @click="isOpen = !isOpen"
-              tabindex="0"
-              @blur="isOpen = false"
-            >
-              分类
-              <i class="iconfont icon-arrowdown"></i>
-            </span>
-            <ul class="dropdown-menu" :style="{ display: isOpen ? 'block' : 'none' }">
-              <li class="dropdown-item" v-for="cate in state.categories" :key="cate._id">
-                <router-link
-                  :to="`/category/${cate.name}`"
-                  @mousedown="jumpTo(cate.name)"
-                >{{ cate.name }}</router-link>
-              </li>
-            </ul>
+          <li class="nav-item">
+            <el-dropdown trigger="click">
+              <span class="nav-link">分类
+                <i class="iconfont icon-arrowdown"></i>
+              </span>
+              <template #dropdown>
+                <el-dropdown-menu>
+                  <el-dropdown-item v-for="cate in state.categories" :key="cate._id">
+                    <router-link :to="`/category/${cate.name}`" @click="isShow = false">{{ cate.name }}</router-link>
+                  </el-dropdown-item>
+                </el-dropdown-menu>
+              </template>
+            </el-dropdown>
           </li>
 
-          <li class="nav-item" @click="isShow = false">
-            <router-link to="/archives" class="nav-link">归档</router-link>
+          <li class="nav-item">
+            <router-link to="/archives" class="nav-link"  @click="isShow = false">归档</router-link>
           </li>
 
-          <li class="nav-item" @click="isShow = false">
-            <router-link to="/friends" class="nav-link">友链</router-link>
+          <li class="nav-item">
+            <router-link to="/friends" class="nav-link" @click="isShow = false">友链</router-link>
           </li>
 
-          <li class="nav-item" @click="isShow = false">
-            <router-link to="/contact" class="nav-link">留言</router-link>
+          <li class="nav-item">
+            <router-link to="/contact" class="nav-link" @click="isShow = false">留言</router-link>
           </li>
 
-          <li class="nav-item" @click="isShow = false">
-            <router-link to="/about" class="nav-link">关于</router-link>
+          <li class="nav-item">
+            <router-link to="/about" class="nav-link" @click="isShow = false">关于</router-link>
           </li>
 
           <li class="nav-item">
@@ -64,13 +59,13 @@
           </li>
         </ul>
       </div>
-      <SearchModal :dialogVisible="dialogVisible" @close="closeDialog" />
     </nav>
+    <SearchModal :dialogVisible="dialogVisible" @close="closeDialog" />
   </header>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted, watch } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import SearchModal from './SearchModal.vue'
 import http from '../utils/http'
@@ -79,7 +74,6 @@ import { Category, ResponseData } from '../types'
 defineProps({ isTransparent: Boolean })
 const router = useRouter()
 const dialogVisible = ref<boolean>(false)
-const isOpen = ref<boolean>(false)
 const isDark = ref<boolean>(false)
 const isShow = ref<boolean>(false)
 const state = reactive({
@@ -103,13 +97,13 @@ const getCategory = async (): Promise<void> => {
 
 // 切换主题
 const switchTheme = (): void => {
-  const scheme = document.documentElement.getAttribute('data-user-color-scheme')
+  const scheme = document.documentElement.getAttribute('data-color-scheme')
   if (scheme === 'dark') {
-    document.documentElement.setAttribute('data-user-color-scheme', 'light')
+    document.documentElement.setAttribute('data-color-scheme', 'light')
     isDark.value = false;
   }
   else {
-    document.documentElement.setAttribute('data-user-color-scheme', 'dark')
+    document.documentElement.setAttribute('data-color-scheme', 'dark')
     isDark.value = true;
   }
 }
@@ -121,11 +115,6 @@ const showNav = (): void => {
   } else {
     isShow.value = true
   }
-}
-
-const jumpTo = (name: string) => {
-  isShow.value = false
-  router.push(`/category/${name}`)
 }
 
 onMounted(() => {
@@ -144,6 +133,7 @@ onMounted(() => {
     z-index: 1000;
     width: 100%;
     height: 64px;
+    opacity: .9;
     background-color: var(--navbar-bg-color);
 
     .container {
@@ -163,7 +153,7 @@ onMounted(() => {
       font-weight: 400;
 
       a {
-        color: var(--navbar-text-color);
+        color: #48dbfb;
         font-weight: 700;
         font-size: 18px;
       }
@@ -173,18 +163,19 @@ onMounted(() => {
       padding: 0;
       margin: 0;
       list-style: none;
+      cursor: pointer;
 
       &::after {
-        content: " ";
+        content: "";
         display: block;
         clear: both;
       }
 
       .nav-item {
-        float: left;
         position: relative;
+        float: left;
 
-        &:nth-child(-n + 5) {
+        &:nth-child(-n + 5):not(&:nth-child(2)) {
           &:hover {
             &::after {
               display: block;
@@ -256,58 +247,6 @@ onMounted(() => {
 
 .transparent {
   background-color: transparent !important;
-}
-
-.dropdown {
-  position: relative;
-  &:hover {
-    .dropdown-menu {
-      display: block;
-    }
-  }
-  .dropdown-menu {
-    // display: none;
-    position: absolute;
-    top: 70px;
-    left: -10px;
-    border-radius: 10px;
-    padding: 10px 0;
-    list-style: none;
-    background-color: var(--navbar-bg-color);
-
-    .dropdown-item {
-      min-width: 100px;
-      padding: 0 20px;
-      font-size: 14.5px;
-      font-weight: 700;
-      cursor: pointer;
-      line-height: 36px;
-      text-align: center;
-      color: var(--navbar-text-color);
-      position: relative;
-
-      &:hover {
-        &::after {
-          display: block;
-        }
-      }
-
-      &::after {
-        display: none;
-        content: "";
-        position: absolute;
-        top: 32px;
-        left: calc(50% - 35%);
-        width: 70%;
-        height: 0;
-        border-bottom: 2px solid #ff6666;
-      }
-
-      a {
-        color: var(--navbar-text-color);
-      }
-    }
-  }
 }
 
 @media screen and (max-width: 980px) {
