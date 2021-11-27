@@ -29,9 +29,11 @@
           href="https://creativecommons.org/licenses/by/4.0/deed.zh"
           rel="external nofollow noreferrer"
           target="_blank"
-        >CC BY 4.0</a>
+          >CC BY 4.0</a
+        >
         许可协议。转载请注明来源
-        <a href="/about" target="_blank">{{ name }}</a>！
+        <a href="/about" target="_blank">{{ name }}</a
+        >！
       </span>
     </div>
   </div>

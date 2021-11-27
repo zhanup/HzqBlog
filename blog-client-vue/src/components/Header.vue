@@ -1,29 +1,45 @@
 <template>
   <header class="navbar">
-    <nav class="navbar-wrapper" :class="(isTransparent && !isShow) ? 'transparent' : ''">
+    <nav
+      class="navbar-wrapper"
+      :class="isTransparent && !isShow ? 'transparent' : ''"
+    >
       <div class="container">
         <h3 class="logo-container">
-          <router-link tag="h3" to="/">Hzq's Blog</router-link>
+          <router-link to="/">Hzq's Blog</router-link>
         </h3>
 
         <button class="navbar-toggler" @click="showNav">
-          <i class="iconfont" :class="isShow ? 'icon-off-search' : 'icon-menu2'"></i>
+          <i
+            class="iconfont"
+            :class="isShow ? 'icon-off-search' : 'icon-menu2'"
+          ></i>
         </button>
 
         <ul class="nav-list" :class="isShow ? 'show' : ''">
           <li class="nav-item">
-            <router-link to="/" class="nav-link" @click="isShow = false">首页</router-link>
+            <router-link to="/" class="nav-link" @click="isShow = false"
+              >首页</router-link
+            >
           </li>
 
           <li class="nav-item">
             <el-dropdown trigger="click">
-              <span class="nav-link">分类
+              <span class="nav-link"
+                >分类
                 <i class="iconfont icon-arrowdown"></i>
               </span>
               <template #dropdown>
                 <el-dropdown-menu>
-                  <el-dropdown-item v-for="cate in state.categories" :key="cate._id">
-                    <router-link :to="`/category/${cate.name}`" @click="isShow = false">{{ cate.name }}</router-link>
+                  <el-dropdown-item
+                    v-for="cate in state.categories"
+                    :key="cate._id"
+                  >
+                    <router-link
+                      :to="`/category/${cate.name}`"
+                      @click="isShow = false"
+                      >{{ cate.name }}</router-link
+                    >
                   </el-dropdown-item>
                 </el-dropdown-menu>
               </template>
@@ -31,19 +47,27 @@
           </li>
 
           <li class="nav-item">
-            <router-link to="/archives" class="nav-link"  @click="isShow = false">归档</router-link>
+            <router-link to="/archives" class="nav-link" @click="isShow = false"
+              >归档</router-link
+            >
           </li>
 
           <li class="nav-item">
-            <router-link to="/friends" class="nav-link" @click="isShow = false">友链</router-link>
+            <router-link to="/friends" class="nav-link" @click="isShow = false"
+              >友链</router-link
+            >
           </li>
 
           <li class="nav-item">
-            <router-link to="/contact" class="nav-link" @click="isShow = false">留言</router-link>
+            <router-link to="/contact" class="nav-link" @click="isShow = false"
+              >留言</router-link
+            >
           </li>
 
           <li class="nav-item">
-            <router-link to="/about" class="nav-link" @click="isShow = false">关于</router-link>
+            <router-link to="/about" class="nav-link" @click="isShow = false"
+              >关于</router-link
+            >
           </li>
 
           <li class="nav-item">
@@ -54,7 +78,10 @@
 
           <li class="nav-item">
             <span class="nav-link theme" @click="switchTheme">
-              <i class="iconfont" :class="isDark ? 'icon-light' : 'icon-dark'"></i>
+              <i
+                class="iconfont"
+                :class="isDark ? 'icon-light' : 'icon-dark'"
+              ></i>
             </span>
           </li>
         </ul>
@@ -65,14 +92,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, reactive, onMounted, defineProps } from 'vue'
 import SearchModal from './SearchModal.vue'
 import http from '../utils/http'
 import { Category, ResponseData } from '../types'
 
 defineProps({ isTransparent: Boolean })
-const router = useRouter()
 const dialogVisible = ref<boolean>(false)
 const isDark = ref<boolean>(false)
 const isShow = ref<boolean>(false)
@@ -82,12 +107,12 @@ const state = reactive({
 
 // 显示搜索框
 const showDialog = (): void => {
-  dialogVisible.value = true;
+  dialogVisible.value = true
 }
 
 // 关闭搜索框
 const closeDialog = (): void => {
-  dialogVisible.value = false;
+  dialogVisible.value = false
 }
 
 const getCategory = async (): Promise<void> => {
@@ -100,11 +125,10 @@ const switchTheme = (): void => {
   const scheme = document.documentElement.getAttribute('data-color-scheme')
   if (scheme === 'dark') {
     document.documentElement.setAttribute('data-color-scheme', 'light')
-    isDark.value = false;
-  }
-  else {
+    isDark.value = false
+  } else {
     document.documentElement.setAttribute('data-color-scheme', 'dark')
-    isDark.value = true;
+    isDark.value = true
   }
 }
 
@@ -133,7 +157,7 @@ onMounted(() => {
     z-index: 1000;
     width: 100%;
     height: 64px;
-    opacity: .9;
+    opacity: 0.9;
     background-color: var(--navbar-bg-color);
 
     .container {
@@ -166,7 +190,7 @@ onMounted(() => {
       cursor: pointer;
 
       &::after {
-        content: "";
+        content: '';
         display: block;
         clear: both;
       }
@@ -183,7 +207,7 @@ onMounted(() => {
           }
           &::after {
             display: none;
-            content: "";
+            content: '';
             position: absolute;
             top: 50px;
             left: calc(50% - 25px);

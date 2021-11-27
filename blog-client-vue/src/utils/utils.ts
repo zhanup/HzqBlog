@@ -18,7 +18,7 @@ export const scrollToTop = (): void => {
   if (document.body.scrollIntoView) {
     document.body.scrollIntoView({ behavior: 'smooth' })
   } else {
-    let sTop = document.documentElement.scrollTop || document.body.scrollTop
+    const sTop = document.documentElement.scrollTop || document.body.scrollTop
     if (sTop > 0) {
       window.requestAnimationFrame(scrollToTop)
       window.scrollTo(0, sTop - sTop / 8)
@@ -29,8 +29,8 @@ export const scrollToTop = (): void => {
 // 格式化时间
 export const formatDate = (date: string | Date): string => {
   if (!date) return ''
-  const d = new Date(date);
-  return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+  const d = new Date(date)
+  return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`
 }
 
-// export 
+// export

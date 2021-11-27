@@ -1,5 +1,8 @@
 <template>
-  <div class="bg-cover" :style="{ backgroundImage: `url(${state.detail.img_url})` }">
+  <div
+    class="bg-cover"
+    :style="{ backgroundImage: `url(${state.detail.img_url})` }"
+  >
     <div class="container">
       <h2 class="blog-title">{{ state.detail.title }}</h2>
     </div>
@@ -10,10 +13,17 @@
         <div class="article-info">
           <div class="tag-cate">
             <div class="article-tag">
-              <span class="tag" v-for="tag of state.detail.tags" :key="tag._id">{{ tag.name }}</span>
+              <span
+                class="tag"
+                v-for="tag of state.detail.tags"
+                :key="tag._id"
+                >{{ tag.name }}</span
+              >
             </div>
             <div class="post-cate">
-              <router-link class="cate" :to="`/category/${cateName}`">{{ cateName }}</router-link>
+              <router-link class="cate" :to="`/category/${cateName}`">{{
+                cateName
+              }}</router-link>
             </div>
           </div>
           <div class="post-info">
@@ -58,7 +68,14 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, onMounted, nextTick, onBeforeUnmount, computed } from 'vue'
+import {
+  ref,
+  reactive,
+  onMounted,
+  nextTick,
+  onBeforeUnmount,
+  computed
+} from 'vue'
 import { useRoute } from 'vue-router'
 import Comment from '../../components/Comment.vue'
 import FullButton from './FullButton.vue'
@@ -83,6 +100,7 @@ const state = reactive({
 
 // 初始化目录
 const tocbotInit = (): void => {
+  // eslint-disable-next-line
   tocbot.init({
     tocSelector: '.toc-content',
     contentSelector: '.markdown-body',
@@ -100,43 +118,55 @@ const fullClick = (): void => {
 
 // 文章链接
 const url = computed<string>(() => {
-  return `http://localhost:3001/detail/${route.params.id}`
+  return `http://1.15.112.209/detail/${route.params.id}`
 })
 
 // 获取文章详情
 const getArticleDetail = async (): Promise<void> => {
   const id = route.params.id
   const res: Article = await http.get(`/article/detail?id=${id}`)
-  state.detail = res;
-  state.aid = res._id;
-  state.content = marked(res.content);
-  getComments();
-  nextTick(() => tocbotInit());
+  state.detail = res
+  state.aid = res._id
+  state.content = marked(res.content)
+  getComments()
+  nextTick(() => tocbotInit())
 }
 
 // 获取评论列表
 const getComments = async (): Promise<void> => {
   const { aid, pageNum, pageSize } = state
-  const res: ResponseData<Comments> = await getCommentList(aid, pageNum, pageSize)
+  const res: ResponseData<Comments> = await getCommentList(
+    aid,
+    pageNum,
+    pageSize
+  )
   state.comments = res.list
   state.total = res.total
 }
 
 // 格式化时间
 const formatDate = (date: string | Date): string => {
-  const d = new Date(date);
-  return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+  const d = new Date(date)
+  return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`
 }
 
 // 提交评论
 const handleComment = async (param: any): Promise<void> => {
-  await http({ url: '/comment/add', method: 'POST', data: { aid: state.aid, ...param } })
+  await http({
+    url: '/comment/add',
+    method: 'POST',
+    data: { aid: state.aid, ...param }
+  })
   getComments()
 }
 
 // 回复评论
 const handleReply = async (param: any): Promise<void> => {
-  await http({ url: '/comment/add', method: 'POST', data: { aid: state.aid, ...param } })
+  await http({
+    url: '/comment/add',
+    method: 'POST',
+    data: { aid: state.aid, ...param }
+  })
   getComments()
 }
 
@@ -145,7 +175,11 @@ const loadMore = async (param: any): Promise<void> => {
   state.pageNum = param
   state.loadBottom = true
   const { aid, pageNum, pageSize } = state
-  const res: ResponseData<Comments> = await getCommentList(aid, pageNum, pageSize)
+  const res: ResponseData<Comments> = await getCommentList(
+    aid,
+    pageNum,
+    pageSize
+  )
   state.loadBottom = false
   state.comments = [...state.comments, ...res.list]
 }
@@ -160,6 +194,7 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
+  // eslint-disable-next-line
   tocbot.destroy()
 })
 </script>
@@ -171,7 +206,7 @@ onBeforeUnmount(() => {
   margin: 0 auto;
 
   &::after {
-    content: "";
+    content: '';
     display: block;
     clear: both;
   }

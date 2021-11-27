@@ -7,7 +7,7 @@
         </span>
       </div>
       <div>
-        <span class="page-info">{{currentPage}} / {{pageCount}}</span>
+        <span class="page-info">{{ currentPage }} / {{ pageCount }}</span>
       </div>
       <div>
         <span class="next-btn" :class="nextDisabled" @click="nextClick">
@@ -21,6 +21,7 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 
+// eslint-disable-next-line
 const props = defineProps({
   currentPage: {
     type: Number,
@@ -35,25 +36,28 @@ const props = defineProps({
     default: 5
   }
 })
+
+// eslint-disable-next-line
 const emit = defineEmits(['prev-click', 'next-click'])
 
+// 分页数
 const pageCount = computed(() => {
   const { pageSize, total } = props
 
-  let count = Math.floor(total / pageSize);
+  let count = Math.floor(total / pageSize)
   if (total % pageSize > 0) {
-    count += 1;
+    count += 1
   }
-  return count;
+  return count
 })
 
-const prevDisabled = computed(() => (
-  props.currentPage === 1 ? 'disabled' : ''
-))
+// 上一页禁止点击
+const prevDisabled = computed(() => (props.currentPage === 1 ? 'disabled' : ''))
 
-const nextDisabled = computed(() => (
+// 下一页禁止点击
+const nextDisabled = computed(() =>
   props.currentPage === pageCount.value ? 'disabled' : ''
-))
+)
 
 const prevClick = (): void => {
   const { currentPage } = props
@@ -63,7 +67,7 @@ const prevClick = (): void => {
   }
 }
 
-const nextClick = () :void => {
+const nextClick = (): void => {
   const { currentPage } = props
   if (currentPage < pageCount.value) {
     emit('next-click', currentPage + 1)
@@ -86,7 +90,7 @@ const nextClick = () :void => {
   .disabled {
     background-color: #ccc !important;
     cursor: default !important;
-    color: #9F9F9F !important;
+    color: #9f9f9f !important;
     box-shadow: none !important;
   }
 
@@ -104,7 +108,8 @@ const nextClick = () :void => {
     text-align: center;
     border-radius: 50%;
     cursor: pointer;
-    box-shadow: 0 3px 3px 0 rgb(0 0 0 / 14%), 0 1px 7px 0 rgb(0 0 0 / 12%), 0 3px 1px -1px rgb(0 0 0 / 20%);
+    box-shadow: 0 3px 3px 0 rgb(0 0 0 / 14%), 0 1px 7px 0 rgb(0 0 0 / 12%),
+      0 3px 1px -1px rgb(0 0 0 / 20%);
     background-color: var(--btn-bg-color);
     color: #fff;
 

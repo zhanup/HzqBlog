@@ -1,7 +1,7 @@
 <template>
   <div class="reply">
     <el-dialog
-      v-model="replyVisible"
+      :model-value="replyVisible"
       :show-close="false"
       @close="closeDialog"
       custom-class="reply-modal"
@@ -10,7 +10,13 @@
         <div class="vpanel">
           <div class="vwrap">
             <div class="vheader">
-              <input class="vinput" v-model="reply.name" name="nick" type="text" placeholder="昵称" />
+              <input
+                class="vinput"
+                v-model="reply.name"
+                name="nick"
+                type="text"
+                placeholder="昵称"
+              />
               <input
                 class="vinput"
                 v-model="reply.email"
@@ -21,7 +27,10 @@
             </div>
 
             <div class="vedit">
-              <textarea class="veditor vinput" v-model="reply.content"></textarea>
+              <textarea
+                class="veditor vinput"
+                v-model="reply.content"
+              ></textarea>
             </div>
 
             <div class="vrow">
@@ -66,7 +75,8 @@
                 :name="item.name"
                 :title="item.name"
                 @click="insertEmoji(item.content)"
-              >{{ item.content }}</i>
+                >{{ item.content }}</i
+              >
             </div>
           </div>
         </div>
@@ -76,15 +86,18 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive } from 'vue';
+import { ref, reactive } from 'vue'
 import { ElMessage } from 'element-plus'
-import emojiDataSource from '../assets/data/emoji.json';
+import emojiDataSource from '../assets/data/emoji.json'
 
+// eslint-disable-next-line
 defineProps({
   replyVisible: Boolean
 })
-const emit = defineEmits(['reply', 'close']);
-const emojiVisible = ref<boolean>(false);
+
+// eslint-disable-next-line
+const emit = defineEmits(['reply', 'close'])
+const emojiVisible = ref<boolean>(false)
 const reply = reactive({
   name: '',
   email: '',
@@ -93,17 +106,17 @@ const reply = reactive({
 
 // 关闭 Dialog
 const closeDialog = (): void => {
-  emit('close');
+  emit('close')
 }
 
 // 控制表情包面板
 const emojiShow = (): void => {
-  emojiVisible.value = !emojiVisible.value;
+  emojiVisible.value = !emojiVisible.value
 }
 
 // 向文本框插入表情
 const insertEmoji = (emoji: string): void => {
-  reply.content += emoji;
+  reply.content += emoji
 }
 
 // 体检回复
@@ -133,12 +146,12 @@ const onSubmit = (): void => {
     }
   }
 }
-.v[data-class="v"] * {
+.v[data-class='v'] * {
   box-sizing: border-box;
   line-height: 1.75;
 }
 
-.v[data-class="v"] {
+.v[data-class='v'] {
   font-size: 16px;
   text-align: left;
 

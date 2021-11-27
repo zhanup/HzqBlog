@@ -20,7 +20,10 @@ module.exports = {
   webpack: {
     plugins: [
       // whenProd生产环境生效
-      ...whenProd(() => [new CompressionPlugin({test: /\.(js|css)?$/i,}), new BundleAnalyzerPlugin()], [])
+      ...whenProd(() => [
+        new CompressionPlugin({test: /\.(js|css)?$/i,}), 
+        new BundleAnalyzerPlugin()
+      ], [])
     ]
   }
 }

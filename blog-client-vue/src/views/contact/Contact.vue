@@ -7,14 +7,16 @@
   <div class="contact">
     <div class="container">
       <div class="board box-shadow">
-        <p>如果对本博客有任何建议或者疑问，欢迎在页面下方留言。但请不要发送包括但不限于以下的违禁内容：</p>
+        <p>
+          如果对本博客有任何建议或者疑问，欢迎在页面下方留言。但请不要发送包括但不限于以下的违禁内容：
+        </p>
         <ul>
           <li><p>1、无意义发言</p></li>
           <li><p>2、脏话、粗话</p></li>
           <li><p>3、广告推广</p></li>
           <li><p>4、政治类讨论</p></li>
         </ul>
-        <p>另外申请友链的同学还请先添加本站的链接再留言哦。</p>     
+        <p>另外申请友链的同学还请先添加本站的链接再留言哦。</p>
       </div>
 
       <Comment
@@ -32,10 +34,10 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, onMounted } from 'vue';
-import Comment from '../../components/Comment.vue';
-import http from '../../utils/http';
-import { Comments, ResponseData } from '../../types';
+import { reactive, onMounted } from 'vue'
+import Comment from '../../components/Comment.vue'
+import http from '../../utils/http'
+import { Comments, ResponseData } from '../../types'
 
 const state = reactive({
   aid: '',
@@ -62,20 +64,28 @@ const getComments = async (): Promise<void> => {
 
 // 留言
 const handleComment = async (param: any): Promise<void> => {
-  await http({url: '/comment/add', data: {aid: state.aid, ...param}, method: 'POST'})
+  await http({
+    url: '/comment/add',
+    data: { aid: state.aid, ...param },
+    method: 'POST'
+  })
   getComments()
 }
 
 // 回复评论
 const handleReply = async (param: any): Promise<void> => {
-  await http({url: '/comment/add', data: {aid: state.aid, ...param}, method: 'POST'})
+  await http({
+    url: '/comment/add',
+    data: { aid: state.aid, ...param },
+    method: 'POST'
+  })
   getComments()
 }
 
 // 加载更多评论
 const loadMore = async (param: any): Promise<void> => {
-  state.pageNum = param;
-  state.loadBottom = true;
+  state.pageNum = param
+  state.loadBottom = true
   const res: ResponseData<Comments> = await http({
     url: '/comment/list',
     params: {
@@ -84,8 +94,8 @@ const loadMore = async (param: any): Promise<void> => {
       pageNum: state.pageNum
     }
   })
-  state.loadBottom = false;
-  state.comments = [...state.comments, ...res.list];
+  state.loadBottom = false
+  state.comments = [...state.comments, ...res.list]
 }
 
 onMounted(() => {
@@ -110,7 +120,7 @@ onMounted(() => {
     border-radius: 10px;
     position: relative;
     padding: 40px 40px 40px 60px;
-    transition: padding .5s ease-in-out;
+    transition: padding 0.5s ease-in-out;
     background-color: var(--board-bg-color);
     font-size: 16px;
 

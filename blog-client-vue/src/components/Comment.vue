@@ -4,12 +4,27 @@
       <div class="vpanel">
         <div class="vwrap">
           <div class="vheader">
-            <input class="vinput" v-model="comment.name" name="nick" type="text" placeholder="昵称" />
-            <input class="vinput" v-model="comment.email" name="email" type="email" placeholder="邮箱" />
+            <input
+              class="vinput"
+              v-model="comment.name"
+              name="nick"
+              type="text"
+              placeholder="昵称"
+            />
+            <input
+              class="vinput"
+              v-model="comment.email"
+              name="email"
+              type="email"
+              placeholder="邮箱"
+            />
           </div>
 
           <div class="vedit">
-            <textarea class="veditor vinput" v-model="comment.content"></textarea>
+            <textarea
+              class="veditor vinput"
+              v-model="comment.content"
+            ></textarea>
           </div>
 
           <div class="vrow">
@@ -54,51 +69,60 @@
               :name="item.name"
               :title="item.name"
               @click="insertEmoji(item.content)"
-            >{{ item.content }}</i>
+              >{{ item.content }}</i
+            >
           </div>
         </div>
       </div>
 
       <div class="vcount" v-show="comments.length > 0">
-        <span class="vnum">{{total}}</span>评论
+        <span class="vnum">{{ total }}</span
+        >评论
       </div>
 
       <div class="vcards" v-show="comments.length > 0">
         <div class="vcard" v-for="item in comments" :key="item._id">
-          <img class="vimg" :src="item.avatar">
+          <img class="vimg" :src="item.avatar" />
           <div class="vh">
             <div class="vhead">
-              <span class="vnick">{{item.name}}</span>
-              <span class="vsys">{{uaBrowser(item.ua)}}</span>
-              <span class="vsys">{{uaOS(item.ua)}}</span>
+              <span class="vnick">{{ item.name }}</span>
+              <span class="vsys">{{ uaBrowser(item.ua) }}</span>
+              <span class="vsys">{{ uaOS(item.ua) }}</span>
             </div>
 
             <div class="vmeta">
-              <span class="vtime">{{howLongBefore(item.date)}}</span>
-              <span class="vat" @click="openDialog(item._id, item.name)">回复</span>
+              <span class="vtime">{{ howLongBefore(item.date) }}</span>
+              <span class="vat" @click="openDialog(item._id, item.name)"
+                >回复</span
+              >
             </div>
 
             <div class="vcontent">
-              <p>{{item.content}}</p>
+              <p>{{ item.content }}</p>
             </div>
 
             <div class="vquote">
-              <div class="vcard" v-for="reply of item.replies">
-                <img class="vimg" :src="reply.avatar">
+              <div class="vcard" v-for="reply of item.replies" :key="reply._id">
+                <img class="vimg" :src="reply.avatar" />
                 <div class="vh">
                   <div class="vhead">
-                    <span class="vnick">{{reply.name}}</span>
-                    <span class="vsys">{{uaBrowser(reply.ua)}}</span>
-                    <span class="vsys">{{uaOS(reply.ua)}}</span>
+                    <span class="vnick">{{ reply.name }}</span>
+                    <span class="vsys">{{ uaBrowser(reply.ua) }}</span>
+                    <span class="vsys">{{ uaOS(reply.ua) }}</span>
                   </div>
 
                   <div class="vmeta">
-                    <span class="vtime">{{howLongBefore(reply.date)}}</span>
-                    <span class="vat" @click="openDialog(item._id, reply.name)">回复</span>
+                    <span class="vtime">{{ howLongBefore(reply.date) }}</span>
+                    <span class="vat" @click="openDialog(item._id, reply.name)"
+                      >回复</span
+                    >
                   </div>
 
                   <div class="vcontent">
-                    <p><span class="vwhom">@{{reply.to_whom}}，</span>{{reply.content}}</p>
+                    <p>
+                      <span class="vwhom">@{{ reply.to_whom }}，</span
+                      >{{ reply.content }}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -107,39 +131,50 @@
         </div>
       </div>
       <div class="vload-bottom text-center" v-show="loadBottom">
-        <i class="vspinner iconfont icon-load" style="width: auto;height: auto;"></i>
+        <i
+          class="vspinner iconfont icon-load"
+          style="width: auto; height: auto"
+        ></i>
       </div>
       <div class="vempty" v-show="comments.length === 0">来发评论吧~</div>
-      <div class="vpage txt-center" v-show="comments.length > 0 && comments.length < total && !loadBottom">
+      <div
+        class="vpage txt-center"
+        v-show="comments.length > 0 && comments.length < total && !loadBottom"
+      >
         <button class="vmore vbtn" @click="more">加载更多...</button>
       </div>
     </div>
 
-    <ReplyPanel @close="closeDialog" @reply="onReply" :reply-visible="replyVisible"/>
+    <ReplyPanel
+      @close="closeDialog"
+      @reply="onReply"
+      :reply-visible="replyVisible"
+    />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, PropType } from 'vue';
-import ReplyPanel from './ReplyModal.vue';
+import { ref, reactive, PropType } from 'vue'
+import ReplyPanel from './ReplyModal.vue'
 import { ElMessage } from 'element-plus'
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
 import UAParser from 'ua-parser-js'
-import emojiDataSource from '../assets/data/emoji.json';
-import { Comments } from '../types';
+import emojiDataSource from '../assets/data/emoji.json'
+import { Comments } from '../types'
 
+// eslint-disable-next-line
 const props = defineProps({
   comments: {
     type: Array as PropType<Array<Comments>>,
-    default: []
+    default: () => []
   },
   currentPage: {
-    type: Number, 
+    type: Number,
     default: 1
   },
   total: {
-    type: Number, 
+    type: Number,
     default: 0
   },
   loadBottom: {
@@ -147,12 +182,15 @@ const props = defineProps({
     default: false
   }
 })
-const emit = defineEmits(['comment', 'reply', 'more-click']);
 
-const emojiVisible = ref<boolean>(false);
-const replyVisible = ref<boolean>(false);
-const to_whom = ref<string>('');
-const cid = ref<string>('');
+// eslint-disable-next-line
+const emit = defineEmits(['comment', 'reply', 'more-click'])
+
+const emojiVisible = ref<boolean>(false)
+const replyVisible = ref<boolean>(false)
+// eslint-disable-next-line
+const to_whom = ref<string>('')
+const cid = ref<string>('')
 const comment = reactive({
   name: '',
   email: '',
@@ -160,24 +198,24 @@ const comment = reactive({
 })
 
 const emojiShow = (): void => {
-  emojiVisible.value = !emojiVisible.value;
+  emojiVisible.value = !emojiVisible.value
 }
 
 // 向内容插入表情
 const insertEmoji = (emoji: string): void => {
-  comment.content += emoji;
+  comment.content += emoji
 }
 
 // 打开回复框
 const openDialog = (id: string, name: string): void => {
-  replyVisible.value = true;
-  cid.value = id;
-  to_whom.value = name;
+  replyVisible.value = true
+  cid.value = id
+  to_whom.value = name
 }
 
 // 关闭回复框
 const closeDialog = (): void => {
-  replyVisible.value = false;
+  replyVisible.value = false
 }
 
 const uaBrowser = (ua: string): string => {
@@ -224,8 +262,8 @@ const howLongBefore = (date: string): string => {
 const onReply = (param: any): void => {
   emit('reply', {
     cid: cid.value,
-    to_whom: to_whom.value, 
-    ...param 
+    to_whom: to_whom.value,
+    ...param
   })
 }
 
@@ -243,16 +281,16 @@ const more = (): void => {
   margin-bottom: 20px;
   background-color: var(--board-bg-color);
   padding: 20px;
-  transition: padding .5s ease-in-out;
+  transition: padding 0.5s ease-in-out;
   border-radius: 10px;
 }
 
-.v[data-class="v"] * {
+.v[data-class='v'] * {
   box-sizing: border-box;
   line-height: 1.75;
 }
 
-.v[data-class="v"] {
+.v[data-class='v'] {
   font-size: 16px;
   text-align: left;
 
@@ -411,8 +449,8 @@ const more = (): void => {
 
   .vcards {
     width: 100%;
-    
-   .vcard {
+
+    .vcard {
       padding-top: 20px;
       position: relative;
       display: block;
@@ -435,10 +473,10 @@ const more = (): void => {
 
       .vh {
         overflow: hidden;
-        padding-bottom: .5em;
+        padding-bottom: 0.5em;
         border-bottom: 1px dashed #f5f5f5;
 
-       .vmeta {
+        .vmeta {
           line-height: 1;
           position: relative;
 
@@ -457,11 +495,11 @@ const more = (): void => {
       }
 
       &:last-child {
-        .vh{
+        .vh {
           border-bottom: none;
         }
       }
-      
+
       .vhead {
         line-height: 1.5;
         margin-top: 0;
@@ -507,7 +545,7 @@ const more = (): void => {
 
       .vquote {
         padding-left: 16px;
-        border-left: 1px dashed rgba(238,238,238,0.5);
+        border-left: 1px dashed rgba(238, 238, 238, 0.5);
 
         .vimg {
           width: 35px;
@@ -543,7 +581,7 @@ const more = (): void => {
     padding-right: 10px;
   }
 
-  .v[data-class="v"] {
+  .v[data-class='v'] {
     .vsys {
       display: none !important;
     }

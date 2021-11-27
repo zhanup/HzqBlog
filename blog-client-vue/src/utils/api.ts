@@ -1,4 +1,4 @@
-import http from './http';
+import http from './http'
 
 // 获取首页文章列表
 export const getHomeArticles = (pageNum: number, pageSize: number) => {
@@ -27,10 +27,10 @@ export const getTagArticles = (name: string | any, pageNum: number, pageSize: nu
 export const getCommentList = (aid: string, pageNum: number, pageSize: number) => {
   return http({
     url: '/comment/list',
-    params: { 
+    params: {
       aid,
       pageNum,
-      pageSize     
+      pageSize
     }
   })
 }

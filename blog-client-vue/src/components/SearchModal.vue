@@ -23,7 +23,9 @@
 
       <ul class="result-list">
         <li class="result-item" v-for="item of state.list" :key="item._id">
-          <router-link @click="closeDialog" :to="`/detail/${item._id}`">{{ item.title }}</router-link>
+          <router-link @click="closeDialog" :to="`/detail/${item._id}`">{{
+            item.title
+          }}</router-link>
         </li>
       </ul>
     </el-dialog>
@@ -31,17 +33,17 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive } from 'vue';
-import http from '../utils/http';
-import { debounce } from '../utils/utils';
-import { Article, ResponseData } from '../types/index';
+import { reactive } from 'vue'
+import http from '../utils/http'
+import { debounce } from '../utils/utils'
+import { Article, ResponseData } from '../types/index'
 
-// 接受props
+// eslint-disable-next-line
 defineProps({
   dialogVisible: Boolean
 })
 
-// 自定义事件
+// eslint-disable-next-line
 const emit = defineEmits(['close'])
 const state = reactive({
   title: '',
@@ -54,7 +56,10 @@ const handleSearch = async (): Promise<void> => {
   if (title.trim() === '') {
     state.list = []
   } else {
-    const res: ResponseData<Article> = await http({url: '/article/search', params: { title }})
+    const res: ResponseData<Article> = await http({
+      url: '/article/search',
+      params: { title }
+    })
     state.list = res.list
   }
 }
@@ -63,9 +68,9 @@ const handleInput = debounce(handleSearch, 500)
 
 // 关闭 Dialog
 const closeDialog = (): void => {
-  emit('close');
-  state.title = '';
-  state.list = [];
+  emit('close')
+  state.title = ''
+  state.list = []
 }
 </script>
 

@@ -21,12 +21,12 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, onMounted } from 'vue';
-import ArticleWaterfall from '../../components/ArticleWaterfall.vue';
-import Pagination from '../../components/Pagination.vue';
-import { scrollToTop } from '../../utils/utils';
-import { Article, ResponseData } from '../../types';
-import { getHomeArticles } from '../../utils/api';
+import { reactive, onMounted } from 'vue'
+import ArticleWaterfall from '../../components/ArticleWaterfall.vue'
+import Pagination from '../../components/Pagination.vue'
+import { scrollToTop } from '../../utils/utils'
+import { Article, ResponseData } from '../../types'
+import { getHomeArticles } from '../../utils/api'
 
 const state = reactive({
   pageNum: 1,
@@ -36,10 +36,10 @@ const state = reactive({
 })
 
 const getArticleList = async (pageNum: number): Promise<void> => {
-  const pageSize = state.pageSize;
+  const pageSize = state.pageSize
   const res: ResponseData<Article> = await getHomeArticles(pageNum, pageSize)
   state.list = res.list
-  state.total = res.total;
+  state.total = res.total
 }
 
 // 分页
@@ -53,7 +53,6 @@ onMounted(() => {
   getArticleList(1)
 })
 </script>
-
 
 <style lang="less" scoped>
 .bg-cover {

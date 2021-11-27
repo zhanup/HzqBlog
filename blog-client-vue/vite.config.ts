@@ -15,7 +15,7 @@ export default defineConfig({
     vue(),
     // ElementPlus按需加载
     Components({
-      resolvers: [ElementPlusResolver()],
+      resolvers: [ElementPlusResolver()]
     }),
     // gzip压缩
     viteCompression()

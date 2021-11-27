@@ -2,29 +2,30 @@ import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { ElMessage } from 'element-plus'
 
 export interface AxiosResponseData {
-  status: number;
-  data?: any;
-  msg?: string;
+  status: number
+  data?: any
+  msg?: string
 }
 
 const http: AxiosInstance | any = axios.create({
-  baseURL: "http://localhost:3002/api",
+  // baseURL: "http://localhost:3002/api",
+  baseURL: 'http://1.15.112.209:5000/api',
   // 超时时间
   timeout: 50000
 })
 
 // 请求拦截
 http.interceptors.request.use((congig: AxiosRequestConfig) => {
-  return congig;
+  return congig
 })
 
 // 响应拦截
 http.interceptors.response.use(
   (res: AxiosResponse<AxiosResponseData>) => {
     if (res.status === 200) {
-      const data: AxiosResponseData = res.data;
+      const data: AxiosResponseData = res.data
       if (data.status === 1) {
-        return data.data;
+        return data.data
       } else {
         ElMessage.error(data.msg || 'Error')
       }
@@ -36,4 +37,4 @@ http.interceptors.response.use(
   (error: any) => Promise.reject(error)
 )
 
-export default http;
+export default http

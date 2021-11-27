@@ -8,14 +8,22 @@
     <div class="container">
       <div class="tags-card box-shadow">
         <div class="chips">
-          <router-link v-for="(item, index) in state.tags" :key="item._id" :to="`/tags/${item.name}`">
-            <span class="chip" :style="{backgroundColor: color[index % 12]}">{{ item.name }}</span>
+          <router-link
+            v-for="(item, index) in state.tags"
+            :key="item._id"
+            :to="`/tags/${item.name}`"
+          >
+            <span
+              class="chip"
+              :style="{ backgroundColor: color[index % 12] }"
+              >{{ item.name }}</span
+            >
           </router-link>
         </div>
       </div>
 
       <div class="archives-card box-shadow">
-        <div class="card" v-for="(value) of state.archives">
+        <div class="card" v-for="value of state.archives" :key="value[0]">
           <h3 class="year">{{ value[0] }}年</h3>
           <div class="brick" v-for="item of value[1]" :key="item._id">
             <router-link class="item" :to="`/detail/${item._id}`">
@@ -30,10 +38,10 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, onMounted } from 'vue';
-import http from '../../utils/http';
-import dayjs from 'dayjs';
-import { Tag, Archives, ResponseData, Article } from '../../types';
+import { reactive, onMounted } from 'vue'
+import http from '../../utils/http'
+import dayjs from 'dayjs'
+import { Tag, Archives, ResponseData, Article } from '../../types'
 
 const state = reactive({
   tags: [] as Array<Tag>,
@@ -41,18 +49,18 @@ const state = reactive({
 })
 
 const color = [
-  "#f9ebea",
-  "#f5eef8",
-  "#d5f5e3",
-  "#e8f8f5",
-  "#f8f9f9",
-  "#82e0aa",
-  "#d7bde2",
-  "#a3e4d7",
-  "#85c1e9",
-  "#f8c471",
-  "#f9e79f",
-  "#fffff"
+  '#f9ebea',
+  '#f5eef8',
+  '#d5f5e3',
+  '#e8f8f5',
+  '#f8f9f9',
+  '#82e0aa',
+  '#d7bde2',
+  '#a3e4d7',
+  '#85c1e9',
+  '#f8c471',
+  '#f9e79f',
+  '#fffff'
 ]
 
 const getYear = (date: any): number => {
@@ -62,7 +70,7 @@ const getYear = (date: any): number => {
 const sort = (obj: any): Map<string, Array<Article>> => {
   const keys = Object.keys(obj).sort((a, b) => getYear(b) - getYear(a))
   const result: Map<string, Array<Article>> = new Map()
-  keys.forEach(o => {
+  keys.forEach((o) => {
     result.set(o, obj[o])
   })
   return result
@@ -71,7 +79,6 @@ const sort = (obj: any): Map<string, Array<Article>> => {
 const getTags = async (): Promise<void> => {
   const res: ResponseData<Tag> = await http.get('/tag/list')
   state.tags = res.list
-
 }
 
 const getArchives = async (): Promise<void> => {
@@ -129,12 +136,12 @@ onMounted(() => {
       border-radius: 5px;
       cursor: pointer;
       box-shadow: 0 3px 5px rgb(0 0 0 / 12%);
-      transition: .3s ease-out;
+      transition: 0.3s ease-out;
       color: #34495e;
 
       &:hover {
         color: #fff;
-        background: linear-gradient(to right,#4cbf30 0%,#0f9d58 100%);
+        background: linear-gradient(to right, #4cbf30 0%, #0f9d58 100%);
       }
     }
   }
@@ -195,9 +202,9 @@ onMounted(() => {
   }
 }
 
-[data-color-scheme="dark"] .archives {
+[data-color-scheme='dark'] .archives {
   .chip {
-    opacity: .8;
+    opacity: 0.8;
   }
 }
 

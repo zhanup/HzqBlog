@@ -2,47 +2,57 @@
   <article class="articles">
     <div class="article" v-for="article of list" :key="article._id">
       <div class="card box-shadow">
-      <router-link :to="`/detail/${article?._id}`">
-        <div class="card-image">
-          <img v-lazy="article?.img_url" alt="img" />
-          <span class="card-title">{{ article?.title }}</span>
-        </div>
-      </router-link>
-      <div class="card-content">
-        <div class="summary f-thide3">{{ article?.desc }}</div>
-        <div class="publish-info">
-          <span class="publish-date">
-            <i class="iconfont icon-schedule"></i>
-            {{ formatDate(article?.date) }}
-          </span>
-          <router-link
-            class="publish-author"
-            :to="`/category/${article.category ? article.category.name : '未分类'}`"
-          >{{ article.category ? article.category.name : '未分类' }}</router-link>
-        </div>
-      </div>
-      <div class="card-action">
-        <router-link v-for="(tag, index) of article?.tags" :key="index" :to="`/tags/${tag.name}`">
-          <span class="chip">{{ tag.name }}</span>
+        <router-link :to="`/detail/${article?._id}`">
+          <div class="card-image">
+            <img v-lazy="article?.img_url" alt="img" />
+            <span class="card-title">{{ article?.title }}</span>
+          </div>
         </router-link>
+        <div class="card-content">
+          <div class="summary f-thide3">{{ article?.desc }}</div>
+          <div class="publish-info">
+            <span class="publish-date">
+              <i class="iconfont icon-schedule"></i>
+              {{ formatDate(article?.date) }}
+            </span>
+            <router-link
+              class="publish-author"
+              :to="`/category/${
+                article.category ? article.category.name : '未分类'
+              }`"
+              >{{
+                article.category ? article.category.name : '未分类'
+              }}</router-link
+            >
+          </div>
+        </div>
+        <div class="card-action">
+          <router-link
+            v-for="(tag, index) of article?.tags"
+            :key="index"
+            :to="`/tags/${tag.name}`"
+          >
+            <span class="chip">{{ tag.name }}</span>
+          </router-link>
+        </div>
       </div>
-    </div>
     </div>
   </article>
 </template>
 
 <script lang="ts" setup>
-import { watch, PropType, nextTick } from 'vue';
-import { Article } from '../types';
-import Macy from 'macy';
+import { watch, PropType, nextTick } from 'vue'
+import { Article } from '../types'
+import Macy from 'macy'
 
+// eslint-disable-next-line
 const props = defineProps({
   list: Array as PropType<Article[]>
 })
 
 const formatDate = (date: string | Date): string => {
-  const d = new Date(date);
-  return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+  const d = new Date(date)
+  return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`
 }
 
 // 瀑布流插件
@@ -62,12 +72,14 @@ const getMacy = () => {
   masonry.reInit()
 }
 
-
-watch(() => props.list, () => {
-  nextTick(() => {
-    getMacy()
-  })
-})
+watch(
+  () => props.list,
+  () => {
+    nextTick(() => {
+      getMacy()
+    })
+  }
+)
 </script>
 
 <style lang="less" scoped>
@@ -93,7 +105,7 @@ watch(() => props.list, () => {
       bottom: 0;
       width: 100%;
       height: 220px;
-      filter: brightness(.7);
+      filter: brightness(0.7);
     }
 
     .card-title {
@@ -145,7 +157,7 @@ watch(() => props.list, () => {
 
     .publish-author {
       font-size: 14.5px;
-      color: var(--sec-text-color);;
+      color: var(--sec-text-color);
 
       &:hover {
         font-weight: bold;

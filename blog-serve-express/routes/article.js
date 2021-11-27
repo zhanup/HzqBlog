@@ -155,7 +155,7 @@ exports.articleApiDetail = (req, res, next) => {
 // 前台文章搜索 （通过标题搜索，只会搜索到公开的文章）
 exports.articleApiSearch = (req, res, next) => {
   const { title } = req.query
-  const filter = { title: new RegExp(title), visible: true }
+  const filter = { title: new RegExp(title, 'i'), visible: true }
 
   Article.find(filter, { title: 1 }, null,(err, doc) => {
     if (err) return next(err)

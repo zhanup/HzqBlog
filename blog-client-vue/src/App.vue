@@ -8,27 +8,26 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted }  from 'vue';
-import Header from './components/Header.vue';
-import Footer from './components/Footer.vue';
+import { ref, onMounted } from 'vue'
+import Header from './components/Header.vue'
+import Footer from './components/Footer.vue'
 
 // 导航背景透明
-const isTransparent = ref<boolean>(true);
+const isTransparent = ref<boolean>(true)
 
 // 滚动处理函数
 const handleScroll = (): void => {
-  const scroll = document.documentElement.scrollTop || document.body.scrollTop;
+  const scroll = document.documentElement.scrollTop || document.body.scrollTop
   if (scroll > 200) {
-    isTransparent.value = false;
+    isTransparent.value = false
   } else {
-    isTransparent.value = true;
+    isTransparent.value = true
   }
 }
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
 })
-
 </script>
 
 <style lang="less">
@@ -42,7 +41,8 @@ onMounted(() => {
 .backTop {
   background-color: var(--board-bg-color) !important;
   color: var(--text-color) !important;
-  box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%) !important;
+  box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%),
+    0 1px 5px 0 rgb(0 0 0 / 20%) !important;
 }
 
 .page-content {

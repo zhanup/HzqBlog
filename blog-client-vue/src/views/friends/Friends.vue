@@ -10,7 +10,9 @@
         <h3 class="header">申请友链须知：</h3>
         <ul class="list">
           <li>
-            <p>1、本站与技术类写作类、生活类、情感类、兴趣类等各类博客互换友链，且具有原创高质量文章、经常更新的站优先。</p>
+            <p>
+              1、本站与技术类写作类、生活类、情感类、兴趣类等各类博客互换友链，且具有原创高质量文章、经常更新的站优先。
+            </p>
           </li>
           <li>
             <p>2、不与含有色情、暴力、政治敏感或其他法律法规禁止的网站互换。</p>
@@ -19,10 +21,14 @@
             <p>3、申请链接前请先添加本博链接，通过留言板页面留言或邮件告知。</p>
           </li>
           <li>
-            <p>4、请提供网站名称、网站链接、网站描述（12字以内）、网站图标或头像。</p>
+            <p>
+              4、请提供网站名称、网站链接、网站描述（12字以内）、网站图标或头像。
+            </p>
           </li>
           <li>
-            <p>5、本站会定期对所有友链进行检查，如果发现一月内不能访问或者六个月内没有内容更新可能会取消该友链。</p>
+            <p>
+              5、本站会定期对所有友链进行检查，如果发现一月内不能访问或者六个月内没有内容更新可能会取消该友链。
+            </p>
           </li>
         </ul>
         <h3 class="header">我的博客资料：</h3>
@@ -36,20 +42,34 @@
           <li>
             <p>
               地址：
-              <a href="http://www.zhanup.top" target="_blank" rel="noopener">http://www.zhanup.top</a>
+              <a href="http://www.zhanup.top" target="_blank" rel="noopener"
+                >http://www.zhanup.top</a
+              >
             </p>
           </li>
           <li>
             <p>
               头像：
-              <a href="http://www.zhanup.top/img/avatar.jpg" target="_blank" rel="noopener">http://www.zhanup.top/img/avatar.jpg</a>
+              <a
+                href="http://www.zhanup.top/img/avatar.jpg"
+                target="_blank"
+                rel="noopener"
+                >http://www.zhanup.top/img/avatar.jpg</a
+              >
             </p>
           </li>
         </ul>
       </div>
       <hr class="divide" />
       <div class="links">
-        <a class="card" v-for="link in state.list" :key="link._id" :href="link.url" target="_blank" :style="{ backgroundColor: getColor() }">
+        <a
+          class="card"
+          v-for="link in state.list"
+          :key="link._id"
+          :href="link.url"
+          target="_blank"
+          :style="{ backgroundColor: getColor() }"
+        >
           <div class="image">
             <img :src="link.icon" :alt="link.name" />
           </div>
@@ -68,12 +88,12 @@ import http from '../../utils/http'
 import { Link, ResponseData } from '../../types'
 
 const state = reactive({
-  list: [] as Array < Link >
+  list: [] as Array<Link>
 })
 
 // 获取友链数据
-const getLinks = async (): Promise < void > => {
-  const res: ResponseData < Link > = await http.get('/link/list')
+const getLinks = async (): Promise<void> => {
+  const res: ResponseData<Link> = await http.get('/link/list')
   state.list = res.list
 }
 

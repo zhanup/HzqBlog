@@ -1,7 +1,7 @@
 <template>
   <div class="bg-cover">
     <div class="container">
-      <h2 class="blog-title">{{route.params.name}}</h2>
+      <h2 class="blog-title">{{ route.params.name }}</h2>
     </div>
   </div>
   <div class="category">
@@ -21,13 +21,13 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, onMounted } from 'vue';
-import { useRoute, onBeforeRouteUpdate } from 'vue-router';
-import ArticleWaterfall from '../../components/ArticleWaterfall.vue';
-import Pagination from '../../components/Pagination.vue';
-import http from '../../utils/http';
-import { scrollToTop } from '../../utils/utils';
-import { Article, ResponseData } from '../../types';
+import { reactive, onMounted } from 'vue'
+import { useRoute, onBeforeRouteUpdate } from 'vue-router'
+import ArticleWaterfall from '../../components/ArticleWaterfall.vue'
+import Pagination from '../../components/Pagination.vue'
+import http from '../../utils/http'
+import { scrollToTop } from '../../utils/utils'
+import { Article, ResponseData } from '../../types'
 
 const route = useRoute()
 const state = reactive({
@@ -37,7 +37,10 @@ const state = reactive({
   list: [] as Array<Article>
 })
 
-const getArticleList = async(pageNum: number, name: string | string[] = route.params.name): Promise<void> => {
+const getArticleList = async (
+  pageNum: number,
+  name: string | string[] = route.params.name
+): Promise<void> => {
   const { pageSize } = state
   const res: ResponseData<Article> = await http({
     url: '/category/article',
