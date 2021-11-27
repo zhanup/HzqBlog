@@ -7,6 +7,7 @@
 </template>
 
 <script lang="ts" setup>
+// eslint-disable-next-line
 const emit = defineEmits(['full-click'])
 const fullClick = (): void => {
   emit('full-click')

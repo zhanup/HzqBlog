@@ -1,11 +1,11 @@
-import React, {Component} from 'react'
-import {Button, Card, Col, Form, Input, message, Row, Select, Switch} from 'antd'
-import {reqAddArticle, reqCategoryList, reqTagList} from '../../request'
+import React, { Component } from 'react'
+import { Button, Card, Col, Form, Input, message, Row, Select, Switch } from 'antd'
+import { reqAddArticle, reqCategoryList, reqTagList } from '../../request'
 import SimpleMDE from 'react-simplemde-editor'
 import 'easymde/dist/easymde.min.css'
 
-const {Option} = Select
-const {TextArea} = Input
+const { Option } = Select
+const { TextArea } = Input
 
 export default class Publish extends Component {
   state = {
@@ -16,12 +16,12 @@ export default class Publish extends Component {
   form = React.createRef()
 
   // 获取标签列表
-  getTagList = async() => {
+  getTagList = async () => {
     const result = await reqTagList()
 
     if (result.status === 1) {
       const { list } = result.data
-      this.setState({tags: list})
+      this.setState({ tags: list })
     }
   }
 
@@ -31,7 +31,7 @@ export default class Publish extends Component {
 
     if (result.status === 1) {
       const { list } = result.data
-      this.setState({category: list})
+      this.setState({ category: list })
     }
   }
 
@@ -39,9 +39,9 @@ export default class Publish extends Component {
     try {
       const result = await reqAddArticle(values)
       const { msg } = result
-  
+
       if (result.status === 1) {
-        message.success(msg);
+        message.success(msg)
         this.form.current.resetFields()
       } else {
         message.error(msg)
@@ -56,29 +56,29 @@ export default class Publish extends Component {
     }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.getTagList()
     this.getCategoryList()
   }
 
-  render() {
+  render () {
     const { tags, category } = this.state
-    
+
     return (
       <Card title="新建文章">
-        <Form 
-          ref={this.form} 
-          layout="vertical" 
+        <Form
+          ref={this.form}
+          layout="vertical"
           onFinish={this.onFinish}
-          initialValues={{visible: true}}
+          initialValues={{ visible: true }}
         >
           <Row>
             <Col span={12}>
-              <Form.Item 
+              <Form.Item
                 label="标题"
                 name="title"
-                style={{paddingRight: 10}}
-                rules={[ {required: true, message: '请输入标题'} ]}
+                style={{ paddingRight: 10 }}
+                rules={[{ required: true, message: '请输入标题' }]}
               >
                 <Input />
               </Form.Item>
@@ -88,8 +88,8 @@ export default class Publish extends Component {
               <Form.Item
                 label="封面"
                 name="img_url"
-                style={{paddingLeft: 10}}
-                rules={[ {required: true, message: '请输入封面'} ]}
+                style={{ paddingLeft: 10 }}
+                rules={[{ required: true, message: '请输入封面' }]}
               >
               <Input />
               </Form.Item>
@@ -99,7 +99,7 @@ export default class Publish extends Component {
           <Form.Item
             label="摘要"
             name="desc"
-            rules={[ {required: true, message: '请输入摘要'} ]}
+            rules={[{ required: true, message: '请输入摘要' }]}
           >
             <TextArea autoSize={{ minRows: 2, maxRows: 6 }} />
           </Form.Item>
@@ -107,9 +107,9 @@ export default class Publish extends Component {
           <Form.Item
             label="内容"
             name="content"
-            rules={[ {required: true, message: '请输入内容'} ]}
+            rules={[{ required: true, message: '请输入内容' }]}
           >
-            <SimpleMDE options={{status: false}} />
+            <SimpleMDE options={{ status: false }} />
           </Form.Item>
 
           <Row>
@@ -117,11 +117,11 @@ export default class Publish extends Component {
               <Form.Item
                 label="标签"
                 name="tags"
-                style={{paddingRight: 10}}
+                style={{ paddingRight: 10 }}
               >
                 <Select mode="multiple">
                   {
-                    tags.map((item) => 
+                    tags.map((item) =>
                       <Option key={item._id} value={item._id}>{item.name}</Option>
                     )
                   }
@@ -130,15 +130,15 @@ export default class Publish extends Component {
             </Col>
 
             <Col span={8}>
-              <Form.Item 
+              <Form.Item
                 label="分类"
                 name="category"
-                style={{padding: '0 5px'}}
-                rules={[ {required: true, message: '请输选择分类'} ]}
+                style={{ padding: '0 5px' }}
+                rules={[{ required: true, message: '请输选择分类' }]}
               >
                 <Select>
                   {
-                    category.map((item) => 
+                    category.map((item) =>
                       <Option key={item._id} value={item._id}>{item.name}</Option>
                     )
                   }
@@ -150,9 +150,9 @@ export default class Publish extends Component {
               <Form.Item
                 label="类型"
                 name="origin"
-                style={{paddingLeft: 20}}
+                style={{ paddingLeft: 20 }}
                 initialValue={0}
-                rules={[ {required: true, message: '请输选择类型'} ]}
+                rules={[{ required: true, message: '请输选择类型' }]}
               >
                 <Select>
                   <Option value={0}>原创</Option>
@@ -170,8 +170,8 @@ export default class Publish extends Component {
             <Switch/>
           </Form.Item>
 
-          <Form.Item style={{textAlign: "right"}}>
-            <Button style={{marginRight: 10}} htmlType="reset">重置</Button>
+          <Form.Item style={{ textAlign: 'right' }}>
+            <Button style={{ marginRight: 10 }} htmlType="reset">重置</Button>
             <Button type="primary" htmlType="submit">立即发布</Button>
           </Form.Item>
         </Form>

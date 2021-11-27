@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import './App.less';
+import './App.less'
 
 import Admin from './pages/admin/admin'
 import Login from './pages/login/login'
 
 class App extends Component {
-  render() {
+  render () {
     return (
       <BrowserRouter>
         <Switch>
@@ -19,5 +19,3 @@ class App extends Component {
 }
 
 export default App
-
-

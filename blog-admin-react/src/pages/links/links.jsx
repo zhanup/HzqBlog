@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Card, Table, Button, Image, Modal, message } from 'antd'
-import { PlusOutlined, EditOutlined, DeleteOutlined, ExclamationCircleOutlined  } from '@ant-design/icons'
+import { PlusOutlined, EditOutlined, DeleteOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
 import { reqLinkList, reqAddLink, reqDeleteLink, reqUpdateLink } from '../../request'
 import { formateDate } from '../../utils/format'
 
@@ -68,22 +68,22 @@ export default class Links extends Component {
         width: 200,
         render: (item, record, index) => (
           <>
-            <Button 
-              style={{fontSize: 12}} 
-              type="primary" 
-              className="mr10" 
+            <Button
+              style={{ fontSize: 12 }}
+              type="primary"
+              className="mr10"
               size="middle"
               icon={ <EditOutlined /> }
               onClick={() => this.showUpdateLink(item)}
             >编辑</Button>
 
-            <Button 
-              style={{fontSize: 12}} 
-              type="primary" 
-              danger 
+            <Button
+              style={{ fontSize: 12 }}
+              type="primary"
+              danger
               size="middle"
               icon={ <DeleteOutlined /> }
-              onClick={() => {this.deleteLink(item._id, index)}}
+              onClick={() => { this.deleteLink(item._id, index) }}
             >删除</Button>
           </>
         )
@@ -96,12 +96,12 @@ export default class Links extends Component {
     // 保存当前分页
     this.pageNum = pageNum
     // 发送请求前，显示loading
-    this.setState({loading: true})
+    this.setState({ loading: true })
 
     const result = await reqLinkList(pageNum, this.state.pageSize)
     // 在请求完成后，隐藏 Loading
-    this.setState({loading: false})
-    
+    this.setState({ loading: false })
+
     if (result.status === 1) {
       const { list, total } = result.data
       this.setState({ list, total })
@@ -109,13 +109,13 @@ export default class Links extends Component {
   }
 
   // 删除标签
-  deleteLink = async(id, index) => {
+  deleteLink = async (id, index) => {
     Modal.confirm({
       title: '是否删除该友链？',
       okText: '确认',
       cancelText: '取消',
       icon: <ExclamationCircleOutlined />,
-      onOk: async() => {
+      onOk: async () => {
         try {
           const result = await reqDeleteLink(id)
           const { msg } = result
@@ -130,7 +130,7 @@ export default class Links extends Component {
           } else {
             message.error(msg)
           }
-        } catch(err) {
+        } catch (err) {
           const res = err.response
           if (res.status === 401) {
             message.error(res.data.msg)
@@ -152,7 +152,7 @@ export default class Links extends Component {
 
           // 重置表单 关闭modal
           this.addRef.current.resetFields()
-          this.setState({showAdd: false})
+          this.setState({ showAdd: false })
 
           if (result.status === 1) {
             message.success(msg)
@@ -161,7 +161,7 @@ export default class Links extends Component {
           } else {
             message.error(msg)
           }
-        } catch(err) {
+        } catch (err) {
           const res = err.response
           if (res.status === 401) {
             message.error(res.data.msg)
@@ -170,7 +170,7 @@ export default class Links extends Component {
           }
           // 重置表单 关闭modal
           this.addRef.current.resetFields()
-          this.setState({showAdd: false})
+          this.setState({ showAdd: false })
         }
       })
       .catch()
@@ -188,15 +188,15 @@ export default class Links extends Component {
 
           // 重置表单数据 关闭编辑框
           this.updateRef.current.resetFields()
-          this.setState({showUpdate: false})
+          this.setState({ showUpdate: false })
 
           if (result.status === 1) {
             message.success(msg)
             this.getLinkList(this.pageNum)
-          } else{
+          } else {
             message.error(msg)
           }
-        } catch(err) {
+        } catch (err) {
           const res = err.response
           if (res.status === 401) {
             message.error(res.data.msg)
@@ -214,22 +214,22 @@ export default class Links extends Component {
     this.setState({ showUpdate: true })
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.initColumns()
     this.getLinkList(1)
   }
 
-  render() {
+  render () {
     const { list, loading, total, pageSize, showAdd, showUpdate } = this.state
     const links = this.links || { name: '', url: '', icon: '', desc: '' }
 
     return (
       <Card className="links" title="友链列表">
-        <div style={{marginBottom: 20}}>
-          <Button 
-            icon={<PlusOutlined />} 
+        <div style={{ marginBottom: 20 }}>
+          <Button
+            icon={<PlusOutlined />}
             type="primary"
-            onClick={() => this.setState({showAdd: true})}
+            onClick={() => this.setState({ showAdd: true })}
           >
             添加友链
           </Button>
@@ -243,7 +243,7 @@ export default class Links extends Component {
           pagination={{
             total,
             pageSize,
-            onChange:  this.getLinkList
+            onChange: this.getLinkList
           }}
           rowKey="_id"
         >
@@ -254,10 +254,10 @@ export default class Links extends Component {
           visible={showAdd}
           okText="确认"
           cancelText="取消"
-          onCancel={() => this.setState({showAdd: false})}
+          onCancel={() => this.setState({ showAdd: false })}
           onOk={this.addLink}
         >
-          <AddForm setForm={form => this.addRef = form} />
+          <AddForm setForm={form => { this.addRef = form }} />
         </Modal>
 
         <Modal
@@ -265,10 +265,10 @@ export default class Links extends Component {
           visible={showUpdate}
           okText="确认"
           cancelText="取消"
-          onCancel={() => this.setState({showUpdate: false})}
+          onCancel={() => this.setState({ showUpdate: false })}
           onOk={this.updateLink}
         >
-          <UpdateForm setForm={form => this.updateRef = form} links={links} />
+          <UpdateForm setForm={form => { this.updateRef = form }} links={links} />
         </Modal>
       </Card>
     )

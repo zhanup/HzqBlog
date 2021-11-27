@@ -48,7 +48,7 @@ const state = reactive({
   archives: null
 })
 
-const color = [
+const color: string[] = [
   '#f9ebea',
   '#f5eef8',
   '#d5f5e3',

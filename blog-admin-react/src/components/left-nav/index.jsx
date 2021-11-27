@@ -1,6 +1,7 @@
-import React, { Component } from "react";
-import { withRouter } from 'react-router-dom';
-import { Menu } from "antd";
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { withRouter } from 'react-router-dom'
+import { Menu } from 'antd'
 
 import {
   HomeOutlined,
@@ -11,20 +12,25 @@ import {
   CommentOutlined,
   AreaChartOutlined,
   UserOutlined
-} from "@ant-design/icons";
+} from '@ant-design/icons'
 
-const { SubMenu } = Menu;
+const { SubMenu } = Menu
 
 class LeftNav extends Component {
-  jumpTo = (item) => {
-    this.props.history.push(item.key);
+  static propTypes = {
+    history: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired
   }
 
-  render() {
-    let path = this.props.location.pathname
-    let openKey = path;
+  jumpTo = (item) => {
+    this.props.history.push(item.key)
+  }
+
+  render () {
+    const path = this.props.location.pathname
+    let openKey = path
     if (path === '/publish' || path === '/blogs') {
-      openKey = '/article';
+      openKey = '/article'
     }
 
     return (
@@ -55,7 +61,7 @@ class LeftNav extends Component {
         <Menu.Item key="/tags" icon={<TagsOutlined />}>
           标签管理
         </Menu.Item>
-        
+
         <Menu.Item key="/category" icon={<AppstoreOutlined />}>
           分类管理
         </Menu.Item>
@@ -68,7 +74,7 @@ class LeftNav extends Component {
           用户管理
         </Menu.Item>
       </Menu>
-    );
+    )
   }
 }
 

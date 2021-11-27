@@ -29,7 +29,8 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint --ext .js --ext .jsx src --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -51,7 +52,14 @@
   },
   "proxy": "http://1.15.112.209:5000",
   "devDependencies": {
+    "babel-eslint": "^10.1.0",
     "compression-webpack-plugin": "6.1.1",
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.27.1",
     "redux-devtools-extension": "^2.13.9",
     "webpack-bundle-analyzer": "^4.5.0"
   }

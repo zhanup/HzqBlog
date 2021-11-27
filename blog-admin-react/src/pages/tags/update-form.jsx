@@ -10,25 +10,25 @@ export default class UpdateForm extends Component {
 
   updateRef = React.createRef()
 
-  componentDidMount() {
+  componentDidMount () {
     this.props.setForm(this.updateRef)
   }
 
-  componentDidUpdate() {
+  componentDidUpdate () {
     // 当props值更新，使用setFieldsValue方法更新input的值
     const { tagName } = this.props
     this.updateRef.current.setFieldsValue({ name: tagName })
   }
 
-  render() {
+  render () {
     const { tagName } = this.props
 
     return (
-      <Form ref={this.updateRef} initialValues={{name: tagName}}>
+      <Form ref={this.updateRef} initialValues={{ name: tagName }}>
         <Form.Item
           name="name"
           label="标签名称"
-          rules={[{ required: true, message: "必须输入标签名称" }]}
+          rules={[{ required: true, message: '必须输入标签名称' }]}
         >
           <Input />
         </Form.Item>

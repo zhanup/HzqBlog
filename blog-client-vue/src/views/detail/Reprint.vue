@@ -40,6 +40,7 @@
 </template>
 
 <script lang="ts" setup>
+// eslint-disable-next-line
 defineProps({
   name: String,
   url: String

@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Form, Input, Select } from 'antd';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { Form, Input, Select } from 'antd'
 
 const { Option } = Select
 
@@ -11,11 +11,11 @@ export default class AddForm extends Component {
 
   addRef = React.createRef()
 
-  componentDidMount() {
+  componentDidMount () {
     this.props.setForm(this.addRef)
   }
 
-  render() {
+  render () {
     const layout = {
       labelCol: { span: 5 },
       wrapperCol: { span: 19 }
@@ -26,7 +26,7 @@ export default class AddForm extends Component {
         <Form.Item
           name="name"
           label="用户名"
-          rules={[{ required: true, message: "必须输入用户名" }]}
+          rules={[{ required: true, message: '必须输入用户名' }]}
         >
           <Input />
         </Form.Item>
@@ -34,7 +34,7 @@ export default class AddForm extends Component {
         <Form.Item
           name="email"
           label="邮箱"
-          rules={[{ required: true, message: "必须输入邮箱" }]}
+          rules={[{ required: true, message: '必须输入邮箱' }]}
         >
           <Input />
         </Form.Item>
@@ -42,7 +42,7 @@ export default class AddForm extends Component {
         <Form.Item
           name="password"
           label="密码"
-          rules={[{ required: true, message: "必须输入密码" }]}
+          rules={[{ required: true, message: '必须输入密码' }]}
         >
           <Input />
         </Form.Item>
@@ -58,6 +58,6 @@ export default class AddForm extends Component {
           </Select>
         </Form.Item>
       </Form>
-    );
+    )
   }
 }

@@ -34,16 +34,16 @@ export default class Gallery extends Component {
   }
 
   // 图片列表
-  getImgList = async() => {
+  getImgList = async () => {
     // 发送请求前，显示loading
-    this.setState({loading: true})
+    this.setState({ loading: true })
     const result = await reqImgList()
     // 在请求完成后，隐藏 Loading
-    this.setState({loading: false})
+    this.setState({ loading: false })
 
     if (result.status === 1) {
       const { list } = result.data
-      this.setState({list})
+      this.setState({ list })
       this.getMacy()
     }
   }
@@ -66,18 +66,18 @@ export default class Gallery extends Component {
       title: '确定要删除吗？',
       okText: '确认',
       cancelText: '取消',
-      onOk: async() => {
+      onOk: async () => {
         try {
           const result = await reqDeleteImg(name)
           const { msg } = result
-  
+
           if (result.status === 1) {
             message.success(msg)
             this.getImgList()
           } else {
             message.error(msg)
           }
-        } catch(err) {
+        } catch (err) {
           const res = err.response
           if (res.status === 401) {
             message.error(res.data.msg)
@@ -99,12 +99,12 @@ export default class Gallery extends Component {
     }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.getImgList()
   }
 
-  render() {
-    const {list, loading} = this.state
+  render () {
+    const { list, loading } = this.state
     const user = storageUtils.getUser()
 
     return (
@@ -117,7 +117,7 @@ export default class Gallery extends Component {
               // action="/manage/img/upload"
               action="http://1.15.112.209:5000/manage/img/upload"
               onChange={this.uploadImg}
-              headers={{Authorization: user.token}}
+              headers={{ Authorization: user.token }}
           >
             <p className="ant-upload-drag-icon">
               <InboxOutlined />
@@ -127,7 +127,7 @@ export default class Gallery extends Component {
         </div>
 
         <Spin spinning={loading}>
-          <div className="waterfall">  
+          <div className="waterfall">
             {
               list.map(item => (
                 <div className="card" key={item._id}>

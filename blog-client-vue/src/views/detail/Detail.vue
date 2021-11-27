@@ -68,14 +68,7 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  ref,
-  reactive,
-  onMounted,
-  nextTick,
-  onBeforeUnmount,
-  computed
-} from 'vue'
+import { ref, reactive, onMounted, nextTick, onBeforeUnmount, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import Comment from '../../components/Comment.vue'
 import FullButton from './FullButton.vue'

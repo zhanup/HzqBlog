@@ -1,9 +1,21 @@
-import React, {Component} from 'react'
-import {Button, Card, Form, Input, message, Modal, Table} from 'antd'
-import {DeleteOutlined, EditOutlined, ExclamationCircleOutlined, PlusOutlined} from '@ant-design/icons'
-import {reqAddTag, reqDeleteTag, reqTagList, reqUpdateTag} from '../../request'
-import {formateDate} from '../../utils/format'
-import {PAGE_SIZE} from '../../utils/constans'
+import React, { Component } from 'react'
+import { Button, Card, Form, Input, message, Modal, Table } from 'antd'
+import {
+  DeleteOutlined,
+  EditOutlined,
+  ExclamationCircleOutlined,
+  PlusOutlined
+} from '@ant-design/icons'
+
+import {
+  reqAddTag,
+  reqDeleteTag,
+  reqTagList,
+  reqUpdateTag
+} from '../../request'
+
+import { formateDate } from '../../utils/format'
+import { PAGE_SIZE } from '../../utils/constans'
 import UpdateForm from './update-form'
 
 export default class Tags extends Component {
@@ -32,14 +44,14 @@ export default class Tags extends Component {
       {
         title: '名称',
         key: 'name',
-        dataIndex: 'name',
+        dataIndex: 'name'
       },
       {
         title: '创建时间',
         key: 'date',
         dataIndex: 'date',
         width: 165,
-        render: date => formateDate(date)
+        render: (date) => formateDate(date)
       },
       {
         title: '操作',
@@ -47,23 +59,23 @@ export default class Tags extends Component {
         width: 200,
         render: (item, record, index) => (
           <>
-            <Button 
-              style={{fontSize: 12}} 
-              type="primary" 
-              className="mr10" 
+            <Button
+              style={{ fontSize: 12 }}
+              type="primary"
+              className="mr10"
               size="middle"
-              icon={ <EditOutlined />  }
+              icon={<EditOutlined />}
               onClick={() => this.showUpdateTag(item)}
             >
               编辑
             </Button>
 
-            <Button 
-              style={{fontSize: 12}} 
-              type="primary" 
-              danger 
+            <Button
+              style={{ fontSize: 12 }}
+              type="primary"
+              danger
               size="middle"
-              icon={ <DeleteOutlined /> }
+              icon={<DeleteOutlined />}
               onClick={() => this.deleteTag(item._id, index)}
             >
               删除
@@ -77,36 +89,37 @@ export default class Tags extends Component {
   // 获取标签列表
   getTagList = async (pageNum) => {
     this.pageNum = pageNum
-    this.setState({loading: true})
+    this.setState({ loading: true })
     const result = await reqTagList(pageNum, this.state.pageSize)
-    this.setState({loading: false})
+    this.setState({ loading: false })
 
     if (result.status === 1) {
       const { list, total } = result.data
-      this.setState({list, total})
+      this.setState({ list, total })
     }
   }
 
   // 添加标签
   addTag = async () => {
     // 表单校验
-    this.addRef.current.validateFields()
+    this.addRef.current
+      .validateFields()
       .then(async (val) => {
         try {
           const result = await reqAddTag(val.name)
           const { msg } = result
-  
+
           // 清空表单 关闭modal
           this.addRef.current.resetFields()
-          this.setState({ showAdd: false });
-  
+          this.setState({ showAdd: false })
+
           if (result.status === 1) {
-            message.success(msg);
+            message.success(msg)
             this.getTagList(this.pageNum)
           } else {
             message.error(msg)
           }
-        } catch(err) {
+        } catch (err) {
           const res = err.response
           if (res.status === 401) {
             message.error(res.data.msg)
@@ -115,7 +128,7 @@ export default class Tags extends Component {
           }
           // 清空表单 关闭modal
           this.addRef.current.resetFields()
-          this.setState({ showAdd: false });
+          this.setState({ showAdd: false })
         }
       })
       .catch()
@@ -142,7 +155,7 @@ export default class Tags extends Component {
           } else {
             message.error(msg)
           }
-        } catch(err) {
+        } catch (err) {
           const res = err.response
           if (res.status === 401) {
             message.error(res.data.msg)
@@ -156,33 +169,34 @@ export default class Tags extends Component {
 
   // 更新标签
   updateTag = () => {
-    this.updateRef.current.validateFields()
+    this.updateRef.current
+      .validateFields()
       .then(async (val) => {
         try {
-          const id = this.tag._id;
+          const id = this.tag._id
           const result = await reqUpdateTag(id, val.name)
           const { msg } = result
-  
+
           // 重置表单 关闭modal
           this.updateRef.current.resetFields()
-          this.setState({showUpdate: false})
-  
+          this.setState({ showUpdate: false })
+
           if (result.status === 1) {
             message.success(msg)
             this.getTagList(this.pageNum)
           } else {
             message.error(msg)
           }
-        } catch(err) {
+        } catch (err) {
           const res = err.response
           if (res.status === 401) {
             message.error(res.data.msg)
           } else {
             message.error('服务器错误')
           }
-           // 重置表单 关闭modal
-           this.updateRef.current.resetFields()
-           this.setState({showUpdate: false})
+          // 重置表单 关闭modal
+          this.updateRef.current.resetFields()
+          this.setState({ showUpdate: false })
         }
       })
       .catch()
@@ -191,23 +205,23 @@ export default class Tags extends Component {
   // 保存要更新的tag
   showUpdateTag = (tag) => {
     this.tag = tag
-    this.setState({showUpdate: true})
+    this.setState({ showUpdate: true })
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.initColumns()
     this.getTagList(1)
   }
 
-  render() {
+  render () {
     const { list, total, loading, pageSize, showAdd, showUpdate } = this.state
     const tag = this.tag || { name: '' }
 
     return (
       <Card title="标签列表">
-        <div style={{marginBottom: 20}}>
-          <Button 
-            icon={ <PlusOutlined /> } 
+        <div style={{ marginBottom: 20 }}>
+          <Button
+            icon={<PlusOutlined />}
             type="primary"
             onClick={() => this.setState({ showAdd: true })}
           >
@@ -215,21 +229,20 @@ export default class Tags extends Component {
           </Button>
         </div>
 
-        <Table 
+        <Table
           loading={loading}
-          bordered 
+          bordered
           rowKey="_id"
-          columns={this.columns} 
+          columns={this.columns}
           dataSource={list}
           pagination={{
             pageSize,
             total,
             onChange: this.getTagList
           }}
-        >
-        </Table>
+        ></Table>
 
-        <Modal 
+        <Modal
           visible={showAdd}
           title="添加标签"
           cancelText="取消"
@@ -238,17 +251,17 @@ export default class Tags extends Component {
           onOk={this.addTag}
         >
           <Form ref={this.addRef}>
-            <Form.Item 
-              label="标签名称" 
+            <Form.Item
+              label="标签名称"
               name="name"
-              rules={[{ required: true, message: "必须输入标签名称" }]}
+              rules={[{ required: true, message: '必须输入标签名称' }]}
             >
-              <Input/>
+              <Input />
             </Form.Item>
           </Form>
         </Modal>
 
-        <Modal 
+        <Modal
           visible={showUpdate}
           title="编辑标签"
           cancelText="取消"
@@ -256,7 +269,10 @@ export default class Tags extends Component {
           onCancel={() => this.setState({ showUpdate: false })}
           onOk={this.updateTag}
         >
-          <UpdateForm setForm={form => this.updateRef = form} tagName={tag.name} />
+          <UpdateForm
+            setForm={(form) => (this.updateRef = form)}
+            tagName={tag.name}
+          />
         </Modal>
       </Card>
     )

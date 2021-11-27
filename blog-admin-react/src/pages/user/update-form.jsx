@@ -12,17 +12,17 @@ export default class UpdateForm extends Component {
 
   updateRef = React.createRef()
 
-  componentDidMount() {
-    this.props.setForm(this.updateRef);
+  componentDidMount () {
+    this.props.setForm(this.updateRef)
   }
 
-  componentDidUpdate() {
+  componentDidUpdate () {
     // 当props值更新，使用setFieldsValue方法更新input的值
     const { name, email, type, avatar } = this.props.user
     this.updateRef.current.setFieldsValue({ name, email, type, avatar })
   }
 
-  render() {
+  render () {
     const { name, email, type, avatar } = this.props.user
     const layout = {
       labelCol: { span: 5 },
@@ -30,11 +30,11 @@ export default class UpdateForm extends Component {
     }
 
     return (
-      <Form ref={this.updateRef} {...layout} initialValues={{name, email, type, avatar}}>
+      <Form ref={this.updateRef} {...layout} initialValues={{ name, email, type, avatar }}>
          <Form.Item
           name="name"
           label="用户名"
-          rules={[{ required: true, message: "必须输入用户名" }]}
+          rules={[{ required: true, message: '必须输入用户名' }]}
         >
           <Input />
         </Form.Item>
@@ -42,7 +42,7 @@ export default class UpdateForm extends Component {
         <Form.Item
           name="email"
           label="邮箱"
-          rules={[{ required: true, message: "必须输入邮箱" }]}
+          rules={[{ required: true, message: '必须输入邮箱' }]}
         >
           <Input />
         </Form.Item>
@@ -50,7 +50,7 @@ export default class UpdateForm extends Component {
         <Form.Item
           name="avatar"
           label="头像"
-          rules={[{ required: true, message: "必须输入头像" }]}
+          rules={[{ required: true, message: '必须输入头像' }]}
         >
           <Input />
         </Form.Item>
@@ -65,6 +65,6 @@ export default class UpdateForm extends Component {
           </Select>
         </Form.Item>
       </Form>
-    );
+    )
   }
 }

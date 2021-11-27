@@ -1,8 +1,8 @@
-@import "./markdown.css";
-@import "./toc.css";
-@import "./common.css";
+@import './markdown.css';
+@import './toc.css';
+@import './common.css';
 
-[data-color-scheme="light"] {
+[data-color-scheme='light'] {
   color-scheme: light;
   --body-bg-color: #f7f9fe;
   --board-bg-color: #fff;
@@ -17,10 +17,11 @@
   --link-hover-bg-color: #f8f9fa;
   --navbar-bg-color: #12121c;
   --navbar-text-color: #fff;
-  --font-family: Georgia, "Noto Serif SC", Helvetica, Arial, Menlo, Monaco, monospace, serif;
+  --font-family: Georgia, 'Noto Serif SC', Helvetica, Arial, Menlo, Monaco,
+    monospace, serif;
 }
 
-[data-color-scheme="dark"] {
+[data-color-scheme='dark'] {
   color-scheme: dark;
   --body-bg-color: #191928;
   --board-bg-color: #282c34;
@@ -35,11 +36,12 @@
   --link-hover-bg-color: #f8f9fa;
   --navbar-bg-color: #1b1c1d;
   --navbar-text-color: rgba(255, 255, 255, 0.6);
-  --font-family: Georgia, "Noto Serif SC", Helvetica, Arial, Menlo, Monaco, monospace, serif;
+  --font-family: Georgia, 'Noto Serif SC', Helvetica, Arial, Menlo, Monaco,
+    monospace, serif;
 }
 
-[data-color-scheme="dark"] img {
-  opacity: .9;
+[data-color-scheme='dark'] img {
+  opacity: 0.9;
 }
 
 *,
@@ -78,7 +80,7 @@ textarea {
   margin: 0;
 }
 .el-dropdown__popper {
-  opacity: .8;
+  opacity: 0.8;
   border-color: var(--navbar-bg-color) !important;
   background-color: var(--navbar-bg-color) !important;
 }
@@ -98,7 +100,7 @@ textarea {
 
 .el-dropdown-menu__item::after {
   display: none;
-  content: "";
+  content: '';
   position: absolute;
   top: 35px;
   left: calc(50% - 30px);
@@ -113,7 +115,6 @@ textarea {
 
 .el-dropdown-menu__item:hover {
   background: none !important;
-  
 }
 
 .el-dropdown-menu__item a {

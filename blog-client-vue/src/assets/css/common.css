@@ -66,11 +66,11 @@
   background-image: url('../img/bggrid.png');
 }
 
-[data-color-scheme="dark"] .bg-cover {
+[data-color-scheme='dark'] .bg-cover {
   opacity: 0.8;
 }
 
-.bg-cover:before, 
+.bg-cover:before,
 .bg-cover:after {
   position: absolute;
   width: 100%;
@@ -78,7 +78,7 @@
   display: block;
   left: 0;
   top: 0;
-  content: "";
+  content: '';
 }
 
 .bg-cover .container {

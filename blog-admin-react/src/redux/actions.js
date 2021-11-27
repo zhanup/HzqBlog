@@ -4,13 +4,13 @@ import storageUtils from '../utils/storageUtils'
 import { message } from 'antd'
 
 // 接收用户的同步action
-export const receiveUser = (user) => ({type: RECEIVE_USER, user})
+export const receiveUser = (user) => ({ type: RECEIVE_USER, user })
 
 // 退出登录的同步action
 export const logout = () => {
   // 删除local中的user
   storageUtils.removeUser()
-  return {type: RESET_USER}
+  return { type: RESET_USER }
 }
 
 // 登录的异步action

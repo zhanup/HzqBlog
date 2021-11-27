@@ -30,7 +30,7 @@ class User extends Component {
       {
         title: '用户名',
         key: 'name',
-        dataIndex: 'name',
+        dataIndex: 'name'
       },
       {
         title: '头像',
@@ -49,7 +49,7 @@ class User extends Component {
       {
         title: '邮箱',
         key: 'email',
-        dataIndex: 'email',
+        dataIndex: 'email'
       },
       {
         title: '创建时间',
@@ -64,20 +64,20 @@ class User extends Component {
         width: 200,
         render: (item) => (
           <>
-            <Button 
-              style={{fontSize: 12}} 
-              type="primary" 
-              className="mr10" 
+            <Button
+              style={{ fontSize: 12 }}
+              type="primary"
+              className="mr10"
               size="middle"
               icon={<EditOutlined />}
               onClick={() => this.showUpdate(item)}
             >
               编辑
             </Button>
-            <Button 
-              style={{fontSize: 12}} 
-              type="primary" 
-              danger 
+            <Button
+              style={{ fontSize: 12 }}
+              type="primary"
+              danger
               size="middle"
               icon={<DeleteOutlined />}
               onClick={() => this.deleteUser(item._id)}
@@ -121,7 +121,7 @@ class User extends Component {
           } else {
             message.error(msg)
           }
-        } catch(err) {
+        } catch (err) {
           const res = err.response
           if (res.status === 401) {
             message.error(res.data.msg)
@@ -143,7 +143,7 @@ class User extends Component {
 
           // 重置表单 关闭modal
           this.addRef.current.resetFields()
-          this.setState({showAdd: false})
+          this.setState({ showAdd: false })
 
           if (result.status === 1) {
             message.success(msg)
@@ -152,7 +152,7 @@ class User extends Component {
           } else {
             message.error(msg)
           }
-        } catch(err) {
+        } catch (err) {
           const res = err.response
           if (res.status === 401) {
             message.error(res.data.msg)
@@ -161,7 +161,7 @@ class User extends Component {
           }
           // 重置表单 关闭modal
           this.addRef.current.resetFields()
-          this.setState({showAdd: false})
+          this.setState({ showAdd: false })
         }
       })
       .catch()
@@ -170,7 +170,7 @@ class User extends Component {
   // 保存用户信息
   showUpdate = (user) => {
     this.user = user
-    this.setState({showUpdate: true})
+    this.setState({ showUpdate: true })
   }
 
   // 更新用户
@@ -184,15 +184,15 @@ class User extends Component {
 
           // 重置表单数据 关闭编辑框
           this.updateRef.current.resetFields()
-          this.setState({showUpdate: false})
+          this.setState({ showUpdate: false })
 
           if (result.status === 1) {
             message.success(msg)
             this.getUserList(this.pageNum)
-          } else{
+          } else {
             message.error(msg)
           }
-        } catch(err) {
+        } catch (err) {
           const res = err.response
           if (res.status === 401) {
             message.error(res.data.msg)
@@ -204,22 +204,22 @@ class User extends Component {
       .catch()
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.initColumns()
     this.getUserList(1)
   }
 
-  render() {
+  render () {
     const { loading, list, total, pageSize, showAdd, showUpdate } = this.state
     const user = this.user || { name: '', email: '', type: 0 }
 
     return (
       <Card title="用户管理">
-      <div style={{marginBottom: 20}}>
-        <Button 
-          icon={ <PlusOutlined /> } 
+      <div style={{ marginBottom: 20 }}>
+        <Button
+          icon={ <PlusOutlined /> }
           type="primary"
-          onClick={() => this.setState({showAdd: true})}
+          onClick={() => this.setState({ showAdd: true })}
         >
           添加用户
         </Button>
@@ -227,9 +227,9 @@ class User extends Component {
 
       <Table
         loading={loading}
-        bordered 
+        bordered
         rowKey="_id"
-        columns={this.columns} 
+        columns={this.columns}
         dataSource={list}
         pagination={{
           pageSize,
@@ -243,10 +243,10 @@ class User extends Component {
         visible={showAdd}
         okText="确认"
         cancelText="取消"
-        onCancel={() => this.setState({showAdd: false})}
+        onCancel={() => this.setState({ showAdd: false })}
         onOk={this.addUser}
       >
-        <AddForm setForm={form => this.addRef = form} />
+        <AddForm setForm={form => { this.addRef = form }} />
       </Modal>
 
       <Modal
@@ -254,10 +254,10 @@ class User extends Component {
         visible={showUpdate}
         okText="确认"
         cancelText="取消"
-        onCancel={() => this.setState({showUpdate: false})}
+        onCancel={() => this.setState({ showUpdate: false })}
         onOk={this.updateUser}
       >
-        <UpdateForm setForm={form => this.updateRef = form} user={user} />
+        <UpdateForm setForm={form => { this.updateRef = form }} user={ user } />
       </Modal>
     </Card>
     )

@@ -8,12 +8,12 @@ const storageUtils = {
   },
 
   // 读取user
-  getUser() {
+  getUser () {
     return store.get(USER_KEY) || {}
   },
 
   // 删除user
-  removeUser() {
+  removeUser () {
     store.remove(USER_KEY)
   }
 }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { login } from '../../redux/actions'
 import { Redirect } from 'react-router-dom'
@@ -7,13 +8,17 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import './login.less'
 
 class Login extends Component {
+  static propTypes = {
+    login: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired
+  }
 
- onFinish = async (values) => {
+  onFinish = async (values) => {
     const { name, password } = values
     this.props.login(name, password)
   }
 
-  render() {
+  render () {
     // 如果用户已经登录，自动跳转到管理页面
     const { user } = this.props
     if (user && user.token) {
@@ -31,25 +36,24 @@ class Login extends Component {
           >
             <Form.Item
               name="name"
-              rules={[
-                { required: true, message: '请输入账号！' }
-              ]}
+              rules={[{ required: true, message: '请输入账号！' }]}
             >
               <Input prefix={<UserOutlined />} placeholder="用户名" />
             </Form.Item>
-  
+
             <Form.Item
               name="password"
-              rules={[
-                { required: true,  message: "请输入密码！" }
-              ]}
+              rules={[{ required: true, message: '请输入密码！' }]}
             >
               <Input.Password prefix={<LockOutlined />} placeholder="密码" />
             </Form.Item>
-  
-            <Form.Item
-            >
-              <Button className="login-form-button" type="primary" htmlType="submit">
+
+            <Form.Item>
+              <Button
+                className="login-form-button"
+                type="primary"
+                htmlType="submit"
+              >
                 登录
               </Button>
             </Form.Item>
@@ -60,8 +64,4 @@ class Login extends Component {
   }
 }
 
-export default connect(
-  state => ({user: state.user}),
-  {login}
-)(Login)
-
+export default connect((state) => ({ user: state.user }), { login })(Login)
