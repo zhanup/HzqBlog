@@ -163,11 +163,11 @@ onMounted(() => {
 
     .container {
       max-width: 1200px;
-      line-height: 64px;
       margin: 0 auto;
       padding: 0 20px;
       display: flex;
       justify-content: space-between;
+      align-items: center;
     }
 
     .logo-container {
@@ -200,7 +200,7 @@ onMounted(() => {
         position: relative;
         float: left;
 
-        &:nth-child(-n + 5):not(&:nth-child(2)) {
+        &:nth-child(-n + 6):not(&:nth-child(2)) {
           &:hover {
             &::after {
               display: block;
@@ -210,7 +210,7 @@ onMounted(() => {
             display: none;
             content: '';
             position: absolute;
-            top: 50px;
+            top: 26px;
             left: calc(50% - 25px);
             width: 50px;
             height: 2px;
@@ -255,9 +255,12 @@ onMounted(() => {
       margin: 0;
       background: none;
       border: none;
-      height: 64px;
-      line-height: 64px;
+      outline: none;
       cursor: pointer;
+
+      &:focus {
+        outline: none;
+      }
 
       i {
         color: var(--navbar-text-color);

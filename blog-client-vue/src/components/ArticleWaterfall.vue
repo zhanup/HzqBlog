@@ -13,7 +13,7 @@
           <div class="publish-info">
             <span class="publish-date">
               <i class="iconfont icon-schedule"></i>
-              {{ formatDate(article?.date) }}
+              {{ formatDate(article.date) }}
             </span>
             <router-link
               class="publish-author"
@@ -50,7 +50,7 @@ const props = defineProps({
   list: Array as PropType<Article[]>
 })
 
-const formatDate = (date: string | Date): string => {
+const formatDate = (date: string | any): string => {
   const d = new Date(date)
   return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`
 }

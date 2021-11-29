@@ -42,8 +42,8 @@
           <li>
             <p>
               地址：
-              <a href="http://www.zhanup.top" target="_blank" rel="noopener"
-                >http://www.zhanup.top</a
+              <a href="http://localhost:3001" target="_blank" rel="noopener"
+                >http://localhost:3001</a
               >
             </p>
           </li>
@@ -51,10 +51,10 @@
             <p>
               头像：
               <a
-                href="http://www.zhanup.top/img/avatar.jpg"
+                href="http://localhost:3001/img/avatar.jpg"
                 target="_blank"
                 rel="noopener"
-                >http://www.zhanup.top/img/avatar.jpg</a
+                >http:localhost:3001/img/avatar.jpg</a
               >
             </p>
           </li>

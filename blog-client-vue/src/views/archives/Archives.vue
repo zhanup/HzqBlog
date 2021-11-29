@@ -23,7 +23,7 @@
       </div>
 
       <div class="archives-card box-shadow">
-        <div class="card" v-for="value of state.archives" :key="value[0]">
+        <div class="card" v-for="value in state.archives" :key="value[0]">
           <h3 class="year">{{ value[0] }}年</h3>
           <div class="brick" v-for="item of value[1]" :key="item._id">
             <router-link class="item" :to="`/detail/${item._id}`">
@@ -45,7 +45,7 @@ import { Tag, Archives, ResponseData, Article } from '../../types'
 
 const state = reactive({
   tags: [] as Array<Tag>,
-  archives: null
+  archives: new Map<string, Array<Article>>()
 })
 
 const color: string[] = [

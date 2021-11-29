@@ -1,7 +1,7 @@
 const MD5_SUFFIX = 'zhanup'
 const JWT_SECRET = 'zhanup'
 const PORT = 3002
-const BASE_URL = `http://127.0.0.1:${PORT}`
+const BASE_URL = `http://localhost:${PORT}`
 
 module.exports = {
     MD5_SUFFIX,

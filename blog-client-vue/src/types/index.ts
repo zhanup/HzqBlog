@@ -1,20 +1,20 @@
 export interface ResponseData<T> {
   list: Array<T>
-  total?: number
-  aid?: string
+  total: number
+  aid: string
 }
 
 export interface Article {
   _id: string
   title: string
-  desc?: string
-  content?: string
-  img_url?: string
-  origin?: number
-  tags?: Array<Tag>
-  category?: Category
-  views?: number
-  date?: string | Date
+  desc: string
+  content: string
+  img_url: string
+  origin: number
+  tags: Array<Tag>
+  category: Category
+  views: number
+  date: string | Date
 }
 
 export interface Archives {
