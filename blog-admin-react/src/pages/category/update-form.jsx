@@ -1,38 +1,31 @@
-import React, { Component } from 'react'
+/* eslint-disable react/display-name */
+import React, { useEffect, forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import { Form, Input } from 'antd'
 
-export default class UpdateForm extends Component {
-  static propTypes = {
-    categoryName: PropTypes.string.isRequired,
-    setForm: PropTypes.func.isRequired
-  }
+const UpdateForm = forwardRef((props, ref) => {
+  const { categoryName } = props
 
-  updateRef = React.createRef()
-
-  componentDidMount () {
-    this.props.setForm(this.updateRef)
-  }
-
-  componentDidUpdate () {
+  useEffect(() => {
     // 当props值更新，使用setFieldsValue方法更新input的值
-    const { categoryName } = this.props
-    this.updateRef.current.setFieldsValue({ name: categoryName })
-  }
+    ref.current.setFieldsValue({ name: props.categoryName })
+  }, [props])
 
-  render () {
-    const { categoryName } = this.props
+  return (
+    <Form ref={ref} initialValues={{ name: categoryName }}>
+      <Form.Item
+        name="name"
+        label="分类名称"
+        rules={[{ required: true, message: '必须输入分类名称！' }]}
+      >
+        <Input />
+      </Form.Item>
+    </Form>
+  )
+})
 
-    return (
-      <Form ref={this.updateRef} initialValues={{ name: categoryName }}>
-        <Form.Item
-          name="name"
-          label="分类名称"
-          rules={[{ required: true, message: '必须输入分类名称！' }]}
-        >
-          <Input />
-        </Form.Item>
-      </Form>
-    )
-  }
+UpdateForm.propTypes = {
+  categoryName: PropTypes.string.isRequired
 }
+
+export default UpdateForm

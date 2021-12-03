@@ -50,7 +50,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://1.15.112.209:5000",
+  "proxy": "http://localhost:3002",
   "devDependencies": {
     "babel-eslint": "^10.1.0",
     "compression-webpack-plugin": "6.1.1",

@@ -22,8 +22,7 @@ exports.deleteComment = (req, res, next) => {
 
   Comment.findByIdAndDelete(id, (err, data) => {
     if (err) return next(err)
-
-    console.log(data)
+    
     // cid存在，删除回复
     if (data.cid) {
       Comment.findByIdAndUpdate(data.cid, {$pull: {replies: data._id}}, (err) => {

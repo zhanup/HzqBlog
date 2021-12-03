@@ -16,14 +16,10 @@ export const logout = () => {
 // 登录的异步action
 export const login = (name, password) => {
   return async (dispacth) => {
-    const result = await reqLogin(name, password)
-    if (result.status === 1) {
-      const user = result.data
-      storageUtils.saveUser(user)
-      dispacth(receiveUser(user))
-      message.success(result.msg)
-    } else {
-      message.error(result.msg)
-    }
+    const res = await reqLogin(name, password)
+    const user = res.data
+    storageUtils.saveUser(user)
+    dispacth(receiveUser(user))
+    message.success(res.msg)
   }
 }
