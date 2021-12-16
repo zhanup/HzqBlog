@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { message } from 'antd'
 import storageUtils from '../utils/storageUtils'
+import { BASE_URL } from '../utils/constans'
 
 const http = axios.create({
   baseURL: 'http://localhost:3002/manage',
@@ -30,6 +31,8 @@ http.interceptors.response.use(
       const res = error.response
       if (res.status === 401) {
         message.error(res.data.message)
+        window.location.href = BASE_URL + '/login'
+        storageUtils.removeUser()
       } else {
         message.error(res.statusText)
       }
