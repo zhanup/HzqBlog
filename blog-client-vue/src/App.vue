@@ -8,26 +8,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import useIsTransparent from './hooks/useIsTransparent'
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
 
 // 导航背景透明
-const isTransparent = ref<boolean>(true)
-
-// 滚动处理函数
-const handleScroll = (): void => {
-  const scroll = document.documentElement.scrollTop || document.body.scrollTop
-  if (scroll > 200) {
-    isTransparent.value = false
-  } else {
-    isTransparent.value = true
-  }
-}
-
-onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
-})
+const isTransparent = useIsTransparent()
 </script>
 
 <style lang="less">
