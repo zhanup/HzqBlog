@@ -14,8 +14,8 @@ const http: AxiosInstance | any = axios.create({
 })
 
 // 请求拦截
-http.interceptors.request.use((congig: AxiosRequestConfig) => {
-  return congig
+http.interceptors.request.use((config: AxiosRequestConfig) => {
+  return config
 })
 
 // 响应拦截

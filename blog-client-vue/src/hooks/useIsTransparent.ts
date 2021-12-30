@@ -1,7 +1,7 @@
 import { ref, Ref, onMounted, onBeforeUnmount } from 'vue'
 
 export default function (): Ref<boolean> {
-  const isTransparent = ref<boolean>(false)
+  const isTransparent = ref<boolean>(true)
 
   const scrollChange = () => {
     const scroll = document.documentElement.scrollTop || document.body.scrollTop

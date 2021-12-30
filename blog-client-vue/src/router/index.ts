@@ -1,5 +1,8 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Home from '../views/home/Home.vue'
+import { scrollToTop } from '../utils/utils'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -58,12 +61,19 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   // history: createWebHistory(process.env.BASE_URL),
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes,
-  // eslint-disable-next-line
-  scrollBehavior(to, from, savedPosition) {
-    // 始终滚动到顶部
-    return { top: 0 }
+  routes
+})
+
+router.beforeEach((to, form, next) => {
+  if (to.path !== form.path) {
+    scrollToTop()
   }
+  NProgress.start()
+  next()
+})
+
+router.afterEach((to, form) => {
+  NProgress.done()
 })
 
 export default router

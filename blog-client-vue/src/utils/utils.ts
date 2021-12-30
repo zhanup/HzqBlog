@@ -14,15 +14,10 @@ export const debounce = (fn: Function, t: number) => {
 
 // 滚动到顶部
 export const scrollToTop = (): void => {
-  document.body.scrollIntoView({ behavior: 'smooth' })
-  if (document.body.scrollIntoView) {
-    document.body.scrollIntoView({ behavior: 'smooth' })
-  } else {
-    const sTop = document.documentElement.scrollTop || document.body.scrollTop
-    if (sTop > 0) {
-      window.requestAnimationFrame(scrollToTop)
-      window.scrollTo(0, sTop - sTop / 8)
-    }
+  const sTop = document.documentElement.scrollTop || document.body.scrollTop
+  if (sTop > 0) {
+    window.requestAnimationFrame(scrollToTop)
+    window.scrollTo(0, sTop - sTop / 8)
   }
 }
 

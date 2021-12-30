@@ -13,6 +13,7 @@ export default function Gallery () {
   const [list, setList] = useState([])
   const [loading, setLoading] = useState(false)
   const user = storageUtils.getUser()
+  const uploadUrl = process.env.NODE_ENV === 'development' ? '/manage/img/upload' : 'http://1.15.112.209:5000/manage/img/upload'
 
   // Macy插件配置
   const getMacy = () => {
@@ -91,7 +92,7 @@ export default function Gallery () {
             className="dragger"
             name="image"
             accept="image/*"
-            action="/manage/img/upload"
+            action={uploadUrl}
             onChange={uploadImg}
             headers={{ Authorization: user.token }}
         >

@@ -3,8 +3,9 @@ import { message } from 'antd'
 import storageUtils from '../utils/storageUtils'
 import { BASE_URL } from '../utils/constans'
 
+const baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:3002/manage' : 'http://1.15.112.209:5000/manage'
 const http = axios.create({
-  baseURL: 'http://localhost:3002/manage',
+  baseURL,
   timeout: 5000
 })
 
