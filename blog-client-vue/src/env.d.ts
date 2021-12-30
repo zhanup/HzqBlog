@@ -9,6 +9,28 @@ declare module '*.vue' {
 
 declare module 'macy'
 
+declare namespace hljs {
+  interface Config {
+    ignoreUnescapedHTML?: boolean
+  }
+  function configure(config: Config): void
+  function highlightElement(block): void
+}
+
+declare namespace tocbot {
+  interface Options {
+    tocSelector: string
+    contentSelector: string
+    headingSelector: string
+    ignoreSelector?: string
+    hasInnerContainers?: boolean
+    headingsOffset?: number
+    scrollSmoothOffset?: number
+  }
+  function init(options: Options): void
+  function destroy(): void
+}
+
 interface ImportMetaEnv {
   readonly VITE_LOCAL_URL: string
   readonly VITE_AXIOS_BASE_URL: string
