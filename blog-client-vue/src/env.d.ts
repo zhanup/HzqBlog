@@ -8,3 +8,13 @@ declare module '*.vue' {
 }
 
 declare module 'macy'
+
+interface ImportMetaEnv {
+  readonly VITE_LOCAL_URL: string
+  readonly VITE_AXIOS_BASE_URL: string
+}
+
+// eslint-disable-next-line no-unused-vars
+interface ImportMeta {
+  readonly env: ImportMetaEnv
+}

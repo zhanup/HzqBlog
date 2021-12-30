@@ -11,11 +11,11 @@
     "allowSyntheticDefaultImports": true,
     // 跳过 typescript 对第三方依赖的类型检查
     "skipLibCheck": true,
-    // 忽略 this 的类型检查, Raise error on this expressions with an implied any type.
+    // 忽略 this 的类型检查
     "noImplicitThis": false,
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
-    "types": ["vite/client"]
+    "types": ["vite/client", "node"]
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
   // ts 排除的文件

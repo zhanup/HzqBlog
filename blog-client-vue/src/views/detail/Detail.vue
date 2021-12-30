@@ -111,7 +111,7 @@ const fullClick = (): void => {
 
 // 文章链接
 const url = computed<string>(() => {
-  return `http://localhost:3001/detail/${route.params.id}`
+  return `${import.meta.env.VITE_LOCAL_URL}/detail/${route.params.id}`
 })
 
 // 获取文章详情

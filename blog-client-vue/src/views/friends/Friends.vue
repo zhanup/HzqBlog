@@ -42,8 +42,8 @@
           <li>
             <p>
               地址：
-              <a href="http://localhost:3001" target="_blank" rel="noopener"
-                >http://localhost:3001</a
+              <a :href="localUrl" target="_blank" rel="noopener"
+                >{{localUrl}}</a
               >
             </p>
           </li>
@@ -51,10 +51,10 @@
             <p>
               头像：
               <a
-                href="http://localhost:3001/img/avatar.jpg"
+                :href="`${localUrl}/img/avatar.jpg`"
                 target="_blank"
                 rel="noopener"
-                >http:localhost:3001/img/avatar.jpg</a
+                >{{localUrl + '/img/avatar.jpg'}}</a
               >
             </p>
           </li>
@@ -90,6 +90,8 @@ import { Link, ResponseData } from '../../types'
 const state = reactive({
   list: [] as Array<Link>
 })
+
+const localUrl = import.meta.env.VITE_LOCAL_URL
 
 // 获取友链数据
 const getLinks = async (): Promise<void> => {

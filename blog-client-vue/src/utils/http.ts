@@ -8,7 +8,7 @@ export interface AxiosResponseData {
 }
 
 const http: AxiosInstance | any = axios.create({
-  baseURL: 'http://localhost:3002/api',
+  baseURL: import.meta.env.VITE_AXIOS_BASE_URL,
   // 超时时间
   timeout: 50000
 })
