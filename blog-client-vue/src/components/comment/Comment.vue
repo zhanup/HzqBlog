@@ -63,12 +63,6 @@ const replyVisible = ref<boolean>(false)
 const to_whom = ref<string>('')
 const cid = ref<string>('')
 
-const openDialog = ({ id, name }) => {
-  replyVisible.value = true
-  cid.value = id
-  to_whom.value = name
-}
-
 const showComments = computed(() => {
   return props.comments.length > 0
 })
@@ -81,6 +75,13 @@ const showPage = computed(() => {
     !loadBottom.value
   )
 })
+
+// 打开回复框
+const openDialog = ({ id, name }) => {
+  replyVisible.value = true
+  cid.value = id
+  to_whom.value = name
+}
 
 // 关闭回复框
 const closeDialog = () => {
