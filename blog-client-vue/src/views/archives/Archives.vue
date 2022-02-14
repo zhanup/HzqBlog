@@ -1,9 +1,6 @@
 <template>
-  <div class="bg-cover">
-    <div class="container">
-      <h1 class="blog-title">归档</h1>
-    </div>
-  </div>
+  <page-header :index="2" :show-title="true" title="归档" />
+  
   <div class="archives">
     <div class="container">
       <div class="tags-card box-shadow">
@@ -42,6 +39,7 @@ import { reactive, onMounted } from 'vue'
 import http from '../../utils/http'
 import dayjs from 'dayjs'
 import { Tag, Archives, ResponseData, Article } from '../../types'
+import PageHeader from '../../components/pageHeader/PageHeader.vue'
 
 const state = reactive({
   tags: [] as Array<Tag>,
@@ -93,10 +91,6 @@ onMounted(() => {
 </script>
 
 <style lang="less" scoped>
-.bg-cover {
-  background-image: url(/img/bg3.jpg);
-}
-
 .archives {
   .container {
     width: 95%;

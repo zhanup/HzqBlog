@@ -1,9 +1,6 @@
 <template>
-  <div class="bg-cover">
-    <div class="container">
-      <h2 class="blog-title">{{ route.params.name }}</h2>
-    </div>
-  </div>
+  <page-header :index="3" :show-title="true" :title="title" />
+
   <div class="tags">
     <div class="container">
       <ArticleWaterfall :list="state.list" />
@@ -21,8 +18,9 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, onMounted } from 'vue'
+import { reactive, computed, onMounted } from 'vue'
 import { useRoute, onBeforeRouteUpdate } from 'vue-router'
+import PageHeader from '../../components/pageHeader/PageHeader.vue'
 import ArticleWaterfall from '../../components/articleWaterfall/ArticleWaterfall.vue'
 import Pagination from '../../components/pagination/Pagination.vue'
 import { scrollToTop } from '../../utils/utils'
@@ -57,6 +55,10 @@ const currentChange = (param: any) => {
   getArticleList(param)
 }
 
+const title = computed(() => {
+  return route.params.name as string
+})
+
 // 路由更新钩子
 onBeforeRouteUpdate((to, form) => {
   getArticleList(1, to.params.name)
@@ -68,9 +70,6 @@ onMounted(() => {
 </script>
 
 <style lang="less" scoped>
-.bg-cover {
-  background-image: url(/img/bg4.jpg);
-}
 .tags {
   .container {
     max-width: 1130px;

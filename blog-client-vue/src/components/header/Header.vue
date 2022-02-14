@@ -97,7 +97,6 @@ import SearchModal from '../searchModal/SearchModal.vue'
 import http from '../../utils/http'
 import { Category, ResponseData } from '../../types'
 
-// eslint-disable-next-line
 defineProps({ isTransparent: Boolean })
 const dialogVisible = ref<boolean>(false)
 const isDark = ref<boolean>(false)

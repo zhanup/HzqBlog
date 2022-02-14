@@ -1,9 +1,5 @@
 <template>
-  <div class="bg-cover">
-    <div class="container">
-      <p class="blog-desc">生如夏花之绚烂, 死如秋叶之静美</p>
-    </div>
-  </div>
+  <page-header :index="0" :showSaying="true" saying="生如夏花之绚烂, 死如秋叶之静美" />
   <div class="home">
     <div class="article-list">
       <ArticleWaterfall :list="state.list" />
@@ -22,6 +18,7 @@
 
 <script setup lang="ts">
 import { reactive, onMounted } from 'vue'
+import PageHeader from '../../components/pageHeader/PageHeader.vue'
 import ArticleWaterfall from '../../components/articleWaterfall/ArticleWaterfall.vue'
 import Pagination from '../../components/pagination/Pagination.vue'
 import { scrollToTop } from '../../utils/utils'
@@ -55,14 +52,6 @@ onMounted(() => {
 </script>
 
 <style lang="less" scoped>
-.bg-cover {
-  height: 100vh;
-  background-image: url(/img/bg1.jpg);
-
-  .container {
-    margin-top: 0;
-  }
-}
 .home {
   .article-list {
     max-width: 1125px;

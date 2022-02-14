@@ -1,9 +1,6 @@
 <template>
-  <div class="bg-cover">
-    <div class="container">
-      <h1 class="blog-title">留言</h1>
-    </div>
-  </div>
+  <page-header :index="5" :show-title="true" title="留言" />
+
   <div class="contact">
     <div class="container">
       <div class="board box-shadow">
@@ -35,6 +32,7 @@
 
 <script lang="ts" setup>
 import { reactive, onMounted } from 'vue'
+import PageHeader from '../../components/pageHeader/PageHeader.vue'
 import Comment from '../../components/comment/Comment.vue'
 import http from '../../utils/http'
 import { Comments, ResponseData } from '../../types'
@@ -104,9 +102,6 @@ onMounted(() => {
 </script>
 
 <style lang="less" scoped>
-.bg-cover {
-  background-image: url(/img/bg6.jpg);
-}
 .contact {
   .container {
     width: 95%;

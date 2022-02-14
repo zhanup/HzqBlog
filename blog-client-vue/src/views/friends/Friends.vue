@@ -1,9 +1,6 @@
 <template>
-  <div class="bg-cover">
-    <div class="container">
-      <h1 class="blog-title">友链</h1>
-    </div>
-  </div>
+  <page-header :index="4" :show-title="true" title="归档" />
+
   <div class="friends">
     <div class="container box-shadow">
       <div class="info">
@@ -42,9 +39,9 @@
           <li>
             <p>
               地址：
-              <a :href="localUrl" target="_blank" rel="noopener"
-                >{{localUrl}}</a
-              >
+              <a :href="localUrl" target="_blank" rel="noopener">{{
+                localUrl
+              }}</a>
             </p>
           </li>
           <li>
@@ -54,7 +51,7 @@
                 :href="`${localUrl}/img/avatar.jpg`"
                 target="_blank"
                 rel="noopener"
-                >{{localUrl + '/img/avatar.jpg'}}</a
+                >{{ localUrl + '/img/avatar.jpg' }}</a
               >
             </p>
           </li>
@@ -84,6 +81,7 @@
 </template>
 <script lang="ts" setup>
 import { reactive, onMounted } from 'vue'
+import PageHeader from '../../components/pageHeader/PageHeader.vue'
 import http from '../../utils/http'
 import { Link, ResponseData } from '../../types'
 
@@ -112,10 +110,6 @@ onMounted(() => {
 })
 </script>
 <style lang="less" scoped>
-.bg-cover {
-  background-image: url(/img/bg5.jpg);
-}
-
 .friends {
   .container {
     width: 95%;

@@ -1,9 +1,6 @@
 <template>
-  <div class="bg-cover">
-    <div class="container">
-      <h1 class="blog-title">关于</h1>
-    </div>
-  </div>
+  <page-header :index="6" :show-title="true" title="关于" />
+
   <div class="about">
     <div class="container box-shadow">
       <!-- <h1 class="title">关于本站</h1> -->
@@ -60,10 +57,11 @@
   </div>
 </template>
 
+<script setup lang="ts">
+import PageHeader from '../../components/pageHeader/PageHeader.vue'
+</script>
+
 <style lang="less" scoped>
-.bg-cover {
-  background-image: url(/img/bg7.jpg);
-}
 .about {
   .container {
     width: 95%;

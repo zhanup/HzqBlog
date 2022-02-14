@@ -1,12 +1,9 @@
 <template>
-  <div
-    class="bg-cover"
-    :style="{ backgroundImage: `url(${state.detail.img_url})` }"
-  >
-    <div class="container">
-      <h2 class="blog-title">{{ state.detail.title }}</h2>
-    </div>
-  </div>
+  <page-header
+    :img-url="state.detail.img_url"
+    :title="state.detail.title"
+    :showTitle="true"
+  />
   <div class="detail">
     <div class="main-content" :class="isFull ? 'full-content' : ''">
       <div class="artDetail box-shadow">
@@ -68,8 +65,16 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, onMounted, nextTick, onBeforeUnmount, computed } from 'vue'
+import {
+  ref,
+  reactive,
+  onMounted,
+  nextTick,
+  onBeforeUnmount,
+  computed
+} from 'vue'
 import { useRoute } from 'vue-router'
+import PageHeader from '../../components/pageHeader/PageHeader.vue'
 import Comment from '../../components/comment/Comment.vue'
 import FullButton from './FullButton.vue'
 import Reprint from './Reprint.vue'

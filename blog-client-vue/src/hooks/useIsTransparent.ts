@@ -5,7 +5,7 @@ export default function (): Ref<boolean> {
 
   const scrollChange = () => {
     const scroll = document.documentElement.scrollTop || document.body.scrollTop
-    if (scroll > 200) {
+    if (scroll > 100) {
       isTransparent.value = false
     } else {
       isTransparent.value = true
