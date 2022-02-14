@@ -14,7 +14,7 @@ export interface Article {
   tags: Array<Tag>
   category: Category
   views: number
-  date: string | Date
+  date: string
 }
 
 export interface Archives {
