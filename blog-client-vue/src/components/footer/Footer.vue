@@ -23,7 +23,7 @@ import dayjs from 'dayjs'
 
 const vintage = computed<string>(() => {
   const year = dayjs().format('YYYY')
-  return year === '2021' ? '2021' : `2020 - ${year}`
+  return year === '2021' ? '2021' : `2021 - ${year}`
 })
 </script>
 

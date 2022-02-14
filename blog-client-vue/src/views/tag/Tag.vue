@@ -23,8 +23,8 @@
 <script lang="ts" setup>
 import { reactive, onMounted } from 'vue'
 import { useRoute, onBeforeRouteUpdate } from 'vue-router'
-import ArticleWaterfall from '../../components/ArticleWaterfall.vue'
-import Pagination from '../../components/Pagination.vue'
+import ArticleWaterfall from '../../components/articleWaterfall/ArticleWaterfall.vue'
+import Pagination from '../../components/pagination/Pagination.vue'
 import { scrollToTop } from '../../utils/utils'
 import { Article, ResponseData } from '../../types'
 import { getTagArticles } from '../../utils/api'

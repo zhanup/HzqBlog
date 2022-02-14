@@ -9,8 +9,8 @@
 
 <script setup lang="ts">
 import useIsTransparent from './hooks/useIsTransparent'
-import Header from './components/Header.vue'
-import Footer from './components/Footer.vue'
+import Header from './components/header/Header.vue'
+import Footer from './components/footer/Footer.vue'
 
 // 导航背景透明
 const isTransparent = useIsTransparent()

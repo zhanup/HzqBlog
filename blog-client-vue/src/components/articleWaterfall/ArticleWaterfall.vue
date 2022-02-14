@@ -42,7 +42,7 @@
 
 <script lang="ts" setup>
 import { watch, PropType, nextTick } from 'vue'
-import { Article } from '../types'
+import { Article } from '../../types'
 import Macy from 'macy'
 
 // eslint-disable-next-line

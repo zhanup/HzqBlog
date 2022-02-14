@@ -70,7 +70,7 @@
 <script lang="ts" setup>
 import { ref, reactive, onMounted, nextTick, onBeforeUnmount, computed } from 'vue'
 import { useRoute } from 'vue-router'
-import Comment from '../../components/Comment.vue'
+import Comment from '../../components/comment/Comment.vue'
 import FullButton from './FullButton.vue'
 import Reprint from './Reprint.vue'
 import http from '../../utils/http'

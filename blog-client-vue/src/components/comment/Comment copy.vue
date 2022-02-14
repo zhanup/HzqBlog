@@ -155,15 +155,14 @@
 
 <script lang="ts" setup>
 import { ref, reactive, PropType } from 'vue'
-import ReplyPanel from './ReplyModal.vue'
+import ReplyPanel from '../replyModal/ReplyModal.vue'
 import { ElMessage } from 'element-plus'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import UAParser from 'ua-parser-js'
-import emojiDataSource from '../assets/data/emoji.json'
-import { Comments } from '../types'
+import emojiDataSource from '../../assets/data/emoji.json'
+import { Comments } from '../../types'
 
-// eslint-disable-next-line
 const props = defineProps({
   comments: {
     type: Array as PropType<Array<Comments>>,
@@ -183,12 +182,11 @@ const props = defineProps({
   }
 })
 
-// eslint-disable-next-line
 const emit = defineEmits(['comment', 'reply', 'more-click'])
 
 const emojiVisible = ref<boolean>(false)
 const replyVisible = ref<boolean>(false)
-// eslint-disable-next-line
+
 const to_whom = ref<string>('')
 const cid = ref<string>('')
 const comment = reactive({
@@ -275,6 +273,61 @@ const more = (): void => {
 }
 </script>
 
+<style lang="less">
+.v[data-class='v'] * {
+  box-sizing: border-box;
+  line-height: 1.75;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.vspinner {
+  width: 22px;
+  height: 22px;
+  display: inline-block;
+  border: 6pxdouble #a0a0a0;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s infinite linear;
+  position: relative;
+  vertical-align: middle;
+  margin: 0 5px;
+}
+
+.vbtn {
+  transition-duration: 0.4s;
+  text-align: center;
+  color: #555;
+  border: 1px solid #ededed;
+  border-radius: 4px;
+  display: inline-block;
+  background: transparent;
+  margin-bottom: 0;
+  font-weight: 400;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  white-space: nowrap;
+  padding: 6px 15px;
+  font-size: 0.875em;
+  line-height: 1.5;
+  user-select: none;
+  outline: none;
+
+  &:hover {
+    color: #3090e4;
+    border-color: #3090e4;
+  }
+}
+</style>
+
 <style lang="less" scoped>
 .comment {
   margin-top: 20px;
@@ -284,12 +337,6 @@ const more = (): void => {
   transition: padding 0.5s ease-in-out;
   border-radius: 10px;
 }
-
-.v[data-class='v'] * {
-  box-sizing: border-box;
-  line-height: 1.75;
-}
-
 .v[data-class='v'] {
   font-size: 16px;
   text-align: left;
@@ -326,54 +373,6 @@ const more = (): void => {
       display: inline-block;
       vertical-align: middle;
       font-size: 14px;
-    }
-  }
-
-  .text-right {
-    text-align: right;
-  }
-
-  .text-center {
-    text-align: center;
-  }
-
-  .vspinner {
-    width: 22px;
-    height: 22px;
-    display: inline-block;
-    border: 6pxdouble #a0a0a0;
-    border-top-color: transparent;
-    border-bottom-color: transparent;
-    border-radius: 50%;
-    animation: spin 1s infinite linear;
-    position: relative;
-    vertical-align: middle;
-    margin: 0 5px;
-  }
-
-  .vbtn {
-    transition-duration: 0.4s;
-    text-align: center;
-    color: #555;
-    border: 1px solid #ededed;
-    border-radius: 4px;
-    display: inline-block;
-    background: transparent;
-    margin-bottom: 0;
-    font-weight: 400;
-    vertical-align: middle;
-    touch-action: manipulation;
-    cursor: pointer;
-    white-space: nowrap;
-    padding: 6px 15px;
-    font-size: 0.875em;
-    line-height: 1.5;
-    user-select: none;
-    outline: none;
-
-    &:hover {
-      color: #3090e4;
-      border-color: #3090e4;
     }
   }
 

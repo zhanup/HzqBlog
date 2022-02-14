@@ -34,9 +34,9 @@
 
 <script lang="ts" setup>
 import { reactive } from 'vue'
-import http from '../utils/http'
-import { debounce } from '../utils/utils'
-import { Article, ResponseData } from '../types/index'
+import http from '../../utils/http'
+import { debounce } from '../../utils/utils'
+import { Article, ResponseData } from '../../types/index'
 
 // eslint-disable-next-line
 defineProps({

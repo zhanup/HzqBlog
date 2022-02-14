@@ -35,7 +35,7 @@
 
 <script lang="ts" setup>
 import { reactive, onMounted } from 'vue'
-import Comment from '../../components/Comment.vue'
+import Comment from '../../components/comment/Comment.vue'
 import http from '../../utils/http'
 import { Comments, ResponseData } from '../../types'
 

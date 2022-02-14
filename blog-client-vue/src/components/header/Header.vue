@@ -93,9 +93,9 @@
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue'
-import SearchModal from './SearchModal.vue'
-import http from '../utils/http'
-import { Category, ResponseData } from '../types'
+import SearchModal from '../searchModal/SearchModal.vue'
+import http from '../../utils/http'
+import { Category, ResponseData } from '../../types'
 
 // eslint-disable-next-line
 defineProps({ isTransparent: Boolean })

@@ -22,8 +22,8 @@
 
 <script setup lang="ts">
 import { reactive, onMounted } from 'vue'
-import ArticleWaterfall from '../../components/ArticleWaterfall.vue'
-import Pagination from '../../components/Pagination.vue'
+import ArticleWaterfall from '../../components/articleWaterfall/ArticleWaterfall.vue'
+import Pagination from '../../components/pagination/Pagination.vue'
 import { scrollToTop } from '../../utils/utils'
 import { Article, ResponseData } from '../../types'
 import { getHomeArticles } from '../../utils/api'
