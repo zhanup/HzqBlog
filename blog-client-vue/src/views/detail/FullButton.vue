@@ -19,6 +19,7 @@ const fullClick = (): void => {
   position: fixed;
   right: 20px;
   bottom: 80px;
+  z-index: 1;
 
   .full-btn {
     cursor: pointer;

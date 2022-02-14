@@ -159,8 +159,5 @@ const onReply = (args) => {
     padding-left: 10px;
     padding-right: 10px;
   }
-  .vsys {
-    display: none !important;
-  }
 }
 </style>

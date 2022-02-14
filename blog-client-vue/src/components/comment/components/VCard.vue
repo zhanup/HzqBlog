@@ -196,4 +196,10 @@ const replyClick = (id: string, name: string) => {
     }
   }
 }
+
+@media screen and (max-width: 601px) {
+  .vsys {
+    display: none !important;
+  }
+}
 </style>

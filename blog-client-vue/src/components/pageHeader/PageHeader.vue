@@ -13,7 +13,8 @@ import { computed, toRefs } from 'vue'
 const props = defineProps({
   imgUrl: {
     type: String,
-    default: 'https://pic.3gbizhi.com/2020/0930/thumb_1680_0_20200930114236720.jpg'
+    default:
+      'https://pic.3gbizhi.com/2020/0930/thumb_1680_0_20200930114236720.jpg'
   },
   index: {
     type: Number,
@@ -59,6 +60,10 @@ const style = computed(() => {
 </script>
 
 <style scoped lang="less">
+[data-color-scheme='dark'] .page-header {
+  opacity: 0.8;
+}
+
 .page-header {
   position: relative;
   height: 60vh;
@@ -69,51 +74,36 @@ const style = computed(() => {
   background-position: center center;
   background-size: cover;
   user-select: none;
-}
 
-[data-color-scheme='dark'] .page-header {
-  opacity: 0.8;
-}
+  .container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 90%;
+    max-width: 1125px;
+    transform: translate(-50%, -50%);
+  }
 
-.page-header:before,
-.page-header:after {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  display: block;
-  left: 0;
-  top: 0;
-  content: '';
-}
+  .title {
+    padding: 0;
+    margin: 0;
+    font-size: 32px;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    font-weight: bold;
+    text-align: center;
+    color: #eee;
+    font-family: 楷体;
+    margin-top: -30px;
+  }
 
-.page-header .container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 90%;
-  max-width: 1125px;
-  transform: translate(-50%, -50%);
-}
-
-.page-header .title {
-  padding: 0;
-  margin: 0;
-  font-size: 32px;
-  line-height: 1.5;
-  margin-bottom: 12px;
-  font-weight: bold;
-  text-align: center;
-  color: #eee;
-  font-family: 楷体;
-  margin-top: -30px;
-}
-
-.page-header .saying {
-  padding: 0;
-  margin: 0;
-  font-size: 18px;
-  text-align: center;
-  color: #eee;
-  font-family: 楷体;
+  .saying {
+    padding: 0;
+    margin: 0;
+    font-size: 18px;
+    text-align: center;
+    color: #eee;
+    font-family: 楷体;
+  }
 }
 </style>
