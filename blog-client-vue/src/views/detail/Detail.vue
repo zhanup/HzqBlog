@@ -26,7 +26,7 @@ import DetailHeader from './components/DetailHeader.vue'
 import DetailContent from './components/DetailContent.vue'
 import DetailAside from './components/DetailAside.vue'
 import DetailComment from './components/DetailComment.vue'
-import FullButton from './FullButton.vue'
+import FullButton from './components/FullButton.vue'
 import { getArticleDetail } from '@/api/article'
 import { Article } from '../../types'
 
