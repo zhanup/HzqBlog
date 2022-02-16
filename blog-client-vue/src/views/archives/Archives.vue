@@ -61,7 +61,7 @@ const color: string[] = [
   '#fffff'
 ]
 
-const getYear = (date: any): number => {
+const getYear = (date: any) => {
   return new Date(date).getFullYear()
 }
 
@@ -74,12 +74,12 @@ const sort = (obj: any): Map<string, Array<Article>> => {
   return result
 }
 
-const getTags = async (): Promise<void> => {
+const getTags = async () => {
   const res: ResponseData<Tag> = await http.get('/tag/list')
   state.tags = res.list
 }
 
-const getArchives = async (): Promise<void> => {
+const getArchives = async () => {
   const res: Archives = await http.get('/article/archive')
   state.archives = sort(res)
 }
