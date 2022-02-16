@@ -32,13 +32,13 @@
               <template #dropdown>
                 <el-dropdown-menu>
                   <el-dropdown-item
-                    v-for="cate in state.categories"
-                    :key="cate._id"
+                    v-for="item in categories"
+                    :key="item._id"
                   >
                     <router-link
-                      :to="`/category/${cate.name}`"
+                      :to="`/category/${item.name}`"
                       @click="isShow = false"
-                      >{{ cate.name }}</router-link
+                      >{{ item.name }}</router-link
                     >
                   </el-dropdown-item>
                 </el-dropdown-menu>
@@ -92,18 +92,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import SearchModal from '../searchModal/SearchModal.vue'
-import http from '../../utils/http'
-import { Category, ResponseData } from '../../types'
+import { Category } from '../../types'
+import { useCategoryStore } from '@/store/category'
 
 defineProps({ isTransparent: Boolean })
 const dialogVisible = ref<boolean>(false)
 const isDark = ref<boolean>(false)
 const isShow = ref<boolean>(false)
-const state = reactive({
-  categories: {} as any
-})
+
+const category = useCategoryStore()
+const categories = computed<Category[]>(() => category.list)
 
 // 显示搜索框
 const showDialog = (): void => {
@@ -113,11 +113,6 @@ const showDialog = (): void => {
 // 关闭搜索框
 const closeDialog = (): void => {
   dialogVisible.value = false
-}
-
-const getCategory = async (): Promise<void> => {
-  const res: ResponseData<Category> = await http.get('/category/list')
-  state.categories = res.list
 }
 
 // 切换主题
@@ -142,7 +137,7 @@ const showNav = (): void => {
 }
 
 onMounted(() => {
-  getCategory()
+  category.getCategories()
 })
 </script>
 

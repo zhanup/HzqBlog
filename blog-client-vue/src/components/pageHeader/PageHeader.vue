@@ -1,5 +1,5 @@
 <template>
-  <div class="page-header" :style="style">
+  <div class="page-header" :style="style" v-background="img">
     <div class="container">
       <h2 class="title" v-if="showTitle">{{ title }}</h2>
       <p class="saying" v-if="showSaying">生如夏花之绚烂, 死如秋叶之静美</p>
@@ -13,8 +13,11 @@ import { computed, toRefs } from 'vue'
 const props = defineProps({
   imgUrl: {
     type: String,
-    default:
-      'https://pic.3gbizhi.com/2020/0930/thumb_1680_0_20200930114236720.jpg'
+    default: ''
+  },
+  height: {
+    type: Number,
+    default: 60
   },
   index: {
     type: Number,
@@ -48,15 +51,24 @@ const pictures = [
   'https://s2.loli.net/2022/02/14/kOSXfw5GYN42v3x.jpg'
 ]
 
-const style = computed(() => {
+const style = computed(() => ({
+  height: props.height + 'vh'
+}))
+
+const img = computed(() => {
   const { index, imgUrl } = toRefs(props)
-  return {
-    backgroundImage:
-      index.value !== -1
-        ? `url(${pictures[index.value]})`
-        : `url(${imgUrl.value})`
-  }
+  return index.value !== -1 ? pictures[index.value] : imgUrl.value
 })
+
+const vBackground = (el, binding) => {
+  el.style.backgroundImage = `url(${binding.value})`
+  // const img = new Image()
+  // img.src = binding.value
+  // img.onload = () => {
+  //   console.log('load')
+  //   el.style.backgroundImage = `url(${binding.value})`
+  // }
+}
 </script>
 
 <style scoped lang="less">
@@ -71,6 +83,7 @@ const style = computed(() => {
   padding: 0;
   border: 0;
   overflow: hidden;
+  background-color: #eee;
   background-position: center center;
   background-size: cover;
   user-select: none;

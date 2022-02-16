@@ -1,5 +1,5 @@
 <template>
-  <div class="vpage txt-center">
+  <div class="vpage text-center">
     <button class="vmore vbtn" @click="loadMore">加载更多...</button>
   </div>
 </template>
@@ -39,11 +39,11 @@ const loadMore = () => {
   }
 }
 
-.txt-center {
+.vpage {
   text-align: center;
-}
 
-.vpage .vmore {
-  margin: 14px 0;
+  .vmore {
+    margin: 14px 0;
+  }
 }
 </style>

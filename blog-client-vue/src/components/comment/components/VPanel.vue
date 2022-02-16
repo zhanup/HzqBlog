@@ -74,18 +74,18 @@ import { ref, reactive, toRefs } from 'vue'
 import { ElMessage } from 'element-plus'
 import emojiDataSource from '../emoji.json'
 
-interface Comment {
+interface CommentInfo {
   name: string
   email: string
   content: string
 }
 
 const emit = defineEmits<{
-  (e: 'submit', comment: Comment): void
+  (e: 'submit', comment: CommentInfo): void
 }>()
 
 const emojiVisible = ref(false)
-const comment = reactive<Comment>({
+const comment = reactive<CommentInfo>({
   name: '',
   email: '',
   content: ''

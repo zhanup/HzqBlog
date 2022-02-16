@@ -1,5 +1,5 @@
 <template>
-  <page-header :index="4" :show-title="true" title="归档" />
+  <page-header :index="4" :show-title="true" title="友链" />
 
   <div class="friends">
     <div class="container box-shadow">

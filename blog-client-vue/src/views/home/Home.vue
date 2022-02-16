@@ -1,53 +1,50 @@
 <template>
-  <page-header :index="0" :showSaying="true" saying="生如夏花之绚烂, 死如秋叶之静美" />
+  <page-header :index="0" :height="100" :showSaying="true" saying="生如夏花之绚烂, 死如秋叶之静美" />
   <div class="home">
     <div class="article-list">
-      <ArticleWaterfall :list="state.list" />
+      <ArticleWaterfall :list="list" />
       <Pagination
-        v-if="state.total > state.pageSize"
-        :current-page="state.pageNum"
-        :page-size="state.pageSize"
-        :total="state.total"
+        v-if="total > pageSize"
+        :current-page="pageNum"
+        :page-size="pageSize"
+        :total="total"
         @prev-click="currentChange"
         @next-click="currentChange"
       />
-      <el-empty v-if="state.list.length === 0" description="No Data"></el-empty>
+      <el-empty v-if="list.length === 0" description="No Data"></el-empty>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { reactive, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import PageHeader from '../../components/pageHeader/PageHeader.vue'
 import ArticleWaterfall from '../../components/articleWaterfall/ArticleWaterfall.vue'
 import Pagination from '../../components/pagination/Pagination.vue'
 import { scrollToTop } from '../../utils/utils'
 import { Article, ResponseData } from '../../types'
-import { getHomeArticles } from '../../utils/api'
+import { getArticleList } from '@/api/article'
 
-const state = reactive({
-  pageNum: 1,
-  pageSize: 6,
-  total: 0,
-  list: [] as Array<Article>
-})
+const pageNum = ref(1)
+const pageSize = ref(18)
+const total = ref(0)
+const list = ref<Article[]>([])
 
-const getArticleList = async (pageNum: number): Promise<void> => {
-  const pageSize = state.pageSize
-  const res: ResponseData<Article> = await getHomeArticles(pageNum, pageSize)
-  state.list = res.list
-  state.total = res.total
+const _getArticleList = async (pageNum: number) => {
+  const { data } = await getArticleList(pageNum, pageSize.value)
+  list.value = data.data.list
+  total.value = data.data.total
 }
 
 // 分页
-const currentChange = (param: any): void => {
+const currentChange = (page: number) => {
   scrollToTop()
-  state.pageNum = param
-  getArticleList(param)
+  pageNum.value = page
+  _getArticleList(page)
 }
 
 onMounted(() => {
-  getArticleList(1)
+  _getArticleList(1)
 })
 </script>
 

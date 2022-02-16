@@ -12,7 +12,7 @@
         />
       </div>
       <div class="vempty" v-if="comments.length === 0">来发评论吧~</div>
-      <v-page v-if="showPage" v-bind="$attrs" />
+      <v-page v-if="showPage" :current-page="currentPage" @more-click="moreClick" />
     </div>
 
     <reply-modal
@@ -32,10 +32,15 @@ import VPage from './components/VPage.vue'
 import ReplyModal from '../replyModal/ReplyModal.vue'
 import { Comments } from '../../types'
 
-interface Comment {
+interface CommentInfo {
   name: string
   email: string
   content: string
+}
+
+interface ReplyInfo extends CommentInfo {
+  cid: string
+  to_whom: string
 }
 
 const props = defineProps({
@@ -57,7 +62,13 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['comment', 'reply'])
+// const emit = defineEmits(['comment', 'reply', 'moreClick'])
+const emit = defineEmits<{
+  (e: 'comment', info: CommentInfo): void
+  (e: 'reply', info: ReplyInfo): void
+  (e: 'moreClick', currentPage: number): void
+}>()
+
 
 const replyVisible = ref<boolean>(false)
 const to_whom = ref<string>('')
@@ -89,17 +100,24 @@ const closeDialog = () => {
 }
 
 // 提交评论
-const onSubmit = (comment: Comment) => {
-  emit('comment', comment)
+const onSubmit = (args: CommentInfo) => {
+  emit('comment', args)
 }
 
 // 提交回复
-const onReply = (args) => {
+const onReply = (args: CommentInfo) => {
+  const { name, email, content } = args
   emit('reply', {
     cid: cid.value,
     to_whom: to_whom.value,
-    ...args
+    name,
+    email,
+    content
   })
+}
+
+const moreClick = () => {
+  emit('moreClick', props.currentPage + 1)
 }
 </script>
 

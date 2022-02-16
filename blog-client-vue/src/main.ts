@@ -4,6 +4,7 @@ import router from './router'
 import ElementPlus from 'element-plus'
 // import hljs from 'highlight.js'
 import lazyPlugin from 'vue3-lazy'
+import { createPinia } from 'pinia'
 import 'element-plus/dist/index.css'
 import './assets/css/element.less'
 // import 'highlight.js/styles/base16/dracula.css'
@@ -25,5 +26,6 @@ lazyPlugin.install(app, {
 })
 
 app.use(ElementPlus)
+app.use(createPinia())
 app.use(router)
 app.mount('#app')
