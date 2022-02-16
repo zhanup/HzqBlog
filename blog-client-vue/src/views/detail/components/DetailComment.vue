@@ -26,7 +26,7 @@ const props = defineProps({
 
 const { aid } = toRefs(props)
 const pageNum = ref(1)
-const pageSize = ref(1)
+const pageSize = ref(10)
 const total = ref(0)
 const loadBottom = ref(false)
 const comments = ref<Comments[]>([])

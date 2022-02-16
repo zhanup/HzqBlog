@@ -1,71 +1,64 @@
 <template>
-  <page-header :index="3" :show-title="true" :title="title" />
+  <page-header :index="3" :show-title="true" :title="tagName" />
 
   <div class="tags">
     <div class="container">
-      <ArticleWaterfall :list="state.list" />
+      <ArticleWaterfall :list="list" />
       <Pagination
-        v-if="state.total > state.pageSize"
-        :current-page="state.pageNum"
-        :page-size="state.pageSize"
-        :total="state.total"
+        v-if="total > pageSize"
+        :current-page="pageNum"
+        :page-size="pageSize"
+        :total="total"
         @prev-click="currentChange"
         @next-click="currentChange"
       />
-      <el-empty v-if="state.list.length === 0" description="No Data"></el-empty>
+      <el-empty v-if="list.length === 0" description="No Data" />
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { reactive, computed, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRoute, onBeforeRouteUpdate } from 'vue-router'
-import PageHeader from '../../components/pageHeader/PageHeader.vue'
-import ArticleWaterfall from '../../components/articleWaterfall/ArticleWaterfall.vue'
-import Pagination from '../../components/pagination/Pagination.vue'
+import PageHeader from '@/components/pageHeader/PageHeader.vue'
+import ArticleWaterfall from '@/components/articleWaterfall/ArticleWaterfall.vue'
+import Pagination from '@/components/pagination/Pagination.vue'
 import { scrollToTop } from '../../utils/utils'
-import { Article, ResponseData } from '../../types'
-import { getTagArticles } from '../../utils/api'
+import { getArticlesByTag } from '@/api/article'
+import { Article } from '../../types'
 
 const route = useRoute()
-const state = reactive({
-  pageNum: 1,
-  pageSize: 6,
-  total: 0,
-  list: [] as Array<Article>
-})
+const pageNum = ref(6)
+const pageSize = ref(6)
+const total = ref(0)
+const list = ref<Article[]>([])
+const tagName = computed(() => route.params.name as string)
 
-const getArticleList = async (
-  pageNum: number,
-  name: string | string[] = route.params.name
-): Promise<void> => {
-  const { pageSize } = state
-  const res: ResponseData<Article> = await getTagArticles(
-    name,
-    pageNum,
-    pageSize
-  )
-  state.list = res.list
-  state.total = res.total
+const _getArticlesByTag = async (
+  page: number,
+  name: string = tagName.value
+) => {
+  const {
+    data: { data }
+  } = await getArticlesByTag(name, page, pageSize.value)
+  total.value = data.total
+  list.value = data.list
 }
 
-const currentChange = (param: any) => {
+const currentChange = (currentPage: number) => {
   scrollToTop()
-  state.pageNum = param
-  getArticleList(param)
+  pageNum.value = currentPage
+  _getArticlesByTag(currentPage)
 }
-
-const title = computed(() => {
-  return route.params.name as string
-})
 
 // 路由更新钩子
-onBeforeRouteUpdate((to, form) => {
-  getArticleList(1, to.params.name)
+onBeforeRouteUpdate((to) => {
+  const name = to.params.name as string
+  _getArticlesByTag(1, name)
 })
 
 onMounted(() => {
-  getArticleList(1)
+  _getArticlesByTag(1)
 })
 </script>
 
