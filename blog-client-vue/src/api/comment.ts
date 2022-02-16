@@ -26,6 +26,17 @@ export const getCommentList = (
   })
 }
 
+// 获取留言区数据
+export const getContactComments = (pageNum: number, pageSize: number) => {
+  return request<ResponseData<Comments>>({
+    url: '/contact/list',
+    params: {
+      pageNum,
+      pageSize
+    }
+  })
+}
+
 // 评论
 export const addComment = (data: Info) => {
   return request<ResponseData<Comments>>({
