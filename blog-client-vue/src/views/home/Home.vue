@@ -22,7 +22,7 @@ import PageHeader from '../../components/pageHeader/PageHeader.vue'
 import ArticleWaterfall from '../../components/articleWaterfall/ArticleWaterfall.vue'
 import Pagination from '../../components/pagination/Pagination.vue'
 import { scrollToTop } from '../../utils/utils'
-import { Article, ResponseData } from '../../types'
+import { Article } from '../../types'
 import { getArticleList } from '@/api/article'
 
 const pageNum = ref(1)
