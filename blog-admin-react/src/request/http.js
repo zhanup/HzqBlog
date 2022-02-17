@@ -31,15 +31,16 @@ http.interceptors.response.use(
     if (error.response) {
       const res = error.response
       if (res.status === 401) {
-        message.error(res.data.message)
-        window.location.href = BASE_URL + '/login'
+        message.error('Token失效，请重新登录')
         storageUtils.removeUser()
+        window.location.href = BASE_URL + '/login'
       } else {
         message.error(res.statusText)
       }
     } else {
       message.error('服务器错误')
     }
+    return Promise.reject(new Error('Error'))
   }
 )
 
