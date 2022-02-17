@@ -28,9 +28,11 @@
 .divide {
   position: relative;
   margin: 25px auto;
-  width: calc(100% - 4 px);
+  width: calc(100% - 4px);
   border: 2px dashed hsl(204, 90%, 81%);
   background-color: var(--board-bg-color);
+  box-sizing: content-box;
+  overflow: visible;
 }
 
 .divide::before {
