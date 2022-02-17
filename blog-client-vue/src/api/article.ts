@@ -1,5 +1,5 @@
 import { request } from '@/utils/request'
-import { Article, ResponseData } from '@/types'
+import { Article, ResponseData, Archives } from '@/types'
 
 // 获取文章列表数据
 export const getArticleList = (pageNum: number, pageSize: number) => {
@@ -31,4 +31,9 @@ export const getArticlesByTag = (
 // 获取文章详情
 export const getArticleDetail = (id: string) => {
   return request<Article>({ url: `/article/detail?id=${id}` })
+}
+
+// 获取文章归档数据
+export const getArchives = () => {
+  return request<Archives>({url: '/article/archive'})
 }
