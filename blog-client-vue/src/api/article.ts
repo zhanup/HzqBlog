@@ -1,4 +1,4 @@
-import { request } from '@/utils/request'
+import { request } from '@/utils/http'
 import { Article, ResponseData, Archives } from '@/types'
 
 // 获取文章列表数据

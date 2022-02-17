@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { http } from '@/utils/request'
+import http from '@/utils/http'
 
 interface CategoryState {
   list: any[]
