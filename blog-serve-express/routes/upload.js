@@ -26,7 +26,6 @@ const uploadSingle = upload.single('image')
 exports.imgUpload = (req, res, next) => {
   uploadSingle(req, res, function (err) { //错误处理
     if (err) return next(err)
-    console.log(err)
 
     const file = req.file
     const url = `${BASE_URL}/upload/${file.filename}`
@@ -34,7 +33,7 @@ exports.imgUpload = (req, res, next) => {
     Gallery.create({name: file.filename, url }, (err, doc) => {
       if (err) return next(err)
       const { name, url } = doc
-      console.log(doc)
+
       res.send({
         status: 1,
         msg: '上传成功',
