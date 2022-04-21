@@ -28,6 +28,30 @@ export const getArticlesByTag = (
   })
 }
 
+// 通过标签获取文章
+export const getArticleListByCategory = (
+  name: string,
+  pageNum: number,
+  pageSize: number
+) => {
+  return request<ResponseData<Article>>({
+    url: '/category/article',
+    params: {
+      name,
+      pageNum,
+      pageSize
+    }
+  })
+}
+
+// 搜索文章
+export const searchArticle = (title: string) => {
+  return request<ResponseData<Article>>({
+    url: '/article/search',
+    params: { title }
+  })
+}
+
 // 获取文章详情
 export const getArticleDetail = (id: string) => {
   return request<Article>({ url: `/article/detail?id=${id}` })

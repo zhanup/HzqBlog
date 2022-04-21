@@ -34,9 +34,9 @@
 
 <script lang="ts" setup>
 import { reactive } from 'vue'
-import http from '../../utils/http'
-import { debounce } from '../../utils/utils'
-import { Article, ResponseData } from '../../types/index'
+import { debounce } from '@/utils/utils'
+import { searchArticle } from '@/api/article'
+import { Article } from '@/types'
 
 // eslint-disable-next-line
 defineProps({
@@ -45,22 +45,22 @@ defineProps({
 
 // eslint-disable-next-line
 const emit = defineEmits(['close'])
-const state = reactive({
+const state = reactive<{
+  title: string,
+  list: Array<Article>
+}>({
   title: '',
-  list: [] as Array<Article>
+  list: []
 })
 
 // 搜索
-const handleSearch = async (): Promise<void> => {
+const handleSearch = async () => {
   const title = state.title
   if (title.trim() === '') {
     state.list = []
   } else {
-    const res: ResponseData<Article> = await http({
-      url: '/article/search',
-      params: { title }
-    })
-    state.list = res.list
+    const { data } = await searchArticle(title)
+    state.list = data.data.list
   }
 }
 

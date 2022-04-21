@@ -22,9 +22,9 @@ import { useRoute, onBeforeRouteUpdate } from 'vue-router'
 import PageHeader from '../../components/pageHeader/PageHeader.vue'
 import ArticleWaterfall from '../../components/articleWaterfall/ArticleWaterfall.vue'
 import Pagination from '../../components/pagination/Pagination.vue'
-import http from '../../utils/http'
+import { getArticleListByCategory } from '@/api/article'
 import { scrollToTop } from '../../utils/utils'
-import { Article, ResponseData } from '../../types'
+import { Article } from '../../types'
 
 const route = useRoute()
 const state = reactive({
@@ -34,17 +34,11 @@ const state = reactive({
   list: [] as Array<Article>
 })
 
-const getArticleList = async (
-  pageNum: number,
-  name: string | string[] = route.params.name
-): Promise<void> => {
+const getArticleList = async (pageNum: number, name = route.params.name as string) => {
   const { pageSize } = state
-  const res: ResponseData<Article> = await http({
-    url: '/category/article',
-    params: { name, pageNum, pageSize }
-  })
-  state.list = res.list
-  state.total = res.total
+  const { data } = await getArticleListByCategory(name, pageNum, pageSize)
+  state.list = data.data.list
+  state.total = data.data.total
 }
 
 const currentChange = (param: any) => {
@@ -59,7 +53,7 @@ const title = computed(() => {
 
 // 路由更新钩子
 onBeforeRouteUpdate((to, form) => {
-  getArticleList(1, to.params.name)
+  getArticleList(1, to.params.name as string)
 })
 
 onMounted(() => {
